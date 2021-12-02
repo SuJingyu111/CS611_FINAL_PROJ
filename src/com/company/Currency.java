@@ -9,7 +9,7 @@ public class Currency {
     private Parser parser = new Parser();
     private Writer writer = new Writer();
 
-    public Currency() throws FileNotFoundException {
+    public Currency() throws IOException {
 
         foreignExchange = parser.parseForex();
     }

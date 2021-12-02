@@ -7,7 +7,7 @@ public class Parser {
 
     private Scanner input;
 
-    public HashMap<String, Double> parseForex() throws FileNotFoundException{
+    public HashMap<String, Double> parseForex() throws IOException{
 
         HashMap<String, Double> foreignExchange = new HashMap<>();
         String fileName = System.getProperty("user.dir") + "/src/com/company/Files/" + "Forex.csv";
