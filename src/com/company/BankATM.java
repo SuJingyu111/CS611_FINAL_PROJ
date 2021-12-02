@@ -1,10 +1,13 @@
 package com.company;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class BankATM {
 
-    public static void run(){
+    public static void run() throws FileNotFoundException {
+
+        Currency currency = new Currency();
 
         Scanner in = new Scanner(System.in);
 
@@ -34,7 +37,7 @@ public class BankATM {
         }
 
         else if(choice.equals("2")){
-            ManagerOptions.run();
+            ManagerOptions.run(currency);
         }
 
         else if(choice.equals("3")){
