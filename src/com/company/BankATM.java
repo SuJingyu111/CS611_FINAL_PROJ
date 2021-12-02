@@ -1,11 +1,12 @@
 package com.company;
 
-import java.io.FileNotFoundException;
-import java.util.Scanner;
+
+import java.io.*;
+import java.util.*;
 
 public class BankATM {
 
-    public static void run() throws FileNotFoundException {
+    public static void run() throws IOException {
 
         Currency currency = new Currency();
 
