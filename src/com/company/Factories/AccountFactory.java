@@ -12,6 +12,9 @@ public class AccountFactory {
     public Map<AccountType, Account> produceAccountMap(List<String[]> accountInfo) {
         Map<AccountType, Account> map = new HashMap<>();
         for (String[] info : accountInfo) {
+            if (info.length <= 0) {
+                continue;
+            }
             Account account = produceAccount(info);
             map.put(account.getTYPE(), account);
         }
