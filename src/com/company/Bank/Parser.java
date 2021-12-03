@@ -7,13 +7,13 @@ public class Parser {
 
     private Scanner input;
 
-    private final String CUST_PATH = "DbFiles/Customers.csv";
+    private final String CUST_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "Customers.csv";
 
-    private final String MANAGER_PATH = "DbFiles/Manager.csv";
+    private final String MANAGER_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "Manager.csv";
 
-    private final String CUST_ACC_PATH = "DbFiles/CustomerAccounts.csv";
+    private final String CUST_ACC_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "CustomerAccounts.csv";
 
-    private final String MANAGER_ACC_PATH = "DbFiles/ManagerAccounts.csv";
+    private final String MANAGER_ACC_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "ManagerAccounts.csv";
 
     public HashMap<String, Double> parseForex() throws IOException{
 
@@ -56,7 +56,7 @@ public class Parser {
         return accountIdList;
     }
 
-    //Acount record layout: acc_id, name, pwd, accoutType, balance
+    //Account record layout: acc_id, name, pwd, accountType, balance
     public String[] parseAccount(String id, boolean isCustomer) {
         String delimiter = ",";
         String record = null;
