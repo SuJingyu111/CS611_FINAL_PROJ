@@ -43,7 +43,7 @@ public class CustomerOptions {
             System.out.println("<5> Buy / Sell Stocks");
             System.out.println("<6> Return to Previous Menu");
 
-            String choice = input.nextLine();
+            String choice = input.next();
 
             while(!choice.equals("1") && !choice.equals("2") && !choice.equals("3") && !choice.equals("4") && !choice.equals("5") && !choice.equals("6")){
 
@@ -57,7 +57,7 @@ public class CustomerOptions {
                 System.out.println("<4> Take / Pay Back Loan(s)");
                 System.out.println("<5> Buy / Sell Stocks");
                 System.out.println("<6> Return to Previous Menu");
-                choice = input.nextLine();
+                choice = input.next();
             }
 
             if(choice.equals("1")){
