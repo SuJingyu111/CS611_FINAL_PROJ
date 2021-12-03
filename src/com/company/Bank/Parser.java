@@ -1,5 +1,7 @@
 package com.company.Bank;
 
+import com.company.Stock.Stock;
+
 import java.io.*;
 import java.util.*;
 
@@ -14,6 +16,8 @@ public class Parser {
     private final String CUST_ACC_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "CustomerAccounts.csv";
 
     private final String MANAGER_ACC_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "ManagerAccounts.csv";
+
+    private final String STOCK_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "Stocks.csv";
 
     public HashMap<String, Double> parseForex() throws IOException{
 
@@ -93,6 +97,32 @@ public class Parser {
             return null;
         }
         return new String[0];
+    }
+
+    public List<String[]> parseAllAcountInfo(List<String> accountIdList, boolean isCustomer) {
+        List<String[]> accountInfo = new ArrayList<>();
+        for (String id : accountIdList) {
+            accountInfo.add(parseAccount(id, isCustomer));
+        }
+        return accountInfo;
+    }
+
+    public Map<String, Double> parseAllStockInfo() {
+        Map<String, Double> stockInfo = new HashMap<>();
+        String delimiter = ",";
+        String record = null;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(STOCK_PATH));
+            while ((record = br.readLine()) != null) {
+                String[] info = record.split(delimiter);
+                stockInfo.put(info[0], Double.parseDouble(info[1]));
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            return new HashMap<>();
+        }
+        return stockInfo;
     }
 
 }
