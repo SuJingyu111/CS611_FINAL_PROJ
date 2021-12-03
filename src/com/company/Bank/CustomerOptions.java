@@ -16,9 +16,9 @@ public class CustomerOptions {
         System.out.println("Please enter your password : ");
         String password = input.next();
 
-        List<String> info = parser.parsePersonAccountIds(name, password, true);
+        Boolean presence = parser.checkPresence(name, password, true);
 
-        if(info.isEmpty()){
+        if(!presence){
 
             System.out.println();
             System.out.println("You are not a customer !");
@@ -26,7 +26,8 @@ public class CustomerOptions {
 
         }
 
-        if(!info.isEmpty()){
+        if(presence){
+
 
 
         }

@@ -56,6 +56,25 @@ public class Parser {
         return accountIdList;
     }
 
+    public boolean checkPresence(String name, String pwd, boolean isCustomer){
+        String delimiter = ",";
+        String record = null;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(isCustomer ? CUST_PATH : MANAGER_PATH));
+            while ((record = br.readLine()) != null) {
+                String[] accountInfo = record.split(delimiter);
+                if (accountInfo[0].equals(name) && accountInfo[1].equals(pwd)) {
+                    return true;
+                }
+            }
+        }
+
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+         return false;
+    }
+
     //Account record layout: acc_id, name, pwd, accountType, balance
     public String[] parseAccount(String id, boolean isCustomer) {
         String delimiter = ",";
