@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Bank;
 
 public class Printer {
 

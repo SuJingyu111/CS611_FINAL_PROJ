@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Bank;
 
 import java.io.*;
 import java.util.*;

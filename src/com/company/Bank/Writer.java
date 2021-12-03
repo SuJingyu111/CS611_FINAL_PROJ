@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Bank;
 
 import com.company.Account.Account;
 
