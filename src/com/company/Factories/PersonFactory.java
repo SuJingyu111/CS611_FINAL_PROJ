@@ -5,7 +5,7 @@ import com.company.Account.AccountType;
 import com.company.Persons.Customer;
 import com.company.Persons.Manager;
 import com.company.Exceptions.PersonNotFoundException;
-import com.company.Parser;
+import com.company.Bank.Parser;
 
 import java.io.FileNotFoundException;
 import java.util.*;
