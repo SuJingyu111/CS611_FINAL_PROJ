@@ -29,7 +29,7 @@ public class Parser {
 
     }
 
-    //Customer/Manager layout: id, name, pwd, checkings_id, savings_id, loan_id, stock_id, admin_id
+    //Customer/Manager layout: name, pwd, checkings_id, savings_id, loan_id, stock_id, admin_id
     public List<String> parsePersonAccountIds(String name, String pwd, boolean isCustomer) {
         String delimiter = ",";
         String record = null;
@@ -38,8 +38,8 @@ public class Parser {
             BufferedReader br = new BufferedReader(new FileReader(isCustomer ? CUST_PATH : MANAGER_PATH));
             while ((record = br.readLine()) != null) {
                 String[] accountInfo = record.split(delimiter);
-                if (accountInfo[1].equals(name) && accountInfo[2].equals(pwd)) {
-                    for (int i = 3; i < accountInfo.length; i++) {
+                if (accountInfo[0].equals(name) && accountInfo[1].equals(pwd)) {
+                    for (int i = 2; i < accountInfo.length; i++) {
                         String accountId = accountInfo[i];
                         if (accountId != null && accountId.length() > 0) {
                             accountIdList.add(accountId);
