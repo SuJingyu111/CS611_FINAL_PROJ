@@ -1,14 +1,8 @@
 package com.company.Bank;
 
-import com.company.Account.Account;
-import com.company.Account.AccountType;
-import com.company.Factories.AccountFactory;
 import com.company.Factories.PersonFactory;
 import com.company.Persons.Customer;
-
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class CustomerOptions {
@@ -23,9 +17,9 @@ public class CustomerOptions {
         System.out.println("Please enter your password : ");
         String password = input.next();
 
-        List<String> info = parser.parsePersonAccountIds(name, password, true);
+        Boolean presence = parser.checkPresence(name, password, true);
 
-        if(info.isEmpty()){
+        if(!presence){
 
             System.out.println();
             System.out.println("You are not a customer !");
@@ -33,11 +27,11 @@ public class CustomerOptions {
 
         }
 
-        if(!info.isEmpty()){
+        if(presence) {
+
             PersonFactory personFactory = new PersonFactory();
             Customer customer = personFactory.produceCustomer(name, password);
         }
-
 
     }
 }
