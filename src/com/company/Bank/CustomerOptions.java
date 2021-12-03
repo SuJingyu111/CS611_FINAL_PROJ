@@ -1,14 +1,8 @@
 package com.company.Bank;
 
-import com.company.Account.Account;
-import com.company.Account.AccountType;
-import com.company.Factories.AccountFactory;
 import com.company.Factories.PersonFactory;
 import com.company.Persons.Customer;
-
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class CustomerOptions {
@@ -33,16 +27,11 @@ public class CustomerOptions {
 
         }
 
-        if(presence){
+        if(presence) {
 
-
-
-        if(!info.isEmpty()){
             PersonFactory personFactory = new PersonFactory();
             Customer customer = personFactory.produceCustomer(name, password);
         }
-
-
 
     }
 }
