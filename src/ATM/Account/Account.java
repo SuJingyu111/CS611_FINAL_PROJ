@@ -5,19 +5,20 @@ public class Account {
 
     private String ownerName;
 
-    private int ownerId;
+    private String accountId;
 
     private String pwd;
 
-    private int balance;
+    private double balance;
 
     private AccountType TYPE;
 
-    public Account(String ownerName, int ownerId, String pwd, int balance) {
+    public Account(String accountId, String ownerName, String pwd, AccountType type, double balance) {
         this.ownerName = ownerName;
-        this.ownerId = ownerId;
+        this.accountId = accountId;
         this.pwd = pwd;
         this.balance = balance;
+        this.TYPE = type;
     }
 
     public String getOwnerName() {
@@ -28,12 +29,12 @@ public class Account {
         this.ownerName = ownerName;
     }
 
-    public int getOwnerId() {
-        return ownerId;
+    public String getAccountId() {
+        return accountId;
     }
 
-    public void setOwnerId(int ownerId) {
-        this.ownerId = ownerId;
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
     }
 
     public String getPwd() {
@@ -44,11 +45,11 @@ public class Account {
         this.pwd = pwd;
     }
 
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
