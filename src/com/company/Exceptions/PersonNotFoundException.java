@@ -1,4 +1,4 @@
-package ATM.Exceptions;
+package com.company.Exceptions;
 
 public class PersonNotFoundException extends RuntimeException{
 

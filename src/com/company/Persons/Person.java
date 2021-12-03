@@ -1,9 +1,9 @@
-package ATM.Persons;
+package com.company.Persons;
 
-import ATM.Account.Account;
-import ATM.Account.AccountType;
-import ATM.Exceptions.AccountAlreadyExistException;
-import ATM.Exceptions.AccountNotExistException;
+import com.company.Account.Account;
+import com.company.Account.AccountType;
+import com.company.Exceptions.AccountAlreadyExistException;
+import com.company.Exceptions.AccountNotExistException;
 
 import java.util.Map;
 

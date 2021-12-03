@@ -1,6 +1,6 @@
 package com.company;
 
-import ATM.Account.Account;
+import com.company.Account.Account;
 
 import java.util.*;
 import java.io.*;

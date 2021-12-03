@@ -1,4 +1,4 @@
-package ATM.Account;
+package com.company.Account;
 
 public class Account {
     //TODO

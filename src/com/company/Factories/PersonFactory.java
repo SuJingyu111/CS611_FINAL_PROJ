@@ -1,13 +1,12 @@
-package ATM.Factories;
+package com.company.Factories;
 
-import ATM.Account.Account;
-import ATM.Account.AccountType;
-import ATM.Persons.Customer;
-import ATM.Persons.Manager;
-import ATM.Exceptions.PersonNotFoundException;
+import com.company.Account.Account;
+import com.company.Account.AccountType;
+import com.company.Persons.Customer;
+import com.company.Persons.Manager;
+import com.company.Exceptions.PersonNotFoundException;
 import com.company.Parser;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 

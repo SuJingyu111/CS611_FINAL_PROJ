@@ -1,7 +1,7 @@
-package ATM.Factories;
+package com.company.Factories;
 
-import ATM.Account.Account;
-import ATM.Account.AccountType;
+import com.company.Account.Account;
+import com.company.Account.AccountType;
 
 import java.util.HashMap;
 import java.util.List;
