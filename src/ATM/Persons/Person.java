@@ -9,26 +9,15 @@ import java.util.Map;
 
 public class Person {
 
-    private int id;
-
     private String name;
 
     private String pwd;
 
     private Map<AccountType, Account> accounts;
 
-    public Person(int id, String name, String pwd, Map<AccountType, Account> accounts) {
-        this.id = id;
+    public Person(String name, String pwd, Map<AccountType, Account> accounts) {
         this.name = name;
         this.pwd = pwd;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {
