@@ -43,27 +43,25 @@ public class CustomerDeposit {
         System.out.println("Please enter the account you want to deposit to :");
         System.out.println("<1> Savings");
         System.out.println("<2> Checkings");
-        System.out.println("<3> Stock");
         String choice2 = input.next();
 
-        if(!choice2.equals("1") && !choice2.equals("2") && !choice2.equals("3")){
+        if(!choice2.equals("1") && !choice2.equals("2")){
 
             System.out.println("You've entered the wrong input ! ");
             System.out.println();
             System.out.println("Please enter the account you want to deposit to :");
             System.out.println("<1> Savings");
             System.out.println("<2> Checkings");
-            System.out.println("<3> Stock");
             choice2 = input.next();
         }
 
         if(choice1.equals("2")){
             value *= currency.getForex("EUR");
         }
-        if(choice1.equals("3")){
+        else if(choice1.equals("3")){
             value *= currency.getForex("CAD");
         }
-        if(choice1.equals("4")){
+        else if(choice1.equals("4")){
             value *= currency.getForex("JPY");
         }
 
@@ -71,14 +69,11 @@ public class CustomerDeposit {
             Account account = customer.getAccount(SAVINGS);
             account.setBalance((account.getBalance() + value));
         }
-        if(choice2.equals("2")){
+        else if(choice2.equals("2")){
             Account account = customer.getAccount(CHECKINGS);
             account.setBalance((account.getBalance() + value));
         }
-        if(choice2.equals("3")){
-            Account account = customer.getAccount(STOCK);
-            account.setBalance((account.getBalance() + value));
-        }
+
 
         CustomerBalance.run(customer,currency);
     }

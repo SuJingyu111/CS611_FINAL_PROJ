@@ -80,7 +80,7 @@ public class CustomerOptions {
         }
 
         else if(choice.equals("3")){
-            CustomerWithdraw.run(customer);
+            CustomerWithdraw.run(customer, currency);
         }
 
         else if(choice.equals("4")){
