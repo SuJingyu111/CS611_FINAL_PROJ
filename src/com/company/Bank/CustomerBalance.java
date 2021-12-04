@@ -4,11 +4,12 @@ import com.company.Account.Account;
 import com.company.Account.AccountType;
 import com.company.Persons.Customer;
 
+import java.io.IOException;
 import java.util.Map;
 
 public class CustomerBalance {
 
-    public static void run(Customer customer){
+    public static void run(Customer customer) throws IOException {
 
         System.out.println();
         System.out.println("********************************************************************************************");
@@ -21,6 +22,8 @@ public class CustomerBalance {
 
         }
         System.out.println("********************************************************************************************");
+        System.out.println();
+        CustomerOptions.options(customer);
 
     }
 }

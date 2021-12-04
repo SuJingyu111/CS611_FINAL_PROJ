@@ -35,6 +35,31 @@ public class CustomerOptions {
             System.out.println("Hello there, " + customer.getName() + " !");
             System.out.println("****************************************************************************************");
             System.out.println();
+            options(customer);
+
+        }
+
+    }
+
+    public static void options(Customer customer) throws IOException {
+
+        Scanner input = new Scanner(System.in);
+        System.out.println("What do you want to do ?");
+        System.out.println("<1> Check Balance");
+        System.out.println("<2> Deposit");
+        System.out.println("<3> Withdraw");
+        System.out.println("<4> Take / Pay Back Loan(s)");
+        System.out.println("<5> Buy / Sell Stocks");
+        System.out.println("<6> Return to Previous Menu");
+        System.out.println("<q> Quit");
+
+        String choice = input.next();
+
+        while(!choice.equals("1") && !choice.equals("2") && !choice.equals("3") && !choice.equals("4") && !choice.equals("5") && !choice.equals("6") && !choice.equals("q")){
+
+            System.out.println();
+            System.out.println(" You've entered an incorrect option !");
+            System.out.println();
             System.out.println("What do you want to do ?");
             System.out.println("<1> Check Balance");
             System.out.println("<2> Deposit");
@@ -42,49 +67,36 @@ public class CustomerOptions {
             System.out.println("<4> Take / Pay Back Loan(s)");
             System.out.println("<5> Buy / Sell Stocks");
             System.out.println("<6> Return to Previous Menu");
-
-            String choice = input.next();
-
-            while(!choice.equals("1") && !choice.equals("2") && !choice.equals("3") && !choice.equals("4") && !choice.equals("5") && !choice.equals("6")){
-
-                System.out.println();
-                System.out.println(" You've entered an incorrect option !");
-                System.out.println();
-                System.out.println("What do you want to do ?");
-                System.out.println("<1> Check Balance");
-                System.out.println("<2> Deposit");
-                System.out.println("<3> Withdraw");
-                System.out.println("<4> Take / Pay Back Loan(s)");
-                System.out.println("<5> Buy / Sell Stocks");
-                System.out.println("<6> Return to Previous Menu");
-                choice = input.next();
-            }
-
-            if(choice.equals("1")){
-                CustomerBalance.run(customer);
-            }
-
-            else if(choice.equals("2")){
-                CustomerDeposit.run(customer);
-            }
-
-            else if(choice.equals("3")){
-                CustomerWithdraw.run(customer);
-            }
-
-            else if(choice.equals("4")){
-                CustomerLoan.run(customer);
-            }
-
-            else if(choice.equals("5")){
-                CustomerStock.run(customer);
-            }
-
-            else if(choice.equals("6")){
-                BankATM.run();
-            }
-
+            System.out.println("<q> Quit");
+            choice = input.next();
         }
 
+        if(choice.equals("1")){
+            CustomerBalance.run(customer);
+        }
+
+        else if(choice.equals("2")){
+            CustomerDeposit.run(customer);
+        }
+
+        else if(choice.equals("3")){
+            CustomerWithdraw.run(customer);
+        }
+
+        else if(choice.equals("4")){
+            CustomerLoan.run(customer);
+        }
+
+        else if(choice.equals("5")){
+            CustomerStock.run(customer);
+        }
+
+        else if(choice.equals("6")){
+            BankATM.run();
+        }
+
+        else if(choice.equals("q")){
+            Printer.printExitMessage();
+        }
     }
 }
