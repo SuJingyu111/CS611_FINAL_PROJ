@@ -9,13 +9,16 @@ import java.util.Map;
 
 public class Person {
 
+    private int id;
+
     private String name;
 
     private String pwd;
 
     private Map<AccountType, Account> accounts;
 
-    public Person(String name, String pwd, Map<AccountType, Account> accounts) {
+    public Person(int id, String name, String pwd, Map<AccountType, Account> accounts) {
+        this.id = id;
         this.name = name;
         this.pwd = pwd;
         this.accounts = accounts;
@@ -63,5 +66,4 @@ public class Person {
         }
         accounts.put(account.getTYPE(), account);
     }
-    //TODO
 }
