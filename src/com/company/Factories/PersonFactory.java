@@ -22,15 +22,17 @@ public class PersonFactory{
     }
 
     public Customer produceCustomer(String name, String pwd) throws FileNotFoundException, PersonNotFoundException {
+        int id = parser.checkPresence(name, pwd, true);
         List<String[]> accountInfo = getAccountInfo(name, pwd, true);
         Map<AccountType, Account> accounts = accountFactory.produceAccountMap(accountInfo);
-        return new Customer(name, pwd, accounts);
+        return new Customer(id, name, pwd, accounts);
     }
 
     public Manager produceManager(String name, String pwd) {
+        int id = parser.checkPresence(name, pwd, false);
         List<String[]> accountInfo = getAccountInfo(name, pwd, false);
         Map<AccountType, Account> accounts = accountFactory.produceAccountMap(accountInfo);
-        return new Manager(name, pwd, accounts);
+        return new Manager(id, name, pwd, accounts);
     }
 
     private List<String[]> getAccountInfo(String name, String pwd, boolean isCustomer) {
