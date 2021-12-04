@@ -1,6 +1,10 @@
 package com.company.Bank;
 
+import com.company.Account.Account;
+import com.company.Account.AccountType;
 import com.company.Persons.Customer;
+
+import java.util.Map;
 
 public class CustomerBalance {
 
@@ -8,7 +12,14 @@ public class CustomerBalance {
 
         System.out.println();
         System.out.println("********************************************************************************************");
-        System.out.println(customer.getAccounts());
+        System.out.println("    Account Type      Balance");
+        int count = 1;
+        Map<AccountType, Account> accounts = customer.getAccounts();
+        for(AccountType accountType : accounts.keySet()){
+            System.out.println("<" + count + "> " + accountType + "           " + accounts.get(accountType).getBalance());
+            count += 1;
+
+        }
         System.out.println("********************************************************************************************");
 
     }
