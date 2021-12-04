@@ -1,7 +1,6 @@
 package com.company.Account;
 
 public class Account {
-    //TODO
 
     private String ownerName;
 
@@ -59,5 +58,10 @@ public class Account {
 
     public void setTYPE(AccountType TYPE) {
         this.TYPE = TYPE;
+    }
+
+    @Override
+    public String toString() {
+        return "name: " + ownerName + ", " + "AccountId: " +  accountId + ", " + "Balance: " + balance + ", " + "Type: " + TYPE;
     }
 }
