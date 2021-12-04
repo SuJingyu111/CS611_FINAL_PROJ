@@ -33,25 +33,26 @@ public class Parser {
 
     }
 
-    public boolean checkPresence(String name, String pwd, boolean isCustomer){
+    //-1 if not exist, if exist, return person Id
+    public int checkPresence(String name, String pwd, boolean isCustomer){
         String delimiter = ",";
         String record = null;
         try {
             BufferedReader br = new BufferedReader(new FileReader(isCustomer ? CUST_PATH : MANAGER_PATH));
             while ((record = br.readLine()) != null) {
                 String[] accountInfo = record.split(delimiter);
-                if (accountInfo[0].equals(name) && accountInfo[1].equals(pwd)) {
-                    return true;
+                if (accountInfo[1].equals(name) && accountInfo[2].equals(pwd)) {
+                    return Integer.parseInt(accountInfo[0]);
                 }
             }
         }
         catch (IOException e) {
             e.printStackTrace();
         }
-        return false;
+        return -1;
     }
 
-    //Customer/Manager layout: name, pwd, checkings_id, savings_id, loan_id, stock_id, admin_id
+    //Customer/Manager layout:id, name, pwd, checkings_id, savings_id, loan_id, stock_id, admin_id
     public List<String> parsePersonAccountIds(String name, String pwd, boolean isCustomer) {
         String delimiter = ",";
         String record = null;
@@ -60,8 +61,8 @@ public class Parser {
             BufferedReader br = new BufferedReader(new FileReader(isCustomer ? CUST_PATH : MANAGER_PATH));
             while ((record = br.readLine()) != null) {
                 String[] accountInfo = record.split(delimiter);
-                if (accountInfo[0].equals(name) && accountInfo[1].equals(pwd)) {
-                    for (int i = 2; i < accountInfo.length; i++) {
+                if (accountInfo[1].equals(name) && accountInfo[2].equals(pwd)) {
+                    for (int i = 3; i < accountInfo.length; i++) {
                         String accountId = accountInfo[i];
                         if (accountId != null && accountId.length() > 0) {
                             accountIdList.add(accountId);

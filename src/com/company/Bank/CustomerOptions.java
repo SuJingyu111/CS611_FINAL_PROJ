@@ -17,7 +17,7 @@ public class CustomerOptions {
         System.out.println("Please enter your password : ");
         String password = input.next();
 
-        Boolean presence = parser.checkPresence(name, password, true);
+        Boolean presence = parser.checkPresence(name, password, true) >= 0;
 
         if(!presence){
 
