@@ -16,7 +16,6 @@ public class Currency {
 
     public void setForex(String currency, Double value ) throws IOException {
 
-        foreignExchange.remove(currency);
         foreignExchange.put(currency, value);
         writer.writeForex(foreignExchange);
     }

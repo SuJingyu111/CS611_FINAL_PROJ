@@ -18,6 +18,7 @@ public class Person {
     public Person(String name, String pwd, Map<AccountType, Account> accounts) {
         this.name = name;
         this.pwd = pwd;
+        this.accounts = accounts;
     }
 
     public String getName() {
