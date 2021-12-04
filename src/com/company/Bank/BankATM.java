@@ -34,7 +34,7 @@ public class BankATM {
         }
 
         if(choice.equals("1")){
-            CustomerOptions.run();
+            CustomerOptions.run(currency);
         }
 
         else if(choice.equals("2")){

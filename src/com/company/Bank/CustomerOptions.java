@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class CustomerOptions {
 
-    public static void run() throws IOException {
+    public static void run(Currency currency) throws IOException {
 
         Scanner input = new Scanner(System.in);
         Parser parser = new Parser();
@@ -35,13 +35,13 @@ public class CustomerOptions {
             System.out.println("Hello there, " + customer.getName() + " !");
             System.out.println("****************************************************************************************");
             System.out.println();
-            options(customer);
+            options(customer, currency);
 
         }
 
     }
 
-    public static void options(Customer customer) throws IOException {
+    public static void options(Customer customer, Currency currency) throws IOException {
 
         Scanner input = new Scanner(System.in);
         System.out.println("What do you want to do ?");
@@ -72,11 +72,11 @@ public class CustomerOptions {
         }
 
         if(choice.equals("1")){
-            CustomerBalance.run(customer);
+            CustomerBalance.run(customer, currency);
         }
 
         else if(choice.equals("2")){
-            CustomerDeposit.run(customer);
+            CustomerDeposit.run(customer, currency);
         }
 
         else if(choice.equals("3")){

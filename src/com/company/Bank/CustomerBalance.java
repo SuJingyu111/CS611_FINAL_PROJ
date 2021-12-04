@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class CustomerBalance {
 
-    public static void run(Customer customer) throws IOException {
+    public static void run(Customer customer, Currency currency) throws IOException {
 
         System.out.println();
         System.out.println("********************************************************************************************");
@@ -23,7 +23,7 @@ public class CustomerBalance {
         }
         System.out.println("********************************************************************************************");
         System.out.println();
-        CustomerOptions.options(customer);
+        CustomerOptions.options(customer, currency);
 
     }
 }
