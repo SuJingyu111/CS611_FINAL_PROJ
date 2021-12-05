@@ -74,9 +74,7 @@ public class CustomerDeposit {
             account.setBalance((account.getBalance() + value));
         }
 
-        //TODO : add a method in Writer class to update the increase in balance in the csv file.
         CustomerBalance.run(customer,currency);
-
 
     }
 }
