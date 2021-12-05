@@ -53,7 +53,6 @@ public class CustomerWithdraw {
         Account account = customer.getAccount(CHECKINGS);
         account.setBalance((account.getBalance() - value));
 
-        //TODO : Add a method in Writer class to update the decrease in value in the csv file.
         CustomerBalance.run(customer,currency);
     }
 }
