@@ -62,6 +62,10 @@ public class Account {
 
     @Override
     public String toString() {
-        return "name: " + ownerName + ", " + "AccountId: " +  accountId + ", " + "Balance: " + balance + ", " + "Type: " + TYPE;
+        return getAccountId() + "," +
+                getOwnerName() + "," +
+                getPwd() + "," +
+                getTYPE() + "," +
+                getBalance();
     }
 }
