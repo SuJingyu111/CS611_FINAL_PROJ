@@ -87,5 +87,4 @@ public class Writer {
         FileWriter writer = new FileWriter(TXN_FILE_PATH, true);
         writer.write(transaction.toString());
     }
-
 }
