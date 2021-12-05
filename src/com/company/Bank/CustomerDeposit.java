@@ -37,7 +37,7 @@ public class CustomerDeposit {
 
         System.out.println();
         System.out.println("Enter the amount you want to deposit : ");
-        double value = input.nextInt();
+        double value = input.nextDouble();
 
         System.out.println();
         System.out.println("Please enter the account you want to deposit to :");

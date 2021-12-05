@@ -87,7 +87,7 @@ public class CustomerOptions {
         }
 
         else if(choice.equals("4")){
-            CustomerTransfer.run(customer);
+            CustomerTransfer.run(customer, currency);
         }
 
         else if(choice.equals("5")){

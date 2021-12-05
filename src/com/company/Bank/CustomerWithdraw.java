@@ -37,7 +37,7 @@ public class CustomerWithdraw {
 
         System.out.println();
         System.out.println("Enter the amount you want to withdraw : ");
-        double value = input.nextInt();
+        double value = input.nextDouble();
 
 
         if(choice1.equals("2")){
