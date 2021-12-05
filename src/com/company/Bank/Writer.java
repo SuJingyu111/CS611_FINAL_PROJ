@@ -33,6 +33,7 @@ public class Writer {
     }
 
     public void writeAccount(Account account) throws IOException {
+
         FileWriter writer = new FileWriter(CUST_ACC_PATH, false);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(account.getAccountId()).append(",");

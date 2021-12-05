@@ -48,14 +48,16 @@ public class CustomerOptions {
         System.out.println("<1> Check Balance");
         System.out.println("<2> Deposit");
         System.out.println("<3> Withdraw");
-        System.out.println("<4> Take / Pay Back Loan(s)");
-        System.out.println("<5> Buy / Sell Stocks");
-        System.out.println("<6> Return to Previous Menu");
+        System.out.println("<4> Transfer Between Accounts");
+        System.out.println("<5> Take / Pay Back Loan(s)");
+        System.out.println("<6> Buy / Sell Stocks");
+        System.out.println("<7> Return to Previous Menu");
         System.out.println("<q> Quit");
 
         String choice = input.next();
 
-        while(!choice.equals("1") && !choice.equals("2") && !choice.equals("3") && !choice.equals("4") && !choice.equals("5") && !choice.equals("6") && !choice.equals("q")){
+        while(!choice.equals("1") && !choice.equals("2") && !choice.equals("3") && !choice.equals("4")
+                && !choice.equals("5") && !choice.equals("6")  && !choice.equals("7") && !choice.equals("q")){
 
             System.out.println();
             System.out.println(" You've entered an incorrect option !");
@@ -64,9 +66,10 @@ public class CustomerOptions {
             System.out.println("<1> Check Balance");
             System.out.println("<2> Deposit");
             System.out.println("<3> Withdraw");
-            System.out.println("<4> Take / Pay Back Loan(s)");
-            System.out.println("<5> Buy / Sell Stocks");
-            System.out.println("<6> Return to Previous Menu");
+            System.out.println("<4> Transfer Between Accounts");
+            System.out.println("<5> Take / Pay Back Loan(s)");
+            System.out.println("<6> Buy / Sell Stocks");
+            System.out.println("<7> Return to Previous Menu");
             System.out.println("<q> Quit");
             choice = input.next();
         }
@@ -84,14 +87,18 @@ public class CustomerOptions {
         }
 
         else if(choice.equals("4")){
-            CustomerLoan.run(customer);
+            CustomerTransfer.run(customer);
         }
 
         else if(choice.equals("5")){
-            CustomerStock.run(customer);
+            CustomerLoan.run(customer);
         }
 
         else if(choice.equals("6")){
+            CustomerStock.run(customer);
+        }
+
+        else if(choice.equals("7")){
             BankATM.run();
         }
 
