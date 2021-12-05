@@ -12,15 +12,15 @@ import java.io.*;
 
 public class Writer {
 
-    private final String CUST_PATH = "DbFiles/Customers.csv";
+    private final String CUST_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "Customers.csv";
 
-    private final String MANAGER_PATH = "DbFiles/Manager.csv";
+    private final String MANAGER_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "Manager.csv";
 
-    private final String CUST_ACC_PATH = "DbFiles/CustomerAccounts.csv";
+    private final String CUST_ACC_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "CustomerAccounts.csv";
 
-    private final String MANAGER_ACC_PATH = "DbFiles/ManagerAccounts.csv";
+    private final String MANAGER_ACC_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "ManagerAccounts.csv";
 
-    private final String TXN_FILE_PATH = "DbFiles/Transactions.csv";
+    private final String TXN_FILE_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "Transactions.csv";
 
     public void writeForex(HashMap<String, Double> foreignExchange) throws IOException {
 
