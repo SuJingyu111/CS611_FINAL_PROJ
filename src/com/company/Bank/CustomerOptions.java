@@ -91,7 +91,7 @@ public class CustomerOptions {
         }
 
         else if(choice.equals("5")){
-            CustomerLoan.run(customer);
+            CustomerLoan.run(customer, currency);
         }
 
         else if(choice.equals("6")){
