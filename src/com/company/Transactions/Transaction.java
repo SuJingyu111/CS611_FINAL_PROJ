@@ -64,4 +64,15 @@ public class Transaction {
     public void setAccountType(AccountType accountType) {
         this.accountType = accountType;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(getId()).append(",");
+        stringBuilder.append(getTimestamp().toString()).append(",");
+        stringBuilder.append(getAmount()).append(",");
+        stringBuilder.append(getP().getName()).append(",");
+        stringBuilder.append(getAccountType());
+        return stringBuilder.toString();
+    }
 }
