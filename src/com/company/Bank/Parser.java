@@ -33,7 +33,7 @@ public class Parser {
 
     }
 
-    //-1 if not exist, if exist, return person Id
+    //-1 if not exist, if exists, return person Id
     public int checkPresence(String name, String pwd, boolean isCustomer){
         String delimiter = ",";
         String record = null;

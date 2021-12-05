@@ -31,7 +31,7 @@ public class Writer {
         for(String currency : foreignExchange.keySet()){
             stringBuilder.append(currency);
             stringBuilder.append(",");
-            stringBuilder.append(String.valueOf(foreignExchange.get(currency)));
+            stringBuilder.append(foreignExchange.get(currency));
             stringBuilder.append(",");
         }
 
