@@ -39,6 +39,10 @@ public class PersonFactory{
         return new Manager(id, name, pwd, accounts);
     }
 
+    public Manager produceNewManager(int id, String name, String pwd) {
+        return new Manager(id, name, pwd, new HashMap<>());
+    }
+
     private List<String[]> getAccountInfo(String name, String pwd, boolean isCustomer) {
         List<String> accountIdList = parser.parsePersonAccountIds(name, pwd, isCustomer);
         List<String[]> accountInfo = new ArrayList<>();
