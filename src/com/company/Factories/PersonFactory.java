@@ -21,11 +21,15 @@ public class PersonFactory{
         accountFactory = new AccountFactory();
     }
 
-    public Customer produceCustomer(String name, String pwd) throws FileNotFoundException, PersonNotFoundException {
+    public Customer produceCustomer(String name, String pwd) throws PersonNotFoundException {
         int id = parser.checkPresence(name, pwd, true);
         List<String[]> accountInfo = getAccountInfo(name, pwd, true);
         Map<AccountType, Account> accounts = accountFactory.produceAccountMap(accountInfo);
         return new Customer(id, name, pwd, accounts);
+    }
+
+    public Customer produceNewCustomer(int id, String name, String pwd) {
+        return new Customer(id, name, pwd, new HashMap<>());
     }
 
     public Manager produceManager(String name, String pwd) {
@@ -33,6 +37,10 @@ public class PersonFactory{
         List<String[]> accountInfo = getAccountInfo(name, pwd, false);
         Map<AccountType, Account> accounts = accountFactory.produceAccountMap(accountInfo);
         return new Manager(id, name, pwd, accounts);
+    }
+
+    public Manager produceNewManager(int id, String name, String pwd) {
+        return new Manager(id, name, pwd, new HashMap<>());
     }
 
     private List<String[]> getAccountInfo(String name, String pwd, boolean isCustomer) {
