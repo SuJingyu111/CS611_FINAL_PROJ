@@ -1,7 +1,6 @@
 package com.company.Persons;
 
-import com.company.Account.Account;
-import com.company.Account.AccountType;
+import com.company.Account.*;
 import com.company.Exceptions.AccountAlreadyExistException;
 import com.company.Exceptions.AccountNotExistException;
 
@@ -65,5 +64,24 @@ public class Person {
             throw new AccountAlreadyExistException();
         }
         accounts.put(account.getTYPE(), account);
+    }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(id).append(",");
+        stringBuilder.append(name).append(",");
+        stringBuilder.append(pwd).append(",");
+        appendAccId(AccountType.CHECKINGS, stringBuilder);
+        appendAccId(AccountType.SAVINGS, stringBuilder);
+        appendAccId(AccountType.LOAN, stringBuilder);
+        appendAccId(AccountType.STOCK, stringBuilder);
+        appendAccId(AccountType.ADMIN, stringBuilder);
+        stringBuilder.delete(stringBuilder.length() - 1, stringBuilder.length());
+        return stringBuilder.toString();
+    }
+
+    private void appendAccId(AccountType type, StringBuilder stringBuilder) {
+        Account account = accounts.get(type);
+        stringBuilder.append(account == null ? "" : account.getAccountId()).append(",");
     }
 }
