@@ -60,9 +60,7 @@ public class Person {
     }
 
     public void addAccount(Account account) throws AccountAlreadyExistException {
-        if (accounts.containsKey(account.getTYPE())) {
-            throw new AccountAlreadyExistException();
-        }
+
         accounts.put(account.getTYPE(), account);
     }
 

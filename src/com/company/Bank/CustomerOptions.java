@@ -51,7 +51,8 @@ public class CustomerOptions {
         System.out.println("<4> Transfer Between Accounts");
         System.out.println("<5> Take / Pay Back Loan(s)");
         System.out.println("<6> Buy / Sell Stocks");
-        System.out.println("<7> Return to Previous Menu");
+        System.out.println("<7> Create New Account");
+        System.out.println("<8> Return to Previous Menu");
         System.out.println("<q> Quit");
 
         String choice = input.next();
@@ -69,7 +70,8 @@ public class CustomerOptions {
             System.out.println("<4> Transfer Between Accounts");
             System.out.println("<5> Take / Pay Back Loan(s)");
             System.out.println("<6> Buy / Sell Stocks");
-            System.out.println("<7> Return to Previous Menu");
+            System.out.println("<7> Create New Account");
+            System.out.println("<8> Return to Previous Menu");
             System.out.println("<q> Quit");
             choice = input.next();
         }
@@ -99,6 +101,10 @@ public class CustomerOptions {
         }
 
         else if(choice.equals("7")){
+            CustomerNewAccount.run(customer, currency);
+        }
+
+        else if(choice.equals("8")){
             BankATM.run();
         }
 
