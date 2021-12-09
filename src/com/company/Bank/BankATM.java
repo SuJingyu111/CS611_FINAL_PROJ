@@ -28,7 +28,6 @@ public class BankATM {
             System.out.println("I'm a  <1> Customer ");
             System.out.println("       <2> Manager");
             System.out.println("       <3> New Customer");
-            System.out.println("       <4> New Manager");
             System.out.println("       <q> Quit");
             choice = in.next();
         }
@@ -43,10 +42,6 @@ public class BankATM {
 
         else if(choice.equals("3")){
             CreateCustomer.run();
-        }
-
-        else if(choice.equals("4")){
-            CreateManager.run();
         }
 
         else{

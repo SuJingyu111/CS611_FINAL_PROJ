@@ -1,10 +1,12 @@
 package com.company.Bank;
+import com.company.Persons.Manager;
+
 import java.util.Random;
 import java.util.Scanner;
 
 public class CreateManager {
 
-    public static void run(){
+    public static void run(Manager manager,Currency currency){
 
         Scanner input = new Scanner(System.in);
 
