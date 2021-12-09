@@ -5,7 +5,8 @@ import com.company.Persons.Customer;
 
 
 import java.io.IOException;
-import java.util.Scanner;
+import java.util.*;
+
 
 import static com.company.Account.AccountType.*;
 
@@ -66,19 +67,51 @@ public class CustomerDeposit {
         }
 
         if(choice2.equals("1")){
-            //TODO: ADJUST FUNCTION CALL
-            Account account = customer.getAccount(SAVINGS);
-            account.setBalance((account.getBalance() + value));
+
+            List<Account> AllSavingsAccounts = customer.getAccountsByType(SAVINGS);
+            System.out.println();
+            System.out.println("********************************************************************************************");
+            System.out.println("           Account Id      Balance");
+            int count = 1;
+            for(Account account : AllSavingsAccounts){
+                System.out.println("<" + count + "> " + "           " +  account.getAccountId() + "           " + account.getBalance());
+            }
+
+            System.out.println();
+            System.out.println("Enter the account ID :  ");
+            String ID = input.next();
+
+            for(Account account : AllSavingsAccounts){
+                if(account.getAccountId().equals(ID)){
+                    account.setBalance((account.getBalance() + value));
+                }
+            }
         }
+
         else if(choice2.equals("2")){
-            //TODO: ADJUST FUNCTION CALL
-            Account account = customer.getAccount(CHECKINGS);
-            account.setBalance((account.getBalance() + value));
+
+            List<Account> AllCheckingsAccounts = customer.getAccountsByType(CHECKINGS);
+            System.out.println();
+            System.out.println("********************************************************************************************");
+            System.out.println("           Account Id      Balance");
+            int count = 1;
+            for(Account account : AllCheckingsAccounts){
+                System.out.println("<" + count + "> " + "           " +  account.getAccountId() + "           " + account.getBalance());
+            }
+
+            System.out.println();
+            System.out.println("Enter the account ID :  ");
+            String ID = input.next();
+
+            for(Account account : AllCheckingsAccounts){
+                if(account.getAccountId().equals(ID)){
+                    account.setBalance((account.getBalance() + value));
+                }
+            }
         }
 
         //TODO : Add a method in writer class to update the changes in the balance in the csv files
         //TODO : add transaction to transaction.csv
         CustomerBalance.run(customer,currency);
-
     }
 }

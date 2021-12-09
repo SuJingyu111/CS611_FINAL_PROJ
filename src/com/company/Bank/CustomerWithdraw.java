@@ -4,10 +4,10 @@ import com.company.Account.Account;
 import com.company.Persons.Customer;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 import static com.company.Account.AccountType.CHECKINGS;
-import static com.company.Account.AccountType.SAVINGS;
 
 public class CustomerWithdraw {
 
@@ -49,9 +49,25 @@ public class CustomerWithdraw {
         else if(choice1.equals("4")){
             value *= currency.getForex("JPY");
         }
-        //TODO: ADJUST FUNCTION CALL
-        Account account = customer.getAccount(CHECKINGS);
-        account.setBalance((account.getBalance() - value));
+
+        List<Account> AllCheckingsAccounts = customer.getAccountsByType(CHECKINGS);
+        System.out.println();
+        System.out.println("********************************************************************************************");
+        System.out.println("           Account Id      Balance");
+        int count = 1;
+        for(Account account : AllCheckingsAccounts){
+            System.out.println("<" + count + "> " + "           " +  account.getAccountId() + "           " + account.getBalance());
+        }
+
+        System.out.println();
+        System.out.println("Enter the account ID :  ");
+        String ID = input.next();
+
+        for(Account account : AllCheckingsAccounts){
+            if(account.getAccountId().equals(ID)){
+                account.setBalance((account.getBalance() - value));
+            }
+        }
 
         CustomerBalance.run(customer,currency);
     }

@@ -31,13 +31,32 @@ public class CustomerLoan {
         double value = input.nextDouble();
 
         //TODO: ADJUST FUNCTION CALL
-        Account loanAccount = customer.getAccount(AccountType.LOAN);
-        Account checkingsAccount = customer.getAccount(AccountType.CHECKINGS);
-        Account savingsAccount = customer.getAccount(AccountType.SAVINGS);
+        List<Account> allLoanAccounts = customer.getAccountsByType(AccountType.LOAN);
+        List<Account> allCheckingsAccounts = customer.getAccountsByType(AccountType.CHECKINGS);
+        List<Account> allSavingsAccounts = customer.getAccountsByType(AccountType.SAVINGS);
 
         if(choice1.equals("1")){
-            loanAccount.setBalance(loanAccount.getBalance() + value);
-            checkingsAccount.setBalance(checkingsAccount.getBalance() + value);
+
+            for(Account loanAccount : allLoanAccounts){
+                loanAccount.setBalance(loanAccount.getBalance() + value);
+            }
+            System.out.println();
+            System.out.println("********************************************************************************************");
+            System.out.println("           Account Id      Balance");
+            int count = 1;
+            for(Account account : allCheckingsAccounts){
+                System.out.println("<" + count + "> " + "           " +  account.getAccountId() + "           " + account.getBalance());
+            }
+
+            System.out.println();
+            System.out.println("Enter the account ID you want the amount to be deposited  :  ");
+            String ID = input.next();
+
+            for(Account account : allCheckingsAccounts){
+                if(account.getAccountId().equals(ID)){
+                    account.setBalance((account.getBalance() + value));
+                }
+            }
         }
 
         else if (choice1.equals("2")){
@@ -55,19 +74,56 @@ public class CustomerLoan {
             }
 
             if(choice2.equals("1")){
-                checkingsAccount.setBalance(checkingsAccount.getBalance() - value);
-                loanAccount.setBalance(loanAccount.getBalance() - value);
+
+                System.out.println();
+                System.out.println("********************************************************************************************");
+                System.out.println("           Account Id      Balance");
+                int count = 1;
+                for(Account account : allCheckingsAccounts){
+                    System.out.println("<" + count + "> " + "           " +  account.getAccountId() + "           " + account.getBalance());
+                }
+
+                System.out.println();
+                System.out.println("Enter the account ID you want to pay back from :  ");
+                String ID = input.next();
+
+                for(Account account : allCheckingsAccounts){
+                    if(account.getAccountId().equals(ID)){
+                        account.setBalance((account.getBalance() - value));
+                    }
+                }
+                for(Account loanAccount : allLoanAccounts){
+                    loanAccount.setBalance(loanAccount.getBalance() - value);
+                }
             }
 
             else if (choice2.equals("2")){
-                savingsAccount.setBalance(savingsAccount.getBalance() - value);
-                loanAccount.setBalance(loanAccount.getBalance() - value);
+
+                System.out.println();
+                System.out.println("********************************************************************************************");
+                System.out.println("           Account Id      Balance");
+                int count = 1;
+                for(Account account : allSavingsAccounts){
+                    System.out.println("<" + count + "> " + "           " +  account.getAccountId() + "           " + account.getBalance());
+                }
+
+                System.out.println();
+                System.out.println("Enter the account ID you want to pay back from :  ");
+                String ID = input.next();
+
+                for(Account account : allSavingsAccounts){
+                    if(account.getAccountId().equals(ID)){
+                        account.setBalance((account.getBalance() - value));
+                    }
+                }
+                for(Account loanAccount : allLoanAccounts){
+                    loanAccount.setBalance(loanAccount.getBalance() - value);
+                }
             }
 
         }
 
         CustomerBalance.run(customer, currency);
-
 
     }
 

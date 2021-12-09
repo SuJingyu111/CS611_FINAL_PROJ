@@ -5,6 +5,8 @@ import com.company.Persons.Manager;
 
 import java.io.IOException;
 import java.util.Scanner;
+import com.company.Utils.Parser;
+import com.company.Utils.Printer;
 
 public class ManagerOptions {
 

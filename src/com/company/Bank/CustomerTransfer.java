@@ -4,6 +4,7 @@ import com.company.Account.Account;
 import com.company.Persons.Customer;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 import static com.company.Account.AccountType.CHECKINGS;
@@ -36,19 +37,85 @@ public class CustomerTransfer {
         double value  = input.nextDouble();
 
         if(choice1.equals("1")){
-            //TODO: ADJUST FUNCTION CALL
-            Account account1 = customer.getAccount(CHECKINGS);
-            account1.setBalance((account1.getBalance() - value));
-            Account account2 = customer.getAccount(SAVINGS);
-            account2.setBalance((account2.getBalance() + value));
+
+            List<Account> AllCheckingsAccounts = customer.getAccountsByType(CHECKINGS);
+            System.out.println();
+            System.out.println("********************************************************************************************");
+            System.out.println("           Account Id      Balance");
+            int count = 1;
+            for(Account account : AllCheckingsAccounts){
+                System.out.println("<" + count + "> " + "           " +  account.getAccountId() + "           " + account.getBalance());
+            }
+
+            System.out.println();
+            System.out.println("Enter the account ID to be transferred from :  ");
+            String ID = input.next();
+
+            for(Account account : AllCheckingsAccounts){
+                if(account.getAccountId().equals(ID)){
+                    account.setBalance((account.getBalance() - value));
+                }
+            }
+
+            List<Account> AllSavingsAccounts = customer.getAccountsByType(SAVINGS);
+            System.out.println();
+            System.out.println("********************************************************************************************");
+            System.out.println("           Account Id      Balance");
+            count = 1;
+            for(Account account : AllSavingsAccounts){
+                System.out.println("<" + count + "> " + "           " +  account.getAccountId() + "           " + account.getBalance());
+            }
+
+            System.out.println();
+            System.out.println("Enter the account ID to be transferred to :  ");
+            ID = input.next();
+
+            for(Account account : AllSavingsAccounts){
+                if(account.getAccountId().equals(ID)){
+                    account.setBalance((account.getBalance() + value));
+                }
+            }
         }
 
-        else if(choice1.equals("2")){
-            //TODO: ADJUST FUNCTION CALL
-            Account account1 = customer.getAccount(SAVINGS);
-            account1.setBalance((account1.getBalance() - value));
-            Account account2 = customer.getAccount(CHECKINGS);
-            account2.setBalance((account2.getBalance() + value));
+        else if(choice1.equals("2")) {
+
+            List<Account> AllSavingsAccounts = customer.getAccountsByType(SAVINGS);
+            System.out.println();
+            System.out.println("********************************************************************************************");
+            System.out.println("           Account Id      Balance");
+            int count = 1;
+            for (Account account : AllSavingsAccounts) {
+                System.out.println("<" + count + "> " + "           " + account.getAccountId() + "           " + account.getBalance());
+            }
+
+            System.out.println();
+            System.out.println("Enter the account ID to be transferred from :  ");
+            String ID = input.next();
+
+            for (Account account : AllSavingsAccounts) {
+                if (account.getAccountId().equals(ID)) {
+                    account.setBalance((account.getBalance() - value));
+                }
+            }
+
+            List<Account> AllCheckingsAccounts = customer.getAccountsByType(CHECKINGS);
+            System.out.println();
+            System.out.println("********************************************************************************************");
+            System.out.println("           Account Id      Balance");
+            count = 1;
+            for (Account account : AllCheckingsAccounts) {
+                System.out.println("<" + count + "> " + "           " + account.getAccountId() + "           " + account.getBalance());
+            }
+
+            System.out.println();
+            System.out.println("Enter the account ID to be transferred to :  ");
+            ID = input.next();
+
+            for (Account account : AllCheckingsAccounts) {
+                if (account.getAccountId().equals(ID)) {
+                    account.setBalance((account.getBalance() - value));
+                }
+            }
         }
 
         //TODO : Add a method in writer class to update the changes in the balance in the csv files

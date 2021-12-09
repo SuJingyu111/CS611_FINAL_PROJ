@@ -5,7 +5,7 @@ import com.company.Account.AccountType;
 import com.company.Persons.Customer;
 
 import java.io.IOException;
-import java.util.Map;
+import java.util.*;
 
 public class CustomerBalance {
 
@@ -15,10 +15,13 @@ public class CustomerBalance {
         System.out.println("********************************************************************************************");
         System.out.println("           Account Id      Balance         Account Type");
         int count = 1;
-        //TODO: ADJUST FUNCTION CALL
-        Map<AccountType, Account> accounts = customer.getAccounts();
+        Map<AccountType, List<Account>> accounts = customer.getAllAccounts();
         for(AccountType accountType : accounts.keySet()){
-            System.out.println("<" + count + "> " + "           " +  accounts.get(accountType).getAccountId() + "           " + accounts.get(accountType).getBalance() + "           " + accountType);
+            List<Account> accountsByType = customer.getAccountsByType(accountType);
+            for(Account account : accountsByType){
+                System.out.println("<" + count + "> " + "           " +  account.getAccountId() + "           " + account.getBalance() + "           " + accountType);
+            }
+
             count += 1;
 
         }
