@@ -1,23 +1,17 @@
 package com.company.Bank;
 
+import com.company.Account.AccountFilePath;
+import com.company.Account.AccountType;
 import com.company.Stock.Stock;
 
 import java.io.*;
 import java.util.*;
 
+import static com.company.Account.AccountFilePath.*;
+
 public class Parser {
 
     private Scanner input;
-
-    private final String CUST_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "Customers.csv";
-
-    private final String MANAGER_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "Manager.csv";
-
-    private final String CUST_ACC_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "CustomerAccounts.csv";
-
-    private final String MANAGER_ACC_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "ManagerAccounts.csv";
-
-    private final String STOCK_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "Stocks.csv";
 
     public HashMap<String, Double> parseForex() throws IOException{
 
@@ -52,20 +46,24 @@ public class Parser {
         return -1;
     }
 
-    //Customer/Manager layout:id, name, pwd, checkings_id, savings_id, loan_id, stock_id, admin_id
-    public List<String> parsePersonAccountIds(String name, String pwd, boolean isCustomer) {
+    //TODO: MODIFY PARSER
+    //Customer/Manager layout:id, name, pwd, if_have_save, if_have_check, if_have_stock, if_have_loan, if_have_admin ("T/F")
+    public Map<AccountType, Boolean> parsePersonAccountExistence(String name, String pwd, boolean isCustomer) {
         String delimiter = ",";
         String record = null;
-        List<String> accountIdList = new ArrayList<>();
+        Map<AccountType, Boolean> accountExistMap = new HashMap<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(isCustomer ? CUST_PATH : MANAGER_PATH));
             while ((record = br.readLine()) != null) {
                 String[] accountInfo = record.split(delimiter);
                 if (accountInfo[1].equals(name) && accountInfo[2].equals(pwd)) {
                     for (int i = 3; i < accountInfo.length; i++) {
-                        String accountId = accountInfo[i];
-                        if (accountId != null && accountId.length() > 0) {
-                            accountIdList.add(accountId);
+                        AccountType type = AccountType.values()[i - 3];
+                        if (accountInfo[i].equals("T")) {
+                            accountExistMap.put(type, true);
+                        }
+                        else {
+                            accountExistMap.put(type, false);
                         }
                     }
                     break;
@@ -76,21 +74,21 @@ public class Parser {
             e.printStackTrace();
             return null;
         }
-        return accountIdList;
+        return accountExistMap;
     }
 
-
-
+    //TODO: MODIFY PARSER FOR PERSON CHANGES
     //Account record layout: acc_id, name, pwd, accountType, balance
-    public String[] parseAccount(String id, boolean isCustomer) {
+    public List<String[]> parseAccounts(AccountType type, String name, String pwd) {
         String delimiter = ",";
         String record = null;
+        List<String[]> accountsInfo = new ArrayList<>();
         try {
-            BufferedReader br = new BufferedReader(new FileReader(isCustomer ? CUST_ACC_PATH : MANAGER_ACC_PATH));
+            BufferedReader br = new BufferedReader(new FileReader(AccountFilePath.getPathByAccountType(type)));
             while ((record = br.readLine()) != null) {
                 String[] accountInfo = record.split(delimiter);
-                if (accountInfo[0].equals(id)) {
-                    return accountInfo;
+                if (accountInfo[1].equals(name) && accountInfo[2].equals(pwd)) {
+                    accountsInfo.add(accountInfo);
                 }
             }
         }
@@ -98,9 +96,10 @@ public class Parser {
             e.printStackTrace();
             return null;
         }
-        return new String[0];
+        return accountsInfo;
     }
 
+    /*
     public List<String[]> parseAllAcountInfo(List<String> accountIdList, boolean isCustomer) {
         List<String[]> accountInfo = new ArrayList<>();
         for (String id : accountIdList) {
@@ -108,6 +107,7 @@ public class Parser {
         }
         return accountInfo;
     }
+    */
 
     public Map<String, Double> parseAllStockInfo() {
         Map<String, Double> stockInfo = new HashMap<>();

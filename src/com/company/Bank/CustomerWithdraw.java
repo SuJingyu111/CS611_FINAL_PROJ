@@ -49,7 +49,7 @@ public class CustomerWithdraw {
         else if(choice1.equals("4")){
             value *= currency.getForex("JPY");
         }
-
+        //TODO: ADJUST FUNCTION CALL
         Account account = customer.getAccount(CHECKINGS);
         account.setBalance((account.getBalance() - value));
 
