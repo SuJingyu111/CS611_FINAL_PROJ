@@ -90,6 +90,9 @@ public class Person {
         stringBuilder.append(id).append(",");
         stringBuilder.append(name).append(",");
         stringBuilder.append(pwd);
+        for (AccountType type : AccountType.values()) {
+            appendAccExistence(type, stringBuilder);
+        }
         //appendAccId(AccountType.CHECKINGS, stringBuilder);
         //appendAccId(AccountType.SAVINGS, stringBuilder);
         //appendAccId(AccountType.LOAN, stringBuilder);
@@ -99,8 +102,7 @@ public class Person {
         return stringBuilder.toString();
     }
 
-    //private void appendAccId(AccountType type, StringBuilder stringBuilder) {
-    //    Account account = accounts.get(type);
-    //    stringBuilder.append(account == null ? "" : account.getAccountId()).append(",");
-    //}
+    private void appendAccExistence(AccountType type, StringBuilder stringBuilder) {
+        stringBuilder.append(accounts.containsKey(type) ? "T" : "F").append(",");
+    }
 }
