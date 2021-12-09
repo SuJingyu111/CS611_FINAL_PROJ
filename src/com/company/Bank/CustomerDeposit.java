@@ -66,10 +66,12 @@ public class CustomerDeposit {
         }
 
         if(choice2.equals("1")){
+            //TODO: ADJUST FUNCTION CALL
             Account account = customer.getAccount(SAVINGS);
             account.setBalance((account.getBalance() + value));
         }
         else if(choice2.equals("2")){
+            //TODO: ADJUST FUNCTION CALL
             Account account = customer.getAccount(CHECKINGS);
             account.setBalance((account.getBalance() + value));
         }

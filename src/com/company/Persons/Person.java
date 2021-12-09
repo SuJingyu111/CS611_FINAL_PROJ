@@ -4,6 +4,8 @@ import com.company.Account.*;
 import com.company.Exceptions.AccountAlreadyExistException;
 import com.company.Exceptions.AccountNotExistException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Person {
@@ -14,13 +16,21 @@ public class Person {
 
     private String pwd;
 
-    private Map<AccountType, Account> accounts;
+    private Map<AccountType, List<Account>> accounts;
 
-    public Person(int id, String name, String pwd, Map<AccountType, Account> accounts) {
+    public Person(int id, String name, String pwd, Map<AccountType, List<Account>> accounts) {
         this.id = id;
         this.name = name;
         this.pwd = pwd;
         this.accounts = accounts;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -43,43 +53,56 @@ public class Person {
         return pwd.equals(inputPwd);
     }
 
-    public Account getAccount(AccountType type) throws AccountNotExistException {
-        Account account = accounts.getOrDefault(type, null);
-        if (account == null) {
-            throw new AccountNotExistException();
+    public Account getAccountById(AccountType type, String accountId) throws AccountNotExistException {
+        List<Account> accountList = getAccountsByType(type);
+        for (Account account : accountList) {
+            if (account.getAccountId().equals(accountId)) {
+                return account;
+            }
         }
-        return account;
+        throw new AccountNotExistException();
     }
 
-    public Map<AccountType, Account> getAccounts() {
+    public List<Account> getAccountsByType(AccountType type) throws AccountNotExistException {
+        List<Account> accountList = accounts.getOrDefault(type, new ArrayList<>());
+        if (accountList.size() == 0) {
+            throw new AccountNotExistException();
+        }
+        return accountList;
+    }
+
+    public Map<AccountType, List<Account>> getAllAccounts() {
         return accounts;
     }
 
-    public void setAccounts(Map<AccountType, Account> accounts) {
+    public void setAccounts(Map<AccountType, List<Account>> accounts) {
         this.accounts = accounts;
     }
 
     public void addAccount(Account account) throws AccountAlreadyExistException {
-
-        accounts.put(account.getTYPE(), account);
+        List<Account> accountList = accounts.getOrDefault(account.getTYPE(), new ArrayList<>());
+        accountList.add(account);
+        accounts.put(account.getTYPE(), accountList);
     }
 
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(id).append(",");
         stringBuilder.append(name).append(",");
-        stringBuilder.append(pwd).append(",");
-        appendAccId(AccountType.CHECKINGS, stringBuilder);
-        appendAccId(AccountType.SAVINGS, stringBuilder);
-        appendAccId(AccountType.LOAN, stringBuilder);
-        appendAccId(AccountType.STOCK, stringBuilder);
-        appendAccId(AccountType.ADMIN, stringBuilder);
-        stringBuilder.delete(stringBuilder.length() - 1, stringBuilder.length());
+        stringBuilder.append(pwd);
+        for (AccountType type : AccountType.values()) {
+            appendAccExistence(type, stringBuilder);
+        }
+        //appendAccId(AccountType.CHECKINGS, stringBuilder);
+        //appendAccId(AccountType.SAVINGS, stringBuilder);
+        //appendAccId(AccountType.LOAN, stringBuilder);
+        //appendAccId(AccountType.STOCK, stringBuilder);
+        //appendAccId(AccountType.ADMIN, stringBuilder);
+        //stringBuilder.delete(stringBuilder.length() - 1, stringBuilder.length());
         return stringBuilder.toString();
     }
 
-    private void appendAccId(AccountType type, StringBuilder stringBuilder) {
-        Account account = accounts.get(type);
-        stringBuilder.append(account == null ? "" : account.getAccountId()).append(",");
+    private void appendAccExistence(AccountType type, StringBuilder stringBuilder) {
+        stringBuilder.append(accounts.containsKey(type) ? "T" : "F").append(",");
     }
 }

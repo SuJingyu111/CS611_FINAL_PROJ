@@ -36,7 +36,7 @@ public class CustomerTransfer {
         double value  = input.nextDouble();
 
         if(choice1.equals("1")){
-
+            //TODO: ADJUST FUNCTION CALL
             Account account1 = customer.getAccount(CHECKINGS);
             account1.setBalance((account1.getBalance() - value));
             Account account2 = customer.getAccount(SAVINGS);
@@ -44,7 +44,7 @@ public class CustomerTransfer {
         }
 
         else if(choice1.equals("2")){
-
+            //TODO: ADJUST FUNCTION CALL
             Account account1 = customer.getAccount(SAVINGS);
             account1.setBalance((account1.getBalance() - value));
             Account account2 = customer.getAccount(CHECKINGS);

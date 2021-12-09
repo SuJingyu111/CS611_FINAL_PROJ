@@ -3,20 +3,22 @@ package com.company.Factories;
 import com.company.Account.Account;
 import com.company.Account.AccountType;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class AccountFactory {
 
-    public Map<AccountType, Account> produceAccountMap(List<String[]> accountInfo) {
-        Map<AccountType, Account> map = new HashMap<>();
-        for (String[] info : accountInfo) {
-            if (info.length <= 0) {
-                continue;
+    public Map<AccountType, List<Account>> produceAccountMap(Map<AccountType, List<String[]>> accountInfoMap) {
+        Map<AccountType, List<Account>> map = new HashMap<>();
+        for (AccountType type : accountInfoMap.keySet()) {
+            List<String[]> infoList = accountInfoMap.get(type);
+            List<Account> accountList = new ArrayList<>();
+            for (String[] info : infoList) {
+                accountList.add(produceAccount(info));
             }
-            Account account = produceAccount(info);
-            map.put(account.getTYPE(), account);
+            map.put(type, accountList);
         }
         return map;
     }

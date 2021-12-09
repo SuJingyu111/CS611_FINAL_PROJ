@@ -5,9 +5,8 @@ import com.company.Account.AccountType;
 import com.company.Persons.Customer;
 import com.company.Persons.Manager;
 import com.company.Exceptions.PersonNotFoundException;
-import com.company.Bank.Parser;
+import com.company.Utils.Parser;
 
-import java.io.FileNotFoundException;
 import java.util.*;
 
 public class PersonFactory{
@@ -23,8 +22,8 @@ public class PersonFactory{
 
     public Customer produceCustomer(String name, String pwd) throws PersonNotFoundException {
         int id = parser.checkPresence(name, pwd, true);
-        List<String[]> accountInfo = getAccountInfo(name, pwd, true);
-        Map<AccountType, Account> accounts = accountFactory.produceAccountMap(accountInfo);
+        Map<AccountType, List<String[]>> accountInfo = getAccountInfo(name, pwd, true);
+        Map<AccountType, List<Account>> accounts = accountFactory.produceAccountMap(accountInfo);
         return new Customer(id, name, pwd, accounts);
     }
 
@@ -34,8 +33,8 @@ public class PersonFactory{
 
     public Manager produceManager(String name, String pwd) {
         int id = parser.checkPresence(name, pwd, false);
-        List<String[]> accountInfo = getAccountInfo(name, pwd, false);
-        Map<AccountType, Account> accounts = accountFactory.produceAccountMap(accountInfo);
+        Map<AccountType, List<String[]>> accountInfo = getAccountInfo(name, pwd, false);
+        Map<AccountType, List<Account>> accounts = accountFactory.produceAccountMap(accountInfo);
         return new Manager(id, name, pwd, accounts);
     }
 
@@ -43,11 +42,14 @@ public class PersonFactory{
         return new Manager(id, name, pwd, new HashMap<>());
     }
 
-    private List<String[]> getAccountInfo(String name, String pwd, boolean isCustomer) {
-        List<String> accountIdList = parser.parsePersonAccountIds(name, pwd, isCustomer);
-        List<String[]> accountInfo = new ArrayList<>();
-        for (String id : accountIdList) {
-            accountInfo.add(parser.parseAccount(id, isCustomer));
+    private Map<AccountType, List<String[]>> getAccountInfo(String name, String pwd, boolean isCustomer) {
+        //int personId = parser.checkPresence(name, pwd, isCustomer);
+        Map<AccountType, Boolean> accountExistenceMap = parser.parsePersonAccountExistence(name, pwd, isCustomer);
+        Map<AccountType, List<String[]>> accountInfo = new HashMap<>();
+        for (AccountType type : AccountType.values()) {
+            if (accountExistenceMap.get(type)) {
+                accountInfo.put(type, parser.parseAccounts(type, name, pwd));
+            }
         }
         return accountInfo;
     }

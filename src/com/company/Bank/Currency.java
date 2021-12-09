@@ -1,5 +1,8 @@
 package com.company.Bank;
 
+import com.company.Utils.Parser;
+import com.company.Utils.Writer;
+
 import java.io.*;
 import java.util.*;
 
@@ -7,7 +10,7 @@ public class Currency {
 
     private HashMap<String, Double> foreignExchange = new HashMap<>();
     private Parser parser = new Parser();
-    private Writer writer = new Writer();
+    private com.company.Utils.Writer writer = new Writer();
 
     public Currency() throws IOException {
 

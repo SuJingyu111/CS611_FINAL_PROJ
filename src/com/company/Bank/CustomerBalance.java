@@ -15,6 +15,7 @@ public class CustomerBalance {
         System.out.println("********************************************************************************************");
         System.out.println("           Account Id      Balance         Account Type");
         int count = 1;
+        //TODO: ADJUST FUNCTION CALL
         Map<AccountType, Account> accounts = customer.getAccounts();
         for(AccountType accountType : accounts.keySet()){
             System.out.println("<" + count + "> " + "           " +  accounts.get(accountType).getAccountId() + "           " + accounts.get(accountType).getBalance() + "           " + accountType);

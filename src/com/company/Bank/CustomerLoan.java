@@ -30,6 +30,7 @@ public class CustomerLoan {
         System.out.println("Enter the amount : ");
         double value = input.nextDouble();
 
+        //TODO: ADJUST FUNCTION CALL
         Account loanAccount = customer.getAccount(AccountType.LOAN);
         Account checkingsAccount = customer.getAccount(AccountType.CHECKINGS);
         Account savingsAccount = customer.getAccount(AccountType.SAVINGS);
