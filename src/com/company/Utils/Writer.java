@@ -29,7 +29,7 @@ public class Writer {
         writer.write(String.valueOf(stringBuilder));
 
     }
-    
+
     //Used when a person gets a new Account, if person does not exist, create a new record
     public void grantNewAccount(Person p, Account account, boolean isCustomer) throws IOException, AccountAlreadyExistException {
         String accountFilePath = FilePaths.getPathByAccountType(account.getTYPE());
