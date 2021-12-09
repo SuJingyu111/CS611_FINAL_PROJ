@@ -1,6 +1,8 @@
-package com.company.Account;
+package com.company.Utils;
 
-public class AccountFilePath {
+import com.company.Account.AccountType;
+
+public class FilePaths {
 
     public static final String CUST_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "Customers.csv";
 
@@ -18,6 +20,8 @@ public class AccountFilePath {
     public static final String MANAGER_ACC_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "ManagerAccounts.csv";
 
     public static final String STOCK_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "Stocks.csv";
+
+    public static final String TXN_FILE_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "Transactions.csv";
 
     public static String getPathByAccountType(AccountType type) {
         switch (type){

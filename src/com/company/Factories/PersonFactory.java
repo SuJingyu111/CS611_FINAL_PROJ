@@ -5,9 +5,8 @@ import com.company.Account.AccountType;
 import com.company.Persons.Customer;
 import com.company.Persons.Manager;
 import com.company.Exceptions.PersonNotFoundException;
-import com.company.Bank.Parser;
+import com.company.Utils.Parser;
 
-import java.io.FileNotFoundException;
 import java.util.*;
 
 public class PersonFactory{
@@ -43,7 +42,6 @@ public class PersonFactory{
         return new Manager(id, name, pwd, new HashMap<>());
     }
 
-    //TODO: MODIFY FACTORY
     private Map<AccountType, List<String[]>> getAccountInfo(String name, String pwd, boolean isCustomer) {
         //int personId = parser.checkPresence(name, pwd, isCustomer);
         Map<AccountType, Boolean> accountExistenceMap = parser.parsePersonAccountExistence(name, pwd, isCustomer);

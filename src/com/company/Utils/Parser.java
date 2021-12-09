@@ -1,13 +1,12 @@
-package com.company.Bank;
+package com.company.Utils;
 
-import com.company.Account.AccountFilePath;
+import com.company.Utils.FilePaths;
 import com.company.Account.AccountType;
-import com.company.Stock.Stock;
 
 import java.io.*;
 import java.util.*;
 
-import static com.company.Account.AccountFilePath.*;
+import static com.company.Utils.FilePaths.*;
 
 public class Parser {
 
@@ -46,7 +45,6 @@ public class Parser {
         return -1;
     }
 
-    //TODO: MODIFY PARSER
     //Customer/Manager layout:id, name, pwd, if_have_save, if_have_check, if_have_stock, if_have_loan, if_have_admin ("T/F")
     public Map<AccountType, Boolean> parsePersonAccountExistence(String name, String pwd, boolean isCustomer) {
         String delimiter = ",";
@@ -77,14 +75,13 @@ public class Parser {
         return accountExistMap;
     }
 
-    //TODO: MODIFY PARSER FOR PERSON CHANGES
     //Account record layout: acc_id, name, pwd, accountType, balance
     public List<String[]> parseAccounts(AccountType type, String name, String pwd) {
         String delimiter = ",";
         String record = null;
         List<String[]> accountsInfo = new ArrayList<>();
         try {
-            BufferedReader br = new BufferedReader(new FileReader(AccountFilePath.getPathByAccountType(type)));
+            BufferedReader br = new BufferedReader(new FileReader(FilePaths.getPathByAccountType(type)));
             while ((record = br.readLine()) != null) {
                 String[] accountInfo = record.split(delimiter);
                 if (accountInfo[1].equals(name) && accountInfo[2].equals(pwd)) {

@@ -1,6 +1,6 @@
 package com.company.Factories;
 
-import com.company.Bank.Parser;
+import com.company.Utils.Parser;
 import com.company.Stock.Stock;
 
 import java.util.HashMap;
