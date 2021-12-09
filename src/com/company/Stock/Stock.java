@@ -2,9 +2,9 @@ package com.company.Stock;
 
 public class Stock {
 
-    String corpName;
+    private String corpName;
 
-    double price;
+    private double price;
 
     public Stock(String corpName, double price) {
         this.corpName = corpName;
