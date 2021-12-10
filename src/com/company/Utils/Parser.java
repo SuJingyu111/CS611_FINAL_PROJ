@@ -31,6 +31,23 @@ public class Parser {
 
     }
 
+    public String[] parsePersonInfoById(String id, boolean isCustomer) {
+        try {
+            String personFilePath = isCustomer ? CUST_PATH : MANAGER_PATH;
+            CSVReader personReader = new CSVReader(new FileReader(personFilePath), ',');
+            List<String[]> personCsvBody = personReader.readAll();
+            for (String[] personInfo: personCsvBody) {
+                if (personInfo[0].equals(id)) {
+                    return personInfo;
+                }
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new String[0];
+    }
+
     //-1 if not exist, if exists, return person Id
     public int checkPresence(String name, String pwd, boolean isCustomer) {
         /*

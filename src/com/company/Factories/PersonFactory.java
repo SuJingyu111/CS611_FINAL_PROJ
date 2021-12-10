@@ -27,6 +27,11 @@ public class PersonFactory{
         return new Customer(String.valueOf(id), name, pwd, accounts);
     }
 
+    public Customer produceCustomerById(String id)  throws PersonNotFoundException {
+        String[] customerInfo = parser.parsePersonInfoById(id, true);
+        return produceCustomer(customerInfo[1], customerInfo[2]);
+    }
+
     public Customer produceNewCustomer(String id, String name, String pwd) {
         return new Customer(id, name, pwd, new HashMap<>());
     }
