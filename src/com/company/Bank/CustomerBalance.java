@@ -24,7 +24,6 @@ public class CustomerBalance {
                 for (Map.Entry<CurrencyType, Double> entry : map.entrySet()){
                     System.out.println("                    " + entry.getKey() + "        " + entry.getValue());
                 }
-
                 count += 1;
             }
         }

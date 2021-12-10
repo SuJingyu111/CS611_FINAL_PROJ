@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class LoanAccount extends Account{
 
-    //LocalDate format: yy-mm-dd
+    //LocalDate format: yyyy-mm-dd
     private Map<LocalDate, Double> amountsDue;
 
     public LoanAccount(String accountId, String ownerName, String pwd, AccountType type) {

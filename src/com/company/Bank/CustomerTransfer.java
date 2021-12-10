@@ -78,6 +78,7 @@ public class CustomerTransfer {
                 }
                 count += 1;
             }
+            System.out.println("********************************************************************************************");
 
             System.out.println();
             System.out.println("Enter the account ID to be transferred from :  ");
@@ -106,6 +107,7 @@ public class CustomerTransfer {
                 }
                 count += 1;
             }
+            System.out.println("********************************************************************************************");
 
             System.out.println();
             System.out.println("Enter the account ID to be transferred to :  ");
@@ -139,6 +141,7 @@ public class CustomerTransfer {
                 }
                 count += 1;
             }
+            System.out.println("********************************************************************************************");
 
             System.out.println();
             System.out.println("Enter the account ID to be transferred from :  ");
@@ -167,6 +170,7 @@ public class CustomerTransfer {
                 }
                 count += 1;
             }
+            System.out.println("********************************************************************************************");
 
             System.out.println();
             System.out.println("Enter the account ID to be transferred to :  ");

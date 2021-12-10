@@ -59,6 +59,7 @@ public class CustomerWithdraw {
             }
             count += 1;
         }
+        System.out.println("********************************************************************************************");
 
         System.out.println();
         System.out.println("Enter the account ID :  ");

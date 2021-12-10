@@ -78,6 +78,7 @@ public class CustomerDeposit {
                 }
                 count += 1;
             }
+            System.out.println("********************************************************************************************");
 
             System.out.println();
             System.out.println("Enter the account ID :  ");
@@ -109,6 +110,7 @@ public class CustomerDeposit {
                 }
                 count += 1;
             }
+            System.out.println("********************************************************************************************");
 
             System.out.println();
             System.out.println("Enter the account ID :  ");
