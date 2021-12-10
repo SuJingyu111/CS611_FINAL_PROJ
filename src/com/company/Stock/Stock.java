@@ -26,4 +26,9 @@ public class Stock {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return corpName + " " + price;
+    }
 }

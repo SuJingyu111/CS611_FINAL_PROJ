@@ -85,12 +85,17 @@ public class Account {
         this.TYPE = TYPE;
     }
 
+    //TODO: MODIFY THIS
     @Override
     public String toString() {
-        return getAccountId() + "," +
+        StringBuilder sb = new StringBuilder(getAccountId() + "," +
                 getOwnerName() + "," +
                 getPwd() + "," +
-                getTYPE() + "," +
-                getBalance();
+                getTYPE() + ",");
+        for (Map.Entry<CurrencyType, Double> ent : balance.entrySet()) {
+            sb.append(ent.getKey().name()).append(" ").append(ent.getKey()).append(" ");
+        }
+        sb.delete(sb.length() - (balance.isEmpty() ? 1 : 2), sb.length());
+        return sb.toString();
     }
 }

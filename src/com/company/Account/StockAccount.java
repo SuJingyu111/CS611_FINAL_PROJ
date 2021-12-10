@@ -64,4 +64,22 @@ public class StockAccount extends Account{
         }
     }
 
+    //Should only use in account factory
+    public void addShare(String corpName, int amount) {
+        Stock stock = stockMarket.getStockByName(corpName);
+        stockLookUpMap.put(corpName, stock);
+        sharesHolding.put(stock, amount);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder(super.toString());
+        stringBuilder.append(",");
+        for (Map.Entry<Stock, Integer> ent : sharesHolding.entrySet()) {
+            stringBuilder.append(ent.getKey().getCorpName()).append(" ").append(ent.getValue()).append(" ");
+        }
+        stringBuilder.delete(stringBuilder.length() - (sharesHolding.isEmpty() ? 0 : 1), stringBuilder.length());
+        return stringBuilder.toString();
+    }
+
 }
