@@ -126,7 +126,7 @@ public class Parser {
         }
         return stockInfo;
     }
-    
+
     public List<Transaction> parseTxnByPersonId(String personId) {
         String filePath = TXN_FILE_PATH;
         String delimiter = ",";
