@@ -2,6 +2,6 @@ package com.company.Bank;
 
 public enum CurrencyType {
 
-    USD, CAN, JPY, EURO
+    USD, CAD, JPY, EUR
 
 }

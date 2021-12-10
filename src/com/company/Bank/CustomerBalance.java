@@ -21,12 +21,12 @@ public class CustomerBalance {
             for(Account account : accountsByType){
                 System.out.println("<" + count + "> " + "           " +  account.getAccountId() + "           " + accountType);
                 Map<CurrencyType, Double> map = account.getBalance();
-                for (Map.Entry<CurrencyType, Double> entry : map.entrySet())
+                for (Map.Entry<CurrencyType, Double> entry : map.entrySet()){
                     System.out.println("                    " + entry.getKey() + "        " + entry.getValue());
+                }
+
+                count += 1;
             }
-
-            count += 1;
-
         }
         System.out.println("********************************************************************************************");
         System.out.println();
