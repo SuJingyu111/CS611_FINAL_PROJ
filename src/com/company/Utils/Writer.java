@@ -60,17 +60,7 @@ public class Writer {
     private void writeAccount(int row, List<String[]> personCsvBody, Account account, String accountFilePath) throws IOException, AccountAlreadyExistException {
         //csvBody.get(row)[account.getTYPE().ordinal() + 3] = account.getAccountId();
         //String filePath = isCustomer ? CUST_ACC_PATH : MANAGER_ACC_PATH;
-        CSVReader accountReader = new CSVReader(new FileReader(accountFilePath), ',');
-        List<String[]> csvBodyAcc = accountReader.readAll();
-        csvBodyAcc.add(account.toString().split(","));
-        accountReader.close();
-
-        FileWriter accWriter = new FileWriter(accountFilePath, false);
-        CSVWriter writer = new CSVWriter(accWriter, ',');
-        writer.writeAll(csvBodyAcc);
-        writer.flush();
-        writer.close();
-
+        writeAccountToPath(account, accountFilePath);
         personCsvBody.get(row)[account.getTYPE().ordinal() + 3] = "T";
     }
 
@@ -79,7 +69,33 @@ public class Writer {
         writer.write(transaction.toString());
     }
 
-    public void updateAccount(String accountId, Transaction txn) {
+    public void updateAccountToDisk(Account account) throws IOException {
+        String filePath = FilePaths.getPathByAccountType(account.getTYPE());
+        writeAccountToPath(account, filePath);
+    }
 
+    private void writeAccountToPath(Account account, String filePath) throws IOException {
+        CSVReader accountReader = new CSVReader(new FileReader(filePath), ',');
+        List<String[]> csvBodyAcc = accountReader.readAll();
+        //csvBodyAcc.add(account.toString().split(","));
+        boolean exist = false;
+        for (int i = 0; i < csvBodyAcc.size(); i++) {
+            String[] accountInfo = csvBodyAcc.get(i);
+            if (accountInfo[0].equals(account.getAccountId())) {
+                csvBodyAcc.set(i, account.toString().split(","));
+                exist = true;
+                break;
+            }
+        }
+        if (!exist) {
+            csvBodyAcc.add(account.toString().split(","));
+        }
+        accountReader.close();
+
+        FileWriter accWriter = new FileWriter(filePath, false);
+        CSVWriter writer = new CSVWriter(accWriter, ',');
+        writer.writeAll(csvBodyAcc);
+        writer.flush();
+        writer.close();
     }
 }

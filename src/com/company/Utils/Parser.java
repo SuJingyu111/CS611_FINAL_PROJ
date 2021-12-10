@@ -75,7 +75,7 @@ public class Parser {
         return accountExistMap;
     }
 
-    //Account record layout: acc_id, name, pwd, accountType, balance
+    //Account record layout (general): acc_id, name, pwd, accountType, balance
     public List<String[]> parseAccounts(AccountType type, String name, String pwd) {
         String delimiter = ",";
         String record = null;
