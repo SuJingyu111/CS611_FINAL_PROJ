@@ -59,7 +59,7 @@ public class ManagerOptions {
         while (!choice.equals("1") && !choice.equals("2") && !choice.equals("3")&& !choice.equals("4") && !choice.equals("q")) {
 
             System.out.println();
-            System.out.println(" You've entered an incorrect option !");
+            System.out.println("You've entered an incorrect option !");
             System.out.println();
             System.out.println("What do you want to do ?");
             System.out.println("<1> Get Transactions By Date");
