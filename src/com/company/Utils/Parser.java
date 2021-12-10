@@ -1,9 +1,12 @@
 package com.company.Utils;
 
+import com.company.Factories.TxnFactory;
+import com.company.Transactions.Transaction;
 import com.company.Utils.FilePaths;
 import com.company.Account.AccountType;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.*;
 
 import static com.company.Utils.FilePaths.*;
@@ -122,6 +125,70 @@ public class Parser {
             return new HashMap<>();
         }
         return stockInfo;
+    }
+
+    public List<Transaction> parseTxnByPersonId(String personId) {
+        String filePath = TXN_FILE_PATH;
+        String delimiter = ",";
+        List<Transaction> txnList = new ArrayList<>();
+        String record = null;
+        TxnFactory txnFactory = new TxnFactory();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
+            while ((record = br.readLine()) != null) {
+                String[] info = record.split(delimiter);
+                if (info[3].equals(personId)) {
+                    txnList.add(txnFactory.produceTxn(info));
+                }
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+        return txnList;
+    }
+
+    public List<Transaction> parseTxnByDate(LocalDate date) {
+        String filePath = TXN_FILE_PATH;
+        String delimiter = ",";
+        List<Transaction> txnList = new ArrayList<>();
+        String record = null;
+        TxnFactory txnFactory = new TxnFactory();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
+            while ((record = br.readLine()) != null) {
+                String[] info = record.split(delimiter);
+                if (info[1].equals(date.toString())) {
+                    txnList.add(txnFactory.produceTxn(info));
+                }
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+        return txnList;
+    }
+
+    public List<Transaction> parseAllTxns() {
+        String filePath = TXN_FILE_PATH;
+        String delimiter = ",";
+        List<Transaction> txnList = new ArrayList<>();
+        String record = null;
+        TxnFactory txnFactory = new TxnFactory();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
+            while ((record = br.readLine()) != null) {
+                String[] info = record.split(delimiter);
+                txnList.add(txnFactory.produceTxn(info));
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+        return txnList;
     }
 
 }

@@ -1,10 +1,6 @@
 package com.company.Transactions;
 
-import com.company.Account.AccountType;
-import com.company.Persons.Person;
-
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Transaction {
 
@@ -58,11 +54,11 @@ public class Transaction {
         this.personId = personId;
     }
 
-    public TxnType getAccountType() {
+    public TxnType getTxnType() {
         return type;
     }
 
-    public void setAccountType(TxnType type) {
+    public void setTxnType(TxnType type) {
         this.type = type;
     }
 
@@ -73,7 +69,7 @@ public class Transaction {
         stringBuilder.append(getTimestamp().toString()).append(",");
         stringBuilder.append(getAmount()).append(",");
         stringBuilder.append(getPersonId()).append(",");
-        stringBuilder.append(getAccountType());
+        stringBuilder.append(getTxnType());
         return stringBuilder.toString();
     }
 

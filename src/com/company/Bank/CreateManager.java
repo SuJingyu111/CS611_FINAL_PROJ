@@ -22,7 +22,6 @@ public class CreateManager {
 
         String managerId = getRandomNumberString();
 
-        //TODO : Write manager to csv file.
         PersonFactory personFactory = new PersonFactory();
         Manager newManager = personFactory.produceNewManager(managerId, name, password);
         Writer writer = new Writer();

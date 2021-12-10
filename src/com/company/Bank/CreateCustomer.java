@@ -21,7 +21,6 @@ public class CreateCustomer {
 
         String customerId = getRandomNumberString();
 
-        //TODO : Write customer to csv file.
         PersonFactory personFactory = new PersonFactory();
         Customer customer = personFactory.produceNewCustomer(customerId, name, password);
         Writer writer = new Writer();
