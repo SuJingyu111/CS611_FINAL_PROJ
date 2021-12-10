@@ -1,9 +1,19 @@
 package com.company.Account;
 
+import com.company.Bank.CurrencyType;
+
+import java.security.PublicKey;
+import java.util.Map;
+
 public class AdminAccount extends Account{
 
-    public AdminAccount(String accountId, String ownerName, String pwd, AccountType type, double balance) {
-        super(accountId, ownerName, pwd, type, balance);
+    public AdminAccount(String accountId, String ownerName, String pwd, AccountType type) {
+        super(accountId, ownerName, pwd, type);
+    }
+
+    public AdminAccount(String accountId, String ownerName, String pwd, AccountType type, Map<CurrencyType, Double> balance) {
+        this(accountId, ownerName, pwd, type);
+        setAllBalance(balance);
     }
 
 }
