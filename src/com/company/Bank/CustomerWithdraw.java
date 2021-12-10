@@ -9,6 +9,7 @@ import com.company.Utils.Writer;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -45,24 +46,18 @@ public class CustomerWithdraw {
         System.out.println("Enter the amount you want to withdraw : ");
         double value = input.nextInt();
 
-
-        if(choice1.equals("2")){
-            value *= currency.getForex("EUR");
-        }
-        else if(choice1.equals("3")){
-            value *= currency.getForex("CAD");
-        }
-        else if(choice1.equals("4")){
-            value *= currency.getForex("JPY");
-        }
-
         List<Account> AllCheckingsAccounts = customer.getAccountsByType(CHECKINGS);
         System.out.println();
         System.out.println("********************************************************************************************");
-        System.out.println("           Account Id      Balance");
+        System.out.println("           Account Id      Currency      Balance");
         int count = 1;
         for(Account account : AllCheckingsAccounts){
-            System.out.println("<" + count + "> " + "           " +  account.getAccountId() + "           " + account.getBalance());
+            System.out.println("<" + count + "> " + "           " +  account.getAccountId());
+            Map<CurrencyType, Double> map = account.getBalance();
+            for (Map.Entry<CurrencyType, Double> entry : map.entrySet()){
+                System.out.println("                    " + entry.getKey() + "        " + entry.getValue());
+            }
+            count += 1;
         }
 
         System.out.println();
@@ -72,7 +67,10 @@ public class CustomerWithdraw {
         //TODO: MODIFY FUNCTION CALL
         for(Account account : AllCheckingsAccounts){
             if(account.getAccountId().equals(ID)){
-                account.setBalance((account.getBalance() - value));
+                if(choice1.equals("1")){ account.addToBalance(CurrencyType.USD, -value);}
+                else if(choice1.equals("2")){account.addToBalance(CurrencyType.EUR, -value);}
+                else if(choice1.equals("3")){account.addToBalance(CurrencyType.CAD, -value);}
+                else if(choice1.equals("4")){account.addToBalance(CurrencyType.JPY, -value);}
                 writer.updateAccountToDisk(account);
             }
         }
