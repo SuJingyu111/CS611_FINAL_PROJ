@@ -84,4 +84,7 @@ public class StockAccount extends Account{
         return stringBuilder.toString();
     }
 
+    public Map<String, Integer> getSharesHolding() {
+        return sharesHolding;
+    }
 }
