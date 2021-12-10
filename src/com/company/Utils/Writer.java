@@ -1,6 +1,7 @@
 package com.company.Utils;
 
 import com.company.Account.Account;
+import com.company.Account.AccountType;
 import com.company.Utils.FilePaths;
 import com.company.Exceptions.AccountAlreadyExistException;
 import com.company.Persons.Person;
@@ -37,11 +38,15 @@ public class Writer {
         personCsvBody.add(p.toString().split(","));
         personReader.close();
 
+        writeBackToFile(personFilePath, personCsvBody);
+        /*
         FileWriter personWriter = new FileWriter(personFilePath, false);
         CSVWriter writer = new CSVWriter(personWriter, ',');
         writer.writeAll(personCsvBody);
         writer.flush();
         writer.close();
+
+         */
     }
 
     //Used when a person gets a new Account, if person does not exist, create a new record
@@ -64,11 +69,15 @@ public class Writer {
         }
         personReader.close();
 
+        writeBackToFile(personFilePath, personCsvBody);
+        /*
         FileWriter personWriter = new FileWriter(personFilePath, false);
         CSVWriter writer = new CSVWriter(personWriter, ',');
         writer.writeAll(personCsvBody);
         writer.flush();
         writer.close();
+
+         */
     }
 
     private void writeAccount(int row, List<String[]> personCsvBody, Account account, String accountFilePath) throws IOException, AccountAlreadyExistException {
@@ -93,7 +102,7 @@ public class Writer {
         writer.close();
         */
 
-        System.out.println("!!!!!!!!!");
+        //System.out.println("!!!!!!!!!");
         CSVWriter csvWriter = new CSVWriter(new FileWriter(FilePaths.TXN_FILE_PATH, true));
         csvWriter.writeNext(transaction.toString().split(","));
         csvWriter.flush();
@@ -125,6 +134,28 @@ public class Writer {
         }
         accountReader.close();
 
+        writeBackToFile(filePath, csvBodyAcc);
+    }
+
+    public void deleteAccount(AccountType type, String id) throws IOException {
+        String filePath = FilePaths.getPathByAccountType(type);
+        CSVReader accountReader = new CSVReader(new FileReader(filePath), ',');
+        List<String[]> csvBodyAcc = accountReader.readAll();
+        int deleteIdx = -1;
+        for (int i = 0; i < csvBodyAcc.size(); i++) {
+            String[] accountInfo = csvBodyAcc.get(i);
+            if (accountInfo[0].equals(id)) {
+                deleteIdx = i;
+                break;
+            }
+        }
+        if (deleteIdx >= 0) {
+            csvBodyAcc.remove(deleteIdx);
+        }
+        writeBackToFile(filePath, csvBodyAcc);
+    }
+
+    private void writeBackToFile(String filePath, List<String[]> csvBodyAcc) throws IOException {
         FileWriter accWriter = new FileWriter(filePath, false);
         CSVWriter writer = new CSVWriter(accWriter, ',');
         writer.writeAll(csvBodyAcc);
