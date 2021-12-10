@@ -85,7 +85,6 @@ public class Account {
         this.TYPE = TYPE;
     }
 
-    //TODO: MODIFY THIS
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder(getAccountId() + "," +

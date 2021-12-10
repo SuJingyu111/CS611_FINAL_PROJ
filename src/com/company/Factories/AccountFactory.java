@@ -25,7 +25,6 @@ public class AccountFactory {
         return map;
     }
 
-    //TODO: MODIFY THIS
     public Account produceAccount(String[] args) {
         String id = args[0], name = args[1], pwd = args[2];
         AccountType type = AccountType.valueOf(args[3]);
