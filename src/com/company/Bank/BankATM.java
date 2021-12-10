@@ -44,7 +44,7 @@ public class BankATM {
         }
 
         else if(choice.equals("3")){
-            CreateCustomer.run(currency);
+            CreateCustomer.run(currency, stockMarket);
         }
 
         else{

@@ -58,6 +58,7 @@ public class PersonFactory{
                 accountInfo.put(type, parser.parseAccounts(type, name, pwd));
             }
         }
+        System.out.println(accountInfo.containsKey(AccountType.STOCK));
         return accountInfo;
     }
 }
