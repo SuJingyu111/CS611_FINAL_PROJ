@@ -3,21 +3,22 @@ package com.company.Transactions;
 import com.company.Account.AccountType;
 import com.company.Persons.Person;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Transaction {
 
     private String id;
 
-    private Date timestamp;
+    private LocalDate timestamp;
 
     private double amount;
 
-    private int personId;
+    private String personId;
 
     private TxnType type;
 
-    public Transaction(String id, Date timestamp, double amount, int personId, TxnType type) {
+    public Transaction(String id, LocalDate timestamp, double amount, String personId, TxnType type) {
         this.id = id;
         this.timestamp = timestamp;
         this.amount = amount;
@@ -33,11 +34,11 @@ public class Transaction {
         this.id = id;
     }
 
-    public Date getTimestamp() {
+    public LocalDate getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Date timestamp) {
+    public void setTimestamp(LocalDate timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -49,11 +50,11 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public int getPersonId() {
+    public String getPersonId() {
         return personId;
     }
 
-    public void setPersonId(int personId) {
+    public void setPersonId(String personId) {
         this.personId = personId;
     }
 

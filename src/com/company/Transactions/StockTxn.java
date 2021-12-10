@@ -1,5 +1,6 @@
 package com.company.Transactions;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Map;
 
@@ -8,7 +9,7 @@ public class StockTxn extends Transaction{
     private Map<String, Integer> stockAmountMap;
 
     //Amount is positive if buy,negative if sell
-    public StockTxn(String id, Date timestamp, double amount, int personId, Map<String, Integer> purchaseInfo) {
+    public StockTxn(String id, LocalDate timestamp, double amount, String personId, Map<String, Integer> purchaseInfo) {
         super(id, timestamp, amount, personId, TxnType.STOCK);
         setStockAmountMap(purchaseInfo);
     }

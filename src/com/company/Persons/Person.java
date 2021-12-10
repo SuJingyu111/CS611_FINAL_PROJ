@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class Person {
 
-    private int id;
+    private String id;
 
     private String name;
 
@@ -18,18 +18,18 @@ public class Person {
 
     private Map<AccountType, List<Account>> accounts;
 
-    public Person(int id, String name, String pwd, Map<AccountType, List<Account>> accounts) {
+    public Person(String id, String name, String pwd, Map<AccountType, List<Account>> accounts) {
         this.id = id;
         this.name = name;
         this.pwd = pwd;
         this.accounts = accounts;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

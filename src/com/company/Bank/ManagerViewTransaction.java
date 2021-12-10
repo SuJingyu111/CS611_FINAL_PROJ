@@ -10,7 +10,7 @@ public class ManagerViewTransaction {
         Scanner input = new Scanner(System.in);
 
         System.out.println();
-        System.out.println("Enter date : ( MM/DD/YYYY ) ");
+        System.out.println("Enter date : ( YYYY/MM/DD ) ");
         String date = input.next();
 
     }

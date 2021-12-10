@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class Manager extends Person{
 
-    public Manager(int id, String name, String pwd, Map<AccountType, List<Account>> accounts) {
+    public Manager(String id, String name, String pwd, Map<AccountType, List<Account>> accounts) {
         super(id, name, pwd, accounts);
     }
 

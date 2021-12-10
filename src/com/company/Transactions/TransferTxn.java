@@ -1,10 +1,8 @@
 package com.company.Transactions;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class TransferTxn extends Transaction{
-
-    private String fromPersonId;
 
     private String fromAccId;
 
@@ -12,22 +10,14 @@ public class TransferTxn extends Transaction{
 
     private String toAccId;
 
-    public TransferTxn(String id, Date timestamp, double amount, int personId, String fromPersonId, String fromAccId,
+    public TransferTxn(String id, LocalDate timestamp, double amount, String personId, String fromAccId,
                        String toPersonId, String toAccId) {
         super(id, timestamp, amount, personId, TxnType.TRANSFER);
-        setFromPersonId(fromPersonId);
         setFromAccId(fromAccId);
         setToPersonId(toPersonId);
         setToPersonAccId(toAccId);
     }
 
-    public String getFromPersonId() {
-        return fromPersonId;
-    }
-
-    public void setFromPersonId(String fromPersonId) {
-        this.fromPersonId = fromPersonId;
-    }
 
     public String getFromAccId() {
         return fromAccId;
@@ -57,7 +47,6 @@ public class TransferTxn extends Transaction{
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder(super.toString());
         stringBuilder.append(",");
-        stringBuilder.append(fromPersonId).append(",");
         stringBuilder.append(fromAccId).append(",");
         stringBuilder.append(toPersonId).append(",");
         stringBuilder.append(toAccId);

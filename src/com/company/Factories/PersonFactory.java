@@ -24,10 +24,10 @@ public class PersonFactory{
         int id = parser.checkPresence(name, pwd, true);
         Map<AccountType, List<String[]>> accountInfo = getAccountInfo(name, pwd, true);
         Map<AccountType, List<Account>> accounts = accountFactory.produceAccountMap(accountInfo);
-        return new Customer(id, name, pwd, accounts);
+        return new Customer(String.valueOf(id), name, pwd, accounts);
     }
 
-    public Customer produceNewCustomer(int id, String name, String pwd) {
+    public Customer produceNewCustomer(String id, String name, String pwd) {
         return new Customer(id, name, pwd, new HashMap<>());
     }
 
@@ -35,10 +35,10 @@ public class PersonFactory{
         int id = parser.checkPresence(name, pwd, false);
         Map<AccountType, List<String[]>> accountInfo = getAccountInfo(name, pwd, false);
         Map<AccountType, List<Account>> accounts = accountFactory.produceAccountMap(accountInfo);
-        return new Manager(id, name, pwd, accounts);
+        return new Manager(String.valueOf(id), name, pwd, accounts);
     }
 
-    public Manager produceNewManager(int id, String name, String pwd) {
+    public Manager produceNewManager(String id, String name, String pwd) {
         return new Manager(id, name, pwd, new HashMap<>());
     }
 
