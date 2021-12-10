@@ -58,7 +58,7 @@ public class CustomerCloseAccount {
             System.out.println();
             System.out.println("********************************************************************************************");
             System.out.println("           Account Id      Currency      Balance");
-            int count = 1;
+            count = 1;
             for(Account account : AllSavingsAccounts){
                 System.out.println("<" + count + "> " + "           " +  account.getAccountId());
                 Map<CurrencyType, Double> map = account.getBalance();
