@@ -13,13 +13,16 @@ public class CustomerBalance {
 
         System.out.println();
         System.out.println("********************************************************************************************");
-        System.out.println("           Account Id      Balance         Account Type");
+        System.out.println("           Account Id       Account Type   Currency    Balance ");
         int count = 1;
         Map<AccountType, List<Account>> accounts = customer.getAllAccounts();
         for(AccountType accountType : accounts.keySet()){
             List<Account> accountsByType = customer.getAccountsByType(accountType);
             for(Account account : accountsByType){
-                System.out.println("<" + count + "> " + "           " +  account.getAccountId() + "           " + account.getBalance() + "           " + accountType);
+                System.out.println("<" + count + "> " + "           " +  account.getAccountId() + "           " + accountType);
+                Map<CurrencyType, Double> map = account.getBalance();
+                for (Map.Entry<CurrencyType, Double> entry : map.entrySet())
+                    System.out.println("                    " + entry.getKey() + "        " + entry.getValue());
             }
 
             count += 1;
