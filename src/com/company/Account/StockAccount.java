@@ -1,11 +1,14 @@
 package com.company.Account;
 
+import com.company.Bank.Currency;
+import com.company.Bank.CurrencyType;
 import com.company.Exceptions.InadequateBalanceException;
 import com.company.Exceptions.NotEnoughShareException;
 import com.company.Exceptions.StockNotExistException;
 import com.company.Stock.Stock;
 import com.company.Stock.StockMarket;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,22 +20,28 @@ public class StockAccount extends Account{
 
     private StockMarket stockMarket;
 
-    public StockAccount(String accountId, String ownerName, String pwd, AccountType type, int balance) {
-        super(accountId, ownerName, pwd, type, balance);
+    public StockAccount(String accountId, String ownerName, String pwd, AccountType type, Map<CurrencyType, Double> balance) {
+        this(accountId, ownerName, pwd, type);
+        setAllBalance(balance);
+    }
+
+    public StockAccount(String accountId, String ownerName, String pwd, AccountType type) {
+        super(accountId, ownerName, pwd, type);
         sharesHolding = new HashMap<>();
         stockMarket = StockMarket.getInstance();
     }
 
-    public void buyShare(String corpName, int amount) throws StockNotExistException, InadequateBalanceException {
+    public void buyShare(String corpName, int amount, CurrencyType currencyType) throws StockNotExistException, InadequateBalanceException, IOException {
+        Currency currency = new Currency();
         Stock stock = stockMarket.getStockByName(corpName);
         double cost = stock.getPrice() * amount;
-        double currentBalance = getBalance();
+        double currentBalance = getBalanceByCurrency(currencyType) * currency.getForex(currencyType.name());
         if (currentBalance < cost) {
             throw new InadequateBalanceException();
         }
         stockLookUpMap.putIfAbsent(corpName, stock);
         sharesHolding.put(stock, sharesHolding.getOrDefault(stock, 0) + amount);
-        setBalance(currentBalance - cost);
+        addToBalance(currencyType, -cost);
     }
 
     public void sellShare(String corpName, int amount)  throws StockNotExistException, NotEnoughShareException {
@@ -44,7 +53,7 @@ public class StockAccount extends Account{
         if (holdingAmount < amount) {
             throw new NotEnoughShareException();
         }
-        setBalance(getBalance() + amount * stock.getPrice());
+        addToBalance(CurrencyType.USD,getBalanceByCurrency(CurrencyType.USD) + amount * stock.getPrice());
         holdingAmount -= amount;
         if (holdingAmount == 0) {
             stockLookUpMap.remove(corpName);

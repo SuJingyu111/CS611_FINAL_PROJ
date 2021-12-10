@@ -87,6 +87,7 @@ public class CustomerDeposit {
             System.out.println("Enter the account ID :  ");
             String ID = input.next();
 
+            //TODO: MODIFY FUNCTION CALL
             for(Account account : AllSavingsAccounts){
                 if(account.getAccountId().equals(ID)){
                     account.setBalance((account.getBalance() + value));
@@ -110,6 +111,7 @@ public class CustomerDeposit {
             System.out.println("Enter the account ID :  ");
             String ID = input.next();
 
+            //TODO: MODIFY FUNCTION CALL
             for(Account account : AllCheckingsAccounts){
                 if(account.getAccountId().equals(ID)){
                     account.setBalance((account.getBalance() + value));

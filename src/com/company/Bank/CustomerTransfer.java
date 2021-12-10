@@ -58,6 +58,7 @@ public class CustomerTransfer {
             System.out.println("Enter the account ID to be transferred from :  ");
             String ID1 = input.next();
 
+            //TODO: MODIFY FUNCTION CALL
             for(Account account : AllCheckingsAccounts){
                 if(account.getAccountId().equals(ID1)){
                     account.setBalance((account.getBalance() - value));
@@ -78,6 +79,7 @@ public class CustomerTransfer {
             System.out.println("Enter the account ID to be transferred to :  ");
             String ID2 = input.next();
 
+            //TODO: MODIFY FUNCTION CALL
             for(Account account : AllSavingsAccounts){
                 if(account.getAccountId().equals(ID2)){
                     account.setBalance((account.getBalance() + value));
@@ -103,6 +105,7 @@ public class CustomerTransfer {
             System.out.println("Enter the account ID to be transferred from :  ");
             String ID1 = input.next();
 
+            //TODO: MODIFY FUNCTION CALL
             for (Account account : AllSavingsAccounts) {
                 if (account.getAccountId().equals(ID1)) {
                     account.setBalance((account.getBalance() - value));
@@ -123,6 +126,7 @@ public class CustomerTransfer {
             System.out.println("Enter the account ID to be transferred to :  ");
             String ID2 = input.next();
 
+            //TODO: MODIFY FUNCTION CALL
             for (Account account : AllCheckingsAccounts) {
                 if (account.getAccountId().equals(ID2)) {
                     account.setBalance((account.getBalance() - value));

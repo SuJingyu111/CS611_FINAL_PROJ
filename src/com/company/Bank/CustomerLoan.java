@@ -30,13 +30,13 @@ public class CustomerLoan {
         System.out.println("Enter the amount : ");
         double value = input.nextDouble();
 
-        //TODO: ADJUST FUNCTION CALL
         List<Account> allLoanAccounts = customer.getAccountsByType(AccountType.LOAN);
         List<Account> allCheckingsAccounts = customer.getAccountsByType(AccountType.CHECKINGS);
         List<Account> allSavingsAccounts = customer.getAccountsByType(AccountType.SAVINGS);
 
         if(choice1.equals("1")){
 
+            //TODO: MODIFY FUNCTION CALL
             for(Account loanAccount : allLoanAccounts){
                 loanAccount.setBalance(loanAccount.getBalance() + value);
             }
@@ -52,6 +52,7 @@ public class CustomerLoan {
             System.out.println("Enter the account ID you want the amount to be deposited  :  ");
             String ID = input.next();
 
+            //TODO: MODIFY FUNCTION CALL
             for(Account account : allCheckingsAccounts){
                 if(account.getAccountId().equals(ID)){
                     account.setBalance((account.getBalance() + value));
@@ -87,11 +88,13 @@ public class CustomerLoan {
                 System.out.println("Enter the account ID you want to pay back from :  ");
                 String ID = input.next();
 
+                //TODO: MODIFY FUNCTION CALL
                 for(Account account : allCheckingsAccounts){
                     if(account.getAccountId().equals(ID)){
                         account.setBalance((account.getBalance() - value));
                     }
                 }
+                //TODO: MODIFY FUNCTION CALL
                 for(Account loanAccount : allLoanAccounts){
                     loanAccount.setBalance(loanAccount.getBalance() - value);
                 }
@@ -111,11 +114,13 @@ public class CustomerLoan {
                 System.out.println("Enter the account ID you want to pay back from :  ");
                 String ID = input.next();
 
+                //TODO: MODIFY FUNCTION CALL
                 for(Account account : allSavingsAccounts){
                     if(account.getAccountId().equals(ID)){
                         account.setBalance((account.getBalance() - value));
                     }
                 }
+                //TODO: MODIFY FUNCTION CALL
                 for(Account loanAccount : allLoanAccounts){
                     loanAccount.setBalance(loanAccount.getBalance() - value);
                 }

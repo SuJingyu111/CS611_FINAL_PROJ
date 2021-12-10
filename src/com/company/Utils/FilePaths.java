@@ -46,4 +46,8 @@ public class FilePaths {
         }
     }
 
+    public static String getPersonPath(boolean isCustomer) {
+        return isCustomer ? CUST_PATH : MANAGER_PATH;
+    }
+
 }

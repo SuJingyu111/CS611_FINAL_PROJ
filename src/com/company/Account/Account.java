@@ -1,5 +1,10 @@
 package com.company.Account;
 
+import com.company.Bank.CurrencyType;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Account {
 
     private String ownerName;
@@ -8,15 +13,23 @@ public class Account {
 
     private String pwd;
 
-    private double balance;
+    private Map<CurrencyType, Double> balance;
 
     private AccountType TYPE;
 
-    public Account(String accountId, String ownerName, String pwd, AccountType type, double balance) {
+    public Account(String accountId, String ownerName, String pwd, AccountType type) {
         this.ownerName = ownerName;
         this.accountId = accountId;
         this.pwd = pwd;
-        this.balance = balance;
+        this.TYPE = type;
+        this.balance = new HashMap<>();
+    }
+
+    public Account(String accountId, String ownerName, String pwd, AccountType type, CurrencyType currency, double balance) {
+        this.ownerName = ownerName;
+        this.accountId = accountId;
+        this.pwd = pwd;
+        this.balance.put(currency, balance);
         this.TYPE = type;
     }
 
@@ -44,12 +57,24 @@ public class Account {
         this.pwd = pwd;
     }
 
-    public double getBalance() {
+    public Map<CurrencyType, Double> getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public double getBalanceByCurrency(CurrencyType currencies) {
+        return balance.get(currencies);
+    }
+
+    public void setBalance(CurrencyType currencyType, double balance) {
+        this.balance.put(currencyType, balance);
+    }
+
+    public void setAllBalance(Map<CurrencyType, Double> balance) {
         this.balance = balance;
+    }
+
+    public void addToBalance(CurrencyType currencyType, double balance) {
+        this.balance.put(currencyType, this.balance.getOrDefault(currencyType, 0.0) + balance);
     }
 
     public AccountType getTYPE() {
