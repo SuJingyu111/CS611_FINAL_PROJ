@@ -79,8 +79,27 @@ public class Writer {
     }
 
     public void writeTxn(Transaction transaction) throws IOException {
-        FileWriter writer = new FileWriter(FilePaths.TXN_FILE_PATH, true);
-        writer.write(transaction.toString());
+        /*
+        CSVReader txnReader = new CSVReader(new FileReader(FilePaths.TXN_FILE_PATH), ',');
+        List<String[]> csvBodyAcc = txnReader.readAll();
+        //csvBodyAcc.add(account.toString().split(","));
+        csvBodyAcc.add(transaction.toString().split(","));
+        txnReader.close();
+
+        FileWriter accWriter = new FileWriter(FilePaths.TXN_FILE_PATH, false);
+        CSVWriter writer = new CSVWriter(accWriter, ',');
+        writer.writeAll(csvBodyAcc);
+        writer.flush();
+        writer.close();
+        */
+
+        System.out.println("!!!!!!!!!");
+        CSVWriter csvWriter = new CSVWriter(new FileWriter(FilePaths.TXN_FILE_PATH, true));
+        csvWriter.writeNext(transaction.toString().split(","));
+        csvWriter.flush();
+        csvWriter.close();
+        //FileWriter writer = new FileWriter(FilePaths.TXN_FILE_PATH, true);
+        //writer.write(transaction.toString();
     }
 
     public void updateAccountToDisk(Account account) throws IOException {

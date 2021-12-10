@@ -89,7 +89,7 @@ public class Person {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(id).append(",");
         stringBuilder.append(name).append(",");
-        stringBuilder.append(pwd);
+        stringBuilder.append(pwd).append(",");
         for (AccountType type : AccountType.values()) {
             appendAccExistence(type, stringBuilder);
         }
