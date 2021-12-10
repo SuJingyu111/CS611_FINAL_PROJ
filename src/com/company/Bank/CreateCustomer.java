@@ -1,12 +1,15 @@
 package com.company.Bank;
 
+import com.company.Factories.PersonFactory;
 import com.company.Persons.Customer;
+import com.company.Utils.Writer;
 
+import java.io.IOException;
 import java.util.*;
 
 public class CreateCustomer {
 
-    public static void run(){
+    public static void run() throws IOException {
 
         Scanner input = new Scanner(System.in);
 
@@ -19,7 +22,10 @@ public class CreateCustomer {
         String customerId = getRandomNumberString();
 
         //TODO : Write customer to csv file.
-
+        PersonFactory personFactory = new PersonFactory();
+        Customer customer = personFactory.produceNewCustomer(customerId, name, password);
+        Writer writer = new Writer();
+        writer.writeNewPerson(customer, true);
     }
 
     public static String getRandomNumberString() {

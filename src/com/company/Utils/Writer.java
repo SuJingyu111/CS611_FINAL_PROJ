@@ -30,6 +30,20 @@ public class Writer {
 
     }
 
+    public void writeNewPerson(Person p, boolean isCustomer) throws IOException {
+        String personFilePath = isCustomer ? FilePaths.CUST_PATH : FilePaths.MANAGER_PATH;
+        CSVReader personReader = new CSVReader(new FileReader(personFilePath), ',');
+        List<String[]> personCsvBody = personReader.readAll();
+        personCsvBody.add(p.toString().split(","));
+        personReader.close();
+
+        FileWriter personWriter = new FileWriter(personFilePath, false);
+        CSVWriter writer = new CSVWriter(personWriter, ',');
+        writer.writeAll(personCsvBody);
+        writer.flush();
+        writer.close();
+    }
+
     //Used when a person gets a new Account, if person does not exist, create a new record
     public void grantNewAccount(Person p, Account account, boolean isCustomer) throws IOException, AccountAlreadyExistException {
         String accountFilePath = FilePaths.getPathByAccountType(account.getTYPE());
