@@ -1,4 +1,5 @@
 package com.company.Bank;
+import com.company.Account.AccountType;
 import com.company.Factories.PersonFactory;
 import com.company.Persons.Customer;
 import com.company.Persons.Manager;
@@ -23,7 +24,7 @@ public class CreateManager {
         String managerId = getRandomNumberString();
 
         PersonFactory personFactory = new PersonFactory();
-        Manager newManager = personFactory.produceNewManager(managerId, name, password);
+        Manager newManager = personFactory.produceNewManager(managerId, name, password, manager.getAccountsByType(AccountType.ADMIN));
         Writer writer = new Writer();
         writer.writeNewPerson(newManager, false);
     }

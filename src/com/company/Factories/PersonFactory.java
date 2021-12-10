@@ -43,8 +43,10 @@ public class PersonFactory{
         return new Manager(String.valueOf(id), name, pwd, accounts);
     }
 
-    public Manager produceNewManager(String id, String name, String pwd) {
-        return new Manager(id, name, pwd, new HashMap<>());
+    public Manager produceNewManager(String id, String name, String pwd, List<Account> adminAccounts) {
+        Map<AccountType, List<Account>> accountsMap = new HashMap<>();
+        accountsMap.put(AccountType.ADMIN, adminAccounts);
+        return new Manager(id, name, pwd, accountsMap);
     }
 
     private Map<AccountType, List<String[]>> getAccountInfo(String name, String pwd, boolean isCustomer) {
