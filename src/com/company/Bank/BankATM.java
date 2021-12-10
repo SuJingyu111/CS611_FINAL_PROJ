@@ -43,7 +43,7 @@ public class BankATM {
         }
 
         else if(choice.equals("3")){
-            CreateCustomer.run();
+            CreateCustomer.run(currency);
         }
 
         else{

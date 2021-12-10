@@ -9,7 +9,7 @@ import java.util.*;
 
 public class CreateCustomer {
 
-    public static void run() throws IOException {
+    public static void run(Currency currency) throws IOException {
 
         Scanner input = new Scanner(System.in);
 
@@ -25,6 +25,8 @@ public class CreateCustomer {
         Customer customer = personFactory.produceNewCustomer(customerId, name, password);
         Writer writer = new Writer();
         writer.writeNewPerson(customer, true);
+
+        CustomerOptions.options(customer, currency);
     }
 
     public static String getRandomNumberString() {
