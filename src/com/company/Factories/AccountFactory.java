@@ -24,10 +24,12 @@ public class AccountFactory {
         return map;
     }
 
+    //TODO: MODIFY THIS
     public Account produceAccount(String[] args) {
         String id = args[0], name = args[1], pwd = args[2];
         AccountType type = AccountType.valueOf(args[3]);
         //int balance = Integer.parseInt(args[4]);
+
         Account account = new Account(id, name, pwd, type);
         for (int i = 4; i < args.length; i+=2) {
             account.addToBalance(CurrencyType.valueOf(args[i]), Double.parseDouble(args[i + 1]));
