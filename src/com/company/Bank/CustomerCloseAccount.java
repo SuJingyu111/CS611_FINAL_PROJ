@@ -3,6 +3,7 @@ package com.company.Bank;
 import com.company.Account.Account;
 import com.company.Account.AccountType;
 import com.company.Persons.Customer;
+import com.company.Stock.StockMarket;
 import com.company.Utils.Writer;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ import static com.company.Account.AccountType.SAVINGS;
 
 public class CustomerCloseAccount {
 
-    public static void run(Customer customer, Currency currency) throws IOException {
+    public static void run(Customer customer, Currency currency, StockMarket stockMarket) throws IOException {
 
         Scanner input = new Scanner(System.in);
         Writer writer = new Writer();
@@ -101,6 +102,6 @@ public class CustomerCloseAccount {
             writer.deleteAccount(CHECKINGS, ID);
         }
 
-        CustomerBalance.run(customer, currency);
+        CustomerBalance.run(customer, currency, stockMarket);
     }
 }

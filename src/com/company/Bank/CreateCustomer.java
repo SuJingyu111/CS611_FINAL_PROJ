@@ -2,6 +2,7 @@ package com.company.Bank;
 
 import com.company.Factories.PersonFactory;
 import com.company.Persons.Customer;
+import com.company.Stock.StockMarket;
 import com.company.Utils.Writer;
 
 import java.io.IOException;
@@ -9,7 +10,7 @@ import java.util.*;
 
 public class CreateCustomer {
 
-    public static void run(Currency currency) throws IOException {
+    public static void run(Currency currency, StockMarket stockMarket) throws IOException {
 
         Scanner input = new Scanner(System.in);
 
@@ -26,7 +27,7 @@ public class CreateCustomer {
         Writer writer = new Writer();
         writer.writeNewPerson(customer, true);
 
-        CustomerOptions.options(customer, currency);
+        CustomerOptions.options(customer, currency, stockMarket);
     }
 
     public static String getRandomNumberString() {

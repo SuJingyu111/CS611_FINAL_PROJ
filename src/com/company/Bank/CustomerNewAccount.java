@@ -4,6 +4,7 @@ import com.company.Account.Account;
 import com.company.Account.AccountType;
 import com.company.Factories.AccountFactory;
 import com.company.Persons.Customer;
+import com.company.Stock.StockMarket;
 import com.company.Utils.Writer;
 
 import java.io.IOException;
@@ -13,7 +14,7 @@ public class CustomerNewAccount {
 
 
 
-    public static void run(Customer customer, Currency currency) throws IOException {
+    public static void run(Customer customer, Currency currency, StockMarket stockMarket) throws IOException {
 
         AccountFactory accountFactory = new AccountFactory();
         Writer writer = new Writer();
@@ -86,7 +87,7 @@ public class CustomerNewAccount {
             writer.grantNewAccount(customer, newAccount, true);
         }
 
-        CustomerBalance.run(customer, currency);
+        CustomerBalance.run(customer, currency, stockMarket);
     }
 
     public static String getRandomNumberString() {

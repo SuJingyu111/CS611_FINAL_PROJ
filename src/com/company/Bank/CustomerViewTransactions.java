@@ -1,6 +1,7 @@
 package com.company.Bank;
 
 import com.company.Persons.Customer;
+import com.company.Stock.StockMarket;
 import com.company.Transactions.Transaction;
 import com.company.Utils.Parser;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 public class CustomerViewTransactions {
 
-    public static void run(Customer customer, Currency currency) throws IOException {
+    public static void run(Customer customer, Currency currency, StockMarket stockMarket) throws IOException {
 
         Parser parser = new Parser();
         List<Transaction> transactions = parser.parseTxnByPersonId(customer.getId());
@@ -23,6 +24,6 @@ public class CustomerViewTransactions {
         }
         System.out.println("********************************************************************************************");
 
-        CustomerOptions.options(customer, currency);
+        CustomerOptions.options(customer, currency, stockMarket);
     }
 }

@@ -3,13 +3,14 @@ package com.company.Bank;
 import com.company.Account.Account;
 import com.company.Account.AccountType;
 import com.company.Persons.Customer;
+import com.company.Stock.StockMarket;
 
 import java.io.IOException;
 import java.util.*;
 
 public class CustomerBalance {
 
-    public static void run(Customer customer, Currency currency) throws IOException {
+    public static void run(Customer customer, Currency currency, StockMarket stockMarket) throws IOException {
 
         System.out.println();
         System.out.println("********************************************************************************************");
@@ -29,7 +30,7 @@ public class CustomerBalance {
         }
         System.out.println("********************************************************************************************");
         System.out.println();
-        CustomerOptions.options(customer, currency);
+        CustomerOptions.options(customer, currency, stockMarket);
 
 
     }

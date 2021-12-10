@@ -4,6 +4,7 @@ import com.company.Account.Account;
 import com.company.Account.AccountType;
 import com.company.Account.LoanAccount;
 import com.company.Persons.Customer;
+import com.company.Stock.StockMarket;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -11,7 +12,7 @@ import java.util.*;
 
 public class CustomerLoan {
 
-    public static void run(Customer customer, Currency currency) throws IOException {
+    public static void run(Customer customer, Currency currency, StockMarket stockMarket) throws IOException {
 
         Scanner input = new Scanner(System.in);
 
@@ -179,7 +180,7 @@ public class CustomerLoan {
 
         }
 
-        CustomerBalance.run(customer, currency);
+        CustomerBalance.run(customer, currency, stockMarket);
 
     }
 

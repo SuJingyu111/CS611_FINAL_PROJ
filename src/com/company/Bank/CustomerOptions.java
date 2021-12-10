@@ -2,6 +2,7 @@ package com.company.Bank;
 
 import com.company.Factories.PersonFactory;
 import com.company.Persons.Customer;
+import com.company.Stock.StockMarket;
 import com.company.Utils.Parser;
 import com.company.Utils.Printer;
 
@@ -10,7 +11,7 @@ import java.util.Scanner;
 
 public class CustomerOptions {
 
-    public static void run(Currency currency) throws IOException {
+    public static void run(Currency currency, StockMarket stockMarket) throws IOException {
 
         Scanner input = new Scanner(System.in);
         Parser parser = new Parser();
@@ -38,13 +39,13 @@ public class CustomerOptions {
             System.out.println("Hello there, " + customer.getName() + " !");
             System.out.println("****************************************************************************************");
             System.out.println();
-            options(customer, currency);
+            options(customer, currency, stockMarket);
 
         }
 
     }
 
-    public static void options(Customer customer, Currency currency) throws IOException {
+    public static void options(Customer customer, Currency currency, StockMarket stockMarket) throws IOException {
 
         Scanner input = new Scanner(System.in);
         System.out.println("What do you want to do ?");
@@ -86,39 +87,39 @@ public class CustomerOptions {
         }
 
         if(choice.equals("1")){
-            CustomerBalance.run(customer, currency);
+            CustomerBalance.run(customer, currency, stockMarket);
         }
 
         else if(choice.equals("2")){
-            CustomerDeposit.run(customer, currency);
+            CustomerDeposit.run(customer, currency, stockMarket);
         }
 
         else if(choice.equals("3")){
-            CustomerWithdraw.run(customer, currency);
+            CustomerWithdraw.run(customer, currency, stockMarket);
         }
 
         else if(choice.equals("4")){
-            CustomerTransfer.run(customer, currency);
+            CustomerTransfer.run(customer, currency, stockMarket);
         }
 
         else if(choice.equals("5")){
-            CustomerLoan.run(customer, currency);
+            CustomerLoan.run(customer, currency, stockMarket);
         }
 
         else if(choice.equals("6")){
-            CustomerStock.run(customer);
+            CustomerStock.run(customer, currency, stockMarket);
         }
 
         else if(choice.equals("7")){
-            CustomerNewAccount.run(customer, currency);
+            CustomerNewAccount.run(customer, currency, stockMarket);
         }
 
         else if(choice.equals("8")){
-            CustomerCloseAccount.run(customer, currency);
+            CustomerCloseAccount.run(customer, currency, stockMarket);
         }
 
         else if(choice.equals("9")){
-            CustomerViewTransactions.run(customer, currency);
+            CustomerViewTransactions.run(customer, currency, stockMarket);
         }
 
         else if(choice.equals("10")){

@@ -2,6 +2,7 @@ package com.company.Bank;
 
 import com.company.Account.Account;
 import com.company.Persons.Customer;
+import com.company.Stock.StockMarket;
 import com.company.Transactions.DepositOrWithdrawTxn;
 import com.company.Transactions.Transaction;
 import com.company.Utils.Writer;
@@ -17,7 +18,7 @@ import static com.company.Account.AccountType.CHECKINGS;
 
 public class CustomerWithdraw {
 
-    public static void run(Customer customer, Currency currency) throws IOException {
+    public static void run(Customer customer, Currency currency, StockMarket stockMarket) throws IOException {
 
         Scanner input = new Scanner(System.in);
         Writer writer = new Writer();
@@ -76,7 +77,7 @@ public class CustomerWithdraw {
         }
 
         writer.writeTxn(recordTransaction(value, customer.getId()));
-        CustomerBalance.run(customer,currency);
+        CustomerBalance.run(customer,currency, stockMarket);
     }
 
     public static Transaction recordTransaction(Double amount, String cusID){

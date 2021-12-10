@@ -1,6 +1,7 @@
 package com.company.Bank;
 
 
+import com.company.Stock.StockMarket;
 import com.company.Utils.Printer;
 
 import java.io.*;
@@ -11,6 +12,7 @@ public class BankATM {
     public static void run() throws IOException {
 
         Currency currency = new Currency();
+        StockMarket stockMarket = StockMarket.getInstance();
 
         Scanner in = new Scanner(System.in);
 
@@ -34,7 +36,7 @@ public class BankATM {
         }
 
         if(choice.equals("1")){
-            CustomerOptions.run(currency);
+            CustomerOptions.run(currency, stockMarket);
         }
 
         else if(choice.equals("2")){
