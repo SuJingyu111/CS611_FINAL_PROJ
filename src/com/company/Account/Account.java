@@ -92,7 +92,7 @@ public class Account {
                 getPwd() + "," +
                 getTYPE() + ",");
         for (Map.Entry<CurrencyType, Double> ent : balance.entrySet()) {
-            sb.append(ent.getKey().name()).append(" ").append(ent.getKey()).append(" ");
+            sb.append(ent.getKey().name()).append(" ").append(ent.getValue()).append(" ");
         }
         sb.delete(sb.length() - (balance.isEmpty() ? 1 : 2), sb.length());
         return sb.toString();

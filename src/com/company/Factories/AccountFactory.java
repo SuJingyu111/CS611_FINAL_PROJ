@@ -29,6 +29,11 @@ public class AccountFactory {
         String id = args[0], name = args[1], pwd = args[2];
         AccountType type = AccountType.valueOf(args[3]);
         String[] balance = args[4].split(" ");
+        System.out.println(args[4]);
+        System.out.println("---------------");
+        for (String arg : balance) {
+            System.out.println(arg);
+        }
         //int balance = Integer.parseInt(args[4]);
         /*
         Account account = new Account(id, name, pwd, type);
@@ -75,6 +80,7 @@ public class AccountFactory {
 
     private void setUpBalance(Account account, String[] balance) {
         for (int i = 0; i < balance.length; i+=2) {
+            System.out.println(balance[i]);
             account.addToBalance(CurrencyType.valueOf(balance[i]), Double.parseDouble(balance[i + 1]));
         }
     }
