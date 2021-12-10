@@ -1,28 +1,19 @@
 package com.company.Bank;
 
-import com.company.Persons.Manager;
+import com.company.Persons.Customer;
 import com.company.Transactions.Transaction;
 import com.company.Utils.Parser;
-import com.company.Utils.Writer;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.*;
+import java.util.List;
 
-public class ManagerViewTransaction {
+public class CustomerViewTransactions {
 
-    public static void run(Manager manager, Currency currency) throws IOException {
+    public static void run(Customer customer, Currency currency) throws IOException {
 
-        Scanner input = new Scanner(System.in);
         Parser parser = new Parser();
-
-        System.out.println();
-        System.out.println("Enter date : ( YYYY/MM/DD ) ");
-        String date1 = input.next();
-        LocalDate date = LocalDate.parse(date1);
-        List<Transaction> transactions = parser.parseTxnByDate(date);
+        List<Transaction> transactions = parser.parseTxnByPersonId(customer.getId());
         int count = 1;
-
         System.out.println();
         System.out.println("********************************************************************************************");
         System.out.println("        Transaction ID      Date       Amount      Customer ID      Type ");
@@ -32,7 +23,6 @@ public class ManagerViewTransaction {
         }
         System.out.println("********************************************************************************************");
 
-        ManagerOptions.options(manager, currency);
-
+        CustomerOptions.options(customer, currency);
     }
 }

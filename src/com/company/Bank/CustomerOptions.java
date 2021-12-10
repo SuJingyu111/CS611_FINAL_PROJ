@@ -56,13 +56,16 @@ public class CustomerOptions {
         System.out.println("<6> Buy / Sell Stocks");
         System.out.println("<7> Create New Account");
         System.out.println("<8> Close Account");
-        System.out.println("<9> Return to Previous Menu");
+        System.out.println("<9> View All Transactions");
+        System.out.println("<10> Return to Previous Menu");
         System.out.println("<q> Quit");
 
         String choice = input.next();
 
         while(!choice.equals("1") && !choice.equals("2") && !choice.equals("3") && !choice.equals("4")
-                && !choice.equals("5") && !choice.equals("6")  && !choice.equals("7") && !choice.equals("q")){
+                && !choice.equals("5") && !choice.equals("6")  && !choice.equals("7")
+                && !choice.equals("8") && !choice.equals("9") && !choice.equals("10")
+                && !choice.equals("q")){
 
             System.out.println();
             System.out.println(" You've entered an incorrect option !");
@@ -76,7 +79,8 @@ public class CustomerOptions {
             System.out.println("<6> Buy / Sell Stocks");
             System.out.println("<7> Create New Account");
             System.out.println("<8> Close Account");
-            System.out.println("<9> Return to Previous Menu");
+            System.out.println("<9> View all transactions");
+            System.out.println("<10> Return to Previous Menu");
             System.out.println("<q> Quit");
             choice = input.next();
         }
@@ -114,6 +118,10 @@ public class CustomerOptions {
         }
 
         else if(choice.equals("9")){
+            CustomerViewTransactions.run(customer, currency);
+        }
+
+        else if(choice.equals("10")){
             BankATM.run();
         }
 

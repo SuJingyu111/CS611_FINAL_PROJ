@@ -1,5 +1,6 @@
 package com.company.Bank;
 
+import com.company.Persons.Customer;
 import com.company.Persons.Manager;
 
 import java.io.IOException;
