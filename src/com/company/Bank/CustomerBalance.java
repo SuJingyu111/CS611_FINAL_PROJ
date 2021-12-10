@@ -16,7 +16,6 @@ public class CustomerBalance {
         System.out.println("           Account Id       Account Type   Currency    Balance ");
         int count = 1;
         Map<AccountType, List<Account>> accounts = customer.getAllAccounts();
-        System.out.println(accounts.get(AccountType.CHECKINGS).size());
         for(AccountType accountType : accounts.keySet()){
             List<Account> accountsByType = customer.getAccountsByType(accountType);
             for(Account account : accountsByType){

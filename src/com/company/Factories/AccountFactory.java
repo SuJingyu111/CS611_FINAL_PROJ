@@ -29,8 +29,6 @@ public class AccountFactory {
         String id = args[0], name = args[1], pwd = args[2];
         AccountType type = AccountType.valueOf(args[3]);
         String[] balance = args[4].split(" ");
-        System.out.println(args[4]);
-        System.out.println("---------------");
         for (String arg : balance) {
             System.out.println(arg);
         }
