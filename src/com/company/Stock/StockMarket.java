@@ -28,4 +28,8 @@ public class StockMarket {
         }
         return stockInfo.get(name);
     }
+
+    public void refresh() {
+        stockInfo = stockFactory.getAllStocks();
+    }
 }

@@ -29,6 +29,6 @@ public class Stock {
 
     @Override
     public String toString() {
-        return corpName + " " + price;
+        return corpName + "," + price;
     }
 }

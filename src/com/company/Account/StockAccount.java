@@ -14,15 +14,17 @@ import java.util.Map;
 
 public class StockAccount extends Account{
 
-    private Map<String, Stock> stockLookUpMap;
+    //private Map<String, Stock> stockLookUpMap;
 
-    private Map<Stock, Integer> sharesHolding;
+    private Map<String, Integer> sharesHolding;
 
     private StockMarket stockMarket;
 
     public StockAccount(String accountId, String ownerName, String pwd, AccountType type, Map<CurrencyType, Double> balance) {
         this(accountId, ownerName, pwd, type);
         setAllBalance(balance);
+        sharesHolding = new HashMap<>();
+        stockMarket = StockMarket.getInstance();
     }
 
     public StockAccount(String accountId, String ownerName, String pwd, AccountType type) {
@@ -39,44 +41,44 @@ public class StockAccount extends Account{
         if (currentBalance < cost) {
             throw new InadequateBalanceException();
         }
-        stockLookUpMap.putIfAbsent(corpName, stock);
-        sharesHolding.put(stock, sharesHolding.getOrDefault(stock, 0) + amount);
-        addToBalance(currencyType, -cost);
+        //stockLookUpMap.putIfAbsent(corpName, stock);
+        sharesHolding.put(corpName, sharesHolding.getOrDefault(corpName, 0) + amount);
+        addToBalance(currencyType, -(cost / currency.getForex(currencyType.name())));
     }
 
     public void sellShare(String corpName, int amount)  throws StockNotExistException, NotEnoughShareException {
-        if (!stockLookUpMap.containsKey(corpName)) {
+        if (!sharesHolding.containsKey(corpName)) {
             throw new StockNotExistException();
         }
-        Stock stock = stockLookUpMap.get(corpName);
-        int holdingAmount = sharesHolding.get(stock);
+        Stock stock = stockMarket.getStockByName(corpName);
+        int holdingAmount = sharesHolding.get(corpName);
         if (holdingAmount < amount) {
             throw new NotEnoughShareException();
         }
         addToBalance(CurrencyType.USD,getBalanceByCurrency(CurrencyType.USD) + amount * stock.getPrice());
         holdingAmount -= amount;
         if (holdingAmount == 0) {
-            stockLookUpMap.remove(corpName);
-            sharesHolding.remove(stock);
+            sharesHolding.remove(corpName);
+            //sharesHolding.remove(stock);
         }
         else {
-            sharesHolding.put(stock, holdingAmount);
+            sharesHolding.put(corpName, holdingAmount);
         }
     }
 
     //Should only use in account factory
     public void addShare(String corpName, int amount) {
-        Stock stock = stockMarket.getStockByName(corpName);
-        stockLookUpMap.put(corpName, stock);
-        sharesHolding.put(stock, amount);
+        //Stock stock = stockMarket.getStockByName(corpName);
+        sharesHolding.put(corpName, amount);
+        //sharesHolding.put(stock, amount);
     }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder(super.toString());
         stringBuilder.append(",");
-        for (Map.Entry<Stock, Integer> ent : sharesHolding.entrySet()) {
-            stringBuilder.append(ent.getKey().getCorpName()).append(" ").append(ent.getValue()).append(" ");
+        for (Map.Entry<String, Integer> ent : sharesHolding.entrySet()) {
+            stringBuilder.append(ent.getKey()).append(" ").append(ent.getValue()).append(" ");
         }
         stringBuilder.delete(stringBuilder.length() - (sharesHolding.isEmpty() ? 0 : 1), stringBuilder.length());
         return stringBuilder.toString();
