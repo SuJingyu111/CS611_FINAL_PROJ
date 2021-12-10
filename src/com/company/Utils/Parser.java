@@ -166,6 +166,9 @@ public class Parser {
             String filePath = FilePaths.getPathByAccountType(type);
             CSVReader accReader = new CSVReader(new FileReader(filePath), ',');
             List<String[]> accCsvBody = accReader.readAll();
+            if (type == AccountType.ADMIN) {
+                return accCsvBody;
+            }
             for (String[] accountInfo: accCsvBody) {
                 if (accountInfo[1].equals(name) && accountInfo[2].equals(pwd)) {
                     accountsInfo.add(accountInfo);
