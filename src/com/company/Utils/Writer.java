@@ -2,6 +2,7 @@ package com.company.Utils;
 
 import com.company.Account.Account;
 import com.company.Account.AccountType;
+import com.company.Stock.Stock;
 import com.company.Utils.FilePaths;
 import com.company.Exceptions.AccountAlreadyExistException;
 import com.company.Persons.Person;
@@ -161,5 +162,30 @@ public class Writer {
         writer.writeAll(csvBodyAcc);
         writer.flush();
         writer.close();
+    }
+
+    //update existing stock, if the stock does not already exist, add to the list
+    public void updateStock(Stock stock, boolean ifDelete) throws IOException {
+        String filePath = FilePaths.STOCK_PATH;
+        CSVReader stockReader = new CSVReader(new FileReader(filePath), ',');
+        List<String[]> csvBodyStock = stockReader.readAll();
+        int deleteIdx = -1;
+        for (int i = 0; i < csvBodyStock.size(); i++) {
+            String[] stockInfo = csvBodyStock.get(i);
+            if (stockInfo[0].equals(stock.getCorpName())) {
+                if (!ifDelete) {
+                    stockInfo[1] = String.valueOf(stock.getPrice());
+                }
+                deleteIdx = i;
+                break;
+            }
+        }
+        if (ifDelete && deleteIdx >= 0) {
+            csvBodyStock.remove(deleteIdx);
+        }
+        if (!ifDelete && deleteIdx < 0) {
+            csvBodyStock.add(stock.toString().split(","));
+        }
+        writeBackToFile(FilePaths.STOCK_PATH, csvBodyStock);
     }
 }
