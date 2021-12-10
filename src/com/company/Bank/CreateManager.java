@@ -27,6 +27,8 @@ public class CreateManager {
         Manager newManager = personFactory.produceNewManager(managerId, name, password, manager.getAccountsByType(AccountType.ADMIN));
         Writer writer = new Writer();
         writer.writeNewPerson(newManager, false);
+
+        ManagerOptions.options(manager, currency);
     }
 
     public static String getRandomNumberString() {
