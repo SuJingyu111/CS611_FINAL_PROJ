@@ -13,16 +13,16 @@ public class Transaction {
 
     private double amount;
 
-    private Person p;
+    private int personId;
 
-    private AccountType accountType;
+    private TxnType type;
 
-    public Transaction(String id, Date timestamp, double amount, Person p, AccountType accountType) {
+    public Transaction(String id, Date timestamp, double amount, int personId, TxnType type) {
         this.id = id;
         this.timestamp = timestamp;
         this.amount = amount;
-        this.p = p;
-        this.accountType = accountType;
+        this.personId = personId;
+        this.type = type;
     }
 
     public String getId() {
@@ -49,20 +49,20 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public Person getP() {
-        return p;
+    public int getPersonId() {
+        return personId;
     }
 
-    public void setP(Person p) {
-        this.p = p;
+    public void setPersonId(int personId) {
+        this.personId = personId;
     }
 
-    public AccountType getAccountType() {
-        return accountType;
+    public TxnType getAccountType() {
+        return type;
     }
 
-    public void setAccountType(AccountType accountType) {
-        this.accountType = accountType;
+    public void setAccountType(TxnType type) {
+        this.type = type;
     }
 
     @Override
@@ -71,8 +71,16 @@ public class Transaction {
         stringBuilder.append(getId()).append(",");
         stringBuilder.append(getTimestamp().toString()).append(",");
         stringBuilder.append(getAmount()).append(",");
-        stringBuilder.append(getP().getName()).append(",");
+        stringBuilder.append(getPersonId()).append(",");
         stringBuilder.append(getAccountType());
         return stringBuilder.toString();
+    }
+
+    public TxnType getType() {
+        return type;
+    }
+
+    public void setType(TxnType type) {
+        this.type = type;
     }
 }
