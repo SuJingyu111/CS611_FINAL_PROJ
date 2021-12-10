@@ -65,7 +65,8 @@ public class ManagerOptions {
             System.out.println("<1> Get Transactions By Date");
             System.out.println("<2> Get Customer Details by ID");
             System.out.println("<3> Create New Manager");
-            System.out.println("<4> Return to Previous Menu");
+            System.out.println("<4> Set Forex");
+            System.out.println("<5> Return to Previous Menu");
             System.out.println("<q> Quit");
             choice = input.next();
         }
@@ -83,6 +84,10 @@ public class ManagerOptions {
         }
 
         else if(choice.equals("4")){
+            ManagerSetForex.run(manager, currency);
+        }
+
+        else if(choice.equals("5")){
             BankATM.run();
         }
 
