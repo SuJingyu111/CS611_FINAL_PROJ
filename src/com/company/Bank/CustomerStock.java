@@ -1,16 +1,23 @@
 package com.company.Bank;
 
+import com.company.Account.Account;
+import com.company.Account.AccountType;
+import com.company.Account.StockAccount;
 import com.company.Persons.Customer;
 import com.company.Stock.StockMarket;
 import com.company.Utils.Parser;
+import com.company.Utils.Writer;
 
+import java.io.IOException;
 import java.util.*;
 
 public class CustomerStock {
 
-    public static void run(Customer customer, Currency currency, StockMarket stockMarket){
+    public static void run(Customer customer, Currency currency, StockMarket stockMarket) throws IOException {
 
         Parser parser = new Parser();
+        Scanner input = new Scanner(System.in);
+        Writer writer = new Writer();
 
         Map<String, Double> allStocks = parser.parseAllStockInfo();
         System.out.println();
@@ -23,7 +30,95 @@ public class CustomerStock {
         }
         System.out.println("********************************************************************************************");
         System.out.println();
+
+        List<Account> stockAccounts = customer.getAccountsByType(AccountType.STOCK);
+        Account stockAccount = stockAccounts.get(0);
+        Map<String, Integer> sharesHolding = ((StockAccount) stockAccount).getSharesHolding();
+
+
+        System.out.println("Current Shares : ");
+        System.out.println("********************************************************************************************");
+        System.out.println("    Stock        Shares ");
+        count = 1;
+        for (Map.Entry<String, Integer> entry : sharesHolding.entrySet()){
+            System.out.println("<" + count + "> " + entry.getKey() + "         " + entry.getValue());
+        }
+        System.out.println("********************************************************************************************");
+        System.out.println();
+
+        System.out.println("Do you want to :");
+        System.out.println("<1> Buy");
+        System.out.println("<2> Sell");
+        String choice1 = input.next();
+
+        while(!choice1.equals("1") && !choice1.equals("2")){
+            System.out.println();
+            System.out.println("You've entered an incorrect input !");
+            System.out.println("Do you want to :");
+            System.out.println("<1> Buy");
+            System.out.println("<2> Sell");
+            choice1 = input.next();
+        }
+
+        if(choice1.equals("1")){
+
+            System.out.println();
+            System.out.println("Enter Name of Stock :");
+            String name = input.next();
+
+            System.out.println("Enter No of Shares : ");
+            int noOfShares = input.nextInt();
+
+            System.out.println("Enter Type of Currency :");
+            System.out.println("<1> USD");
+            System.out.println("<2> EUR");
+            System.out.println("<3> CAD");
+            System.out.println("<4> JPY");
+            String choice2 = input.next();
+
+            while(!choice2.equals("1") && !choice2.equals("2") && !choice2.equals("3") && !choice2.equals("4")){
+                System.out.println();
+                System.out.println("You've entered an incorrect input !");
+                System.out.println("<1> USD");
+                System.out.println("<2> EUR");
+                System.out.println("<3> CAD");
+                System.out.println("<4> JPY");
+                choice2 = input.next();
+            }
+
+            if(choice2.equals("1")){((StockAccount) stockAccount).buyShare(name, noOfShares, CurrencyType.USD);}
+            else if(choice2.equals("2")){((StockAccount) stockAccount).buyShare(name, noOfShares, CurrencyType.EUR);}
+            else if(choice2.equals("3")){((StockAccount) stockAccount).buyShare(name, noOfShares, CurrencyType.CAD);}
+            else if(choice2.equals("4")){((StockAccount) stockAccount).buyShare(name, noOfShares, CurrencyType.JPY);}
+
+            writer.updateAccountToDisk(stockAccount);
+
+        }
+
+        else if(choice1.equals("2")){
+
+            System.out.println("Enter Name of Stock :");
+            String name = input.next();
+
+            System.out.println("Enter No of Shares : ");
+            int noOfShares = input.nextInt();
+
+            ((StockAccount) stockAccount).sellShare(name, noOfShares);
+            writer.updateAccountToDisk(stockAccount);
+
+        }
+
+        System.out.println("Current Shares : ");
+        System.out.println("********************************************************************************************");
+        System.out.println("    Stock        Shares ");
+        count = 1;
+        for (Map.Entry<String, Integer> entry : sharesHolding.entrySet()){
+            System.out.println("<" + count + "> " + entry.getKey() + "         " + entry.getValue());
+        }
+        System.out.println("********************************************************************************************");
+        System.out.println();
+
+        CustomerOptions.options(customer, currency, stockMarket);
+
     }
-
-
 }
