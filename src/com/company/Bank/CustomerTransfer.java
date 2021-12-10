@@ -2,7 +2,6 @@ package com.company.Bank;
 
 import com.company.Account.Account;
 import com.company.Persons.Customer;
-import com.company.Transactions.DepositOrWithdrawTxn;
 import com.company.Transactions.Transaction;
 import com.company.Transactions.TransferTxn;
 import com.company.Utils.Writer;
@@ -10,6 +9,7 @@ import com.company.Utils.Writer;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -40,6 +40,26 @@ public class CustomerTransfer {
         }
 
         System.out.println();
+        System.out.println("Please enter the currency you want to withdraw : ");
+        System.out.println("<1> USD");
+        System.out.println("<2> EUR");
+        System.out.println("<3> CAD");
+        System.out.println("<4> JPY");
+        String choice2 = input.next();
+
+        if(!choice2.equals("1") && !choice2.equals("2") && !choice2.equals("3") && !choice2.equals("4")){
+
+            System.out.println("You've entered the wrong input ! ");
+            System.out.println();
+            System.out.println("Please enter the currency you want to withdraw : ");
+            System.out.println("<1> USD");
+            System.out.println("<2> EUR");
+            System.out.println("<3> CAD");
+            System.out.println("<4> JPY");
+            choice2 = input.next();
+        }
+
+        System.out.println();
         System.out.println("Enter the amount : ");
         double value  = input.nextDouble();
 
@@ -48,20 +68,27 @@ public class CustomerTransfer {
             List<Account> AllCheckingsAccounts = customer.getAccountsByType(CHECKINGS);
             System.out.println();
             System.out.println("********************************************************************************************");
-            System.out.println("           Account Id      Balance");
+            System.out.println("           Account Id      Currency      Balance");
             int count = 1;
             for(Account account : AllCheckingsAccounts){
-                System.out.println("<" + count + "> " + "           " +  account.getAccountId() + "           " + account.getBalance());
+                System.out.println("<" + count + "> " + "           " +  account.getAccountId());
+                Map<CurrencyType, Double> map = account.getBalance();
+                for (Map.Entry<CurrencyType, Double> entry : map.entrySet()){
+                    System.out.println("                    " + entry.getKey() + "        " + entry.getValue());
+                }
+                count += 1;
             }
 
             System.out.println();
             System.out.println("Enter the account ID to be transferred from :  ");
             String ID1 = input.next();
 
-            //TODO: MODIFY FUNCTION CALL
             for(Account account : AllCheckingsAccounts){
                 if(account.getAccountId().equals(ID1)){
-                    account.setBalance((account.getBalance() - value));
+                    if(choice2.equals("1")){ account.addToBalance(CurrencyType.USD, -value);}
+                    else if(choice2.equals("2")){account.addToBalance(CurrencyType.EUR, -value);}
+                    else if(choice2.equals("3")){account.addToBalance(CurrencyType.CAD, -value);}
+                    else if(choice2.equals("4")){account.addToBalance(CurrencyType.JPY, -value);}
                     writer.updateAccountToDisk(account);
                 }
             }
@@ -69,20 +96,27 @@ public class CustomerTransfer {
             List<Account> AllSavingsAccounts = customer.getAccountsByType(SAVINGS);
             System.out.println();
             System.out.println("********************************************************************************************");
-            System.out.println("           Account Id      Balance");
+            System.out.println("           Account Id      Currency      Balance");
             count = 1;
             for(Account account : AllSavingsAccounts){
-                System.out.println("<" + count + "> " + "           " +  account.getAccountId() + "           " + account.getBalance());
+                System.out.println("<" + count + "> " + "           " +  account.getAccountId());
+                Map<CurrencyType, Double> map = account.getBalance();
+                for (Map.Entry<CurrencyType, Double> entry : map.entrySet()){
+                    System.out.println("                    " + entry.getKey() + "        " + entry.getValue());
+                }
+                count += 1;
             }
 
             System.out.println();
             System.out.println("Enter the account ID to be transferred to :  ");
             String ID2 = input.next();
 
-            //TODO: MODIFY FUNCTION CALL
             for(Account account : AllSavingsAccounts){
                 if(account.getAccountId().equals(ID2)){
-                    account.setBalance((account.getBalance() + value));
+                    if(choice2.equals("1")){ account.addToBalance(CurrencyType.USD, value);}
+                    else if(choice2.equals("2")){account.addToBalance(CurrencyType.EUR, value);}
+                    else if(choice2.equals("3")){account.addToBalance(CurrencyType.CAD, value);}
+                    else if(choice2.equals("4")){account.addToBalance(CurrencyType.JPY, value);}
                     writer.updateAccountToDisk(account);
                 }
             }
@@ -95,20 +129,27 @@ public class CustomerTransfer {
             List<Account> AllSavingsAccounts = customer.getAccountsByType(SAVINGS);
             System.out.println();
             System.out.println("********************************************************************************************");
-            System.out.println("           Account Id      Balance");
+            System.out.println("           Account Id      Currency      Balance");
             int count = 1;
-            for (Account account : AllSavingsAccounts) {
-                System.out.println("<" + count + "> " + "           " + account.getAccountId() + "           " + account.getBalance());
+            for(Account account : AllSavingsAccounts){
+                System.out.println("<" + count + "> " + "           " +  account.getAccountId());
+                Map<CurrencyType, Double> map = account.getBalance();
+                for (Map.Entry<CurrencyType, Double> entry : map.entrySet()){
+                    System.out.println("                    " + entry.getKey() + "        " + entry.getValue());
+                }
+                count += 1;
             }
 
             System.out.println();
             System.out.println("Enter the account ID to be transferred from :  ");
             String ID1 = input.next();
 
-            //TODO: MODIFY FUNCTION CALL
             for (Account account : AllSavingsAccounts) {
                 if (account.getAccountId().equals(ID1)) {
-                    account.setBalance((account.getBalance() - value));
+                    if(choice2.equals("1")){ account.addToBalance(CurrencyType.USD, -value);}
+                    else if(choice2.equals("2")){account.addToBalance(CurrencyType.EUR, -value);}
+                    else if(choice2.equals("3")){account.addToBalance(CurrencyType.CAD, -value);}
+                    else if(choice2.equals("4")){account.addToBalance(CurrencyType.JPY, -value);}
                     writer.updateAccountToDisk(account);
                 }
             }
@@ -116,20 +157,27 @@ public class CustomerTransfer {
             List<Account> AllCheckingsAccounts = customer.getAccountsByType(CHECKINGS);
             System.out.println();
             System.out.println("********************************************************************************************");
-            System.out.println("           Account Id      Balance");
+            System.out.println("           Account Id      Currency      Balance");
             count = 1;
-            for (Account account : AllCheckingsAccounts) {
-                System.out.println("<" + count + "> " + "           " + account.getAccountId() + "           " + account.getBalance());
+            for(Account account : AllCheckingsAccounts){
+                System.out.println("<" + count + "> " + "           " +  account.getAccountId());
+                Map<CurrencyType, Double> map = account.getBalance();
+                for (Map.Entry<CurrencyType, Double> entry : map.entrySet()){
+                    System.out.println("                    " + entry.getKey() + "        " + entry.getValue());
+                }
+                count += 1;
             }
 
             System.out.println();
             System.out.println("Enter the account ID to be transferred to :  ");
             String ID2 = input.next();
 
-            //TODO: MODIFY FUNCTION CALL
             for (Account account : AllCheckingsAccounts) {
                 if (account.getAccountId().equals(ID2)) {
-                    account.setBalance((account.getBalance() - value));
+                    if(choice2.equals("1")){ account.addToBalance(CurrencyType.USD, value);}
+                    else if(choice2.equals("2")){account.addToBalance(CurrencyType.EUR, value);}
+                    else if(choice2.equals("3")){account.addToBalance(CurrencyType.CAD, value);}
+                    else if(choice2.equals("4")){account.addToBalance(CurrencyType.JPY, value);}
                     writer.updateAccountToDisk(account);
                 }
             }

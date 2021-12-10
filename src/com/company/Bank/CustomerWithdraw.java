@@ -64,7 +64,6 @@ public class CustomerWithdraw {
         System.out.println("Enter the account ID :  ");
         String ID = input.next();
 
-        //TODO: MODIFY FUNCTION CALL
         for(Account account : AllCheckingsAccounts){
             if(account.getAccountId().equals(ID)){
                 if(choice1.equals("1")){ account.addToBalance(CurrencyType.USD, -value);}
