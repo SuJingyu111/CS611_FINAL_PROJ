@@ -192,6 +192,14 @@ public class Writer {
         writeBackToFile(filePath, csvBodyAcc);
     }
 
+    /**
+     * Mark account slot as F of a person when he has no account of that type.
+     *
+     * @param ownerName Name of owner
+     * @param pwd Password of owner
+     * @param type Account type
+     * @throws IOException File not exist
+     */
     private void markAccountAsF(String ownerName, String pwd, AccountType type) throws IOException {
         String personFilePath = FilePaths.getPersonPath(!(type == AccountType.ADMIN));
         CSVReader personReader = new CSVReader(new FileReader(personFilePath), ',');
