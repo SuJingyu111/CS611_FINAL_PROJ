@@ -192,11 +192,9 @@ public class Writer {
     }
 
     /**
-     * Mark account slot as F of a person when he has no account of that type.
+     * Update person information.
      *
-     * @param ownerName Name of owner
-     * @param pwd Password of owner
-     * @param type Account type
+     * @param p Person instance
      * @throws IOException File not exist
      */
     private void updatePerson(Person p) throws IOException {
