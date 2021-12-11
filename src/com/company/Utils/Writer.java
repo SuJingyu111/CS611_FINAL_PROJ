@@ -108,9 +108,10 @@ public class Writer {
     }
 
     /**
-     * Writes a
-     * @param transaction
-     * @throws IOException
+     * Writes a transaction to the file.
+     *
+     * @param transaction Instance of transaction
+     * @throws IOException If file not exist
      */
     public void writeTxn(Transaction transaction) throws IOException {
         CSVWriter csvWriter = new CSVWriter(new FileWriter(FilePaths.TXN_FILE_PATH, true));
@@ -119,11 +120,24 @@ public class Writer {
         csvWriter.close();
     }
 
+    /**
+     * Updates an account to disk, covers original record.
+     *
+     * @param account Instance of account
+     * @throws IOException File not exist
+     */
     public void updateAccountToDisk(Account account) throws IOException {
         String filePath = FilePaths.getPathByAccountType(account.getTYPE());
         writeAccountToPath(account, filePath);
     }
 
+    /**
+     * Writes an account to a file.
+     *
+     * @param account Instance of the account
+     * @param filePath Path of the data file
+     * @throws IOException File not exist
+     */
     private void writeAccountToPath(Account account, String filePath) throws IOException {
         CSVReader accountReader = new CSVReader(new FileReader(filePath), ',');
         List<String[]> csvBodyAcc = accountReader.readAll();
@@ -146,6 +160,13 @@ public class Writer {
         writeBackToFile(filePath, csvBodyAcc);
     }
 
+    /**
+     * Delets an account from data file by ID.
+     *
+     * @param type Type of the account
+     * @param id ID of the account
+     * @throws IOException Data file not exist
+     */
     public void deleteAccount(AccountType type, String id) throws IOException {
         String filePath = FilePaths.getPathByAccountType(type);
         CSVReader accountReader = new CSVReader(new FileReader(filePath), ',');
@@ -165,6 +186,13 @@ public class Writer {
         writeBackToFile(filePath, csvBodyAcc);
     }
 
+    /**
+     * Writes a csv body back to file.
+     *
+     * @param filePath Path of the file
+     * @param csvBodyAcc List of records
+     * @throws IOException File not exist
+     */
     private void writeBackToFile(String filePath, List<String[]> csvBodyAcc) throws IOException {
         checkCSVBody(csvBodyAcc);
         FileWriter accWriter = new FileWriter(filePath, false);
@@ -175,6 +203,14 @@ public class Writer {
     }
 
     //update existing stock, if the stock does not already exist, add to the list
+
+    /**
+     * Updates a stock in data file.
+     *
+     * @param stock Instance of a stock
+     * @param ifDelete If this is a deletion operation
+     * @throws IOException File not exist
+     */
     public void updateStock(Stock stock, boolean ifDelete) throws IOException {
         String filePath = FilePaths.STOCK_PATH;
         CSVReader stockReader = new CSVReader(new FileReader(filePath), ',');
@@ -200,6 +236,12 @@ public class Writer {
         writeBackToFile(FilePaths.STOCK_PATH, csvBodyStock);
     }
 
+    /**
+     * Checks if the csv body is invalid.
+     * When the file is empty, reader will return a list with a array with an empty string.
+     *
+     * @param csvBody List of info.
+     */
     private void checkCSVBody(List<String[]> csvBody) {
         if (csvBody.size() == 1 && (csvBody.get(0).length == 0 || csvBody.get(0)[0].length() == 0)) {
             csvBody.clear();

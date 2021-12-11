@@ -14,10 +14,19 @@ import static com.company.Utils.FilePaths.*;
 
 import com.opencsv.CSVReader;
 
+/**
+ * Parsing util class.
+ */
 public class Parser {
 
     private Scanner input;
 
+    /**
+     * Parses foreign currency exchange information.
+     *
+     * @return A map from currency name to exchange rate
+     * @throws IOException If file does not exist
+     */
     public HashMap<String, Double> parseForex() throws IOException{
 
         HashMap<String, Double> foreignExchange = new HashMap<>();
@@ -32,6 +41,12 @@ public class Parser {
 
     }
 
+    /**
+     * Parses person information by ID.
+     * @param id Person ID
+     * @param isCustomer If the person is customer
+     * @return An array of String containing information of that person, return empty array if person does not exist
+     */
     public String[] parsePersonInfoById(String id, boolean isCustomer) {
         try {
             String personFilePath = isCustomer ? CUST_PATH : MANAGER_PATH;
@@ -50,6 +65,15 @@ public class Parser {
     }
 
     //-1 if not exist, if exists, return person Id
+
+    /**
+     * Check if a person is present.
+     *
+     * @param name Name of the person
+     * @param pwd Password of the person
+     * @param isCustomer If the person is a customer
+     * @return ID of the person, -1 if person does not exist
+     */
     public int checkPresence(String name, String pwd, boolean isCustomer) {
         try {
             String personFilePath = isCustomer ? CUST_PATH : MANAGER_PATH;
@@ -68,6 +92,15 @@ public class Parser {
     }
 
     //Customer/Manager layout:id, name, pwd, if_have_save, if_have_check, if_have_stock, if_have_loan, if_have_admin ("T/F")
+
+    /**
+     * Parses the types of accounts a person has.
+     *
+     * @param name Name of the person
+     * @param pwd Password of the person
+     * @param isCustomer If the person is a customer
+     * @return A map from AccountType to Boolean indicating if a person has a certain type of account
+     */
     public Map<AccountType, Boolean> parsePersonAccountExistence(String name, String pwd, boolean isCustomer) {
         Map<AccountType, Boolean> accountExistMap = new HashMap<>();
         try {
@@ -97,6 +130,15 @@ public class Parser {
     }
 
     //Account record layout (general): acc_id, name, pwd, accountType, "currency_1, balance, currency2, ....."
+
+    /**
+     * Parses a type of accounts by a person's name and password
+     *
+     * @param type Type of the account
+     * @param name Name of the person
+     * @param pwd Password of the person
+     * @return A list of information of the accounts of the given type the person has
+     */
     public List<String[]> parseAccounts(AccountType type, String name, String pwd) {
         List<String[]> accountsInfo = new ArrayList<>();
         try {
@@ -118,6 +160,11 @@ public class Parser {
         return accountsInfo;
     }
 
+    /**
+     * Parses information of all stocks available in market.
+     *
+     * @return A map from stock name to price
+     */
     public Map<String, Double> parseAllStockInfo() {
         Map<String, Double> stockInfo = new HashMap<>();
         try {
@@ -134,6 +181,12 @@ public class Parser {
         return stockInfo;
     }
 
+    /**
+     * Parses the transactions of a given person.
+     *
+     * @param personId ID of the person
+     * @return A list of transactions
+     */
     public List<Transaction> parseTxnByPersonId(String personId) {
         List<Transaction> txnList = new ArrayList<>();
         try {
@@ -153,6 +206,12 @@ public class Parser {
         return txnList;
     }
 
+    /**
+     * Parse all transactions at a specific date.
+     *
+     * @param date A given date
+     * @return A list of transactions
+     */
     public List<Transaction> parseTxnByDate(LocalDate date) {
         List<Transaction> txnList = new ArrayList<>();
         try {
@@ -172,6 +231,11 @@ public class Parser {
         return txnList;
     }
 
+    /**
+     * Parses all transactions.
+     *
+     * @return A list of transactions
+     */
     public List<Transaction> parseAllTxns() {
         List<Transaction> txnList = new ArrayList<>();
         try {
@@ -189,6 +253,12 @@ public class Parser {
         return txnList;
     }
 
+    /**
+     * Parse all the overdue accounts on a given date.
+     *
+     * @param date A specific date
+     * @return A list of string arrays containing account info
+     */
     public List<String[]> parseOverdueLoanAccounts(LocalDate date){
         String filePath = FilePaths.getPathByAccountType(AccountType.LOAN);
         List<String[]> overdueAccList = new ArrayList<>();
@@ -215,6 +285,12 @@ public class Parser {
         return overdueAccList;
     }
 
+    /**
+     * Parses accounts by type.
+     *
+     * @param type Type of account
+     * @return A list of string arrays containing account info
+     */
     public List<String[]> parseAccountsByType(AccountType type){
         String filePath = FilePaths.getPathByAccountType(type);
         try {

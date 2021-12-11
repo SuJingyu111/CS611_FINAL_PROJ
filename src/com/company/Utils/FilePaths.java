@@ -2,6 +2,9 @@ package com.company.Utils;
 
 import com.company.Account.AccountType;
 
+/**
+ * Util class to query proper file path
+ */
 public class FilePaths {
 
     public static final String CUST_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "Customers.csv";
@@ -23,6 +26,12 @@ public class FilePaths {
 
     public static final String TXN_FILE_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "Transactions.csv";
 
+    /**
+     * Gets file path by account type
+     *
+     * @param type Type of the account
+     * @return The path of CSV file that contains the information of the type of accounts
+     */
     public static String getPathByAccountType(AccountType type) {
         switch (type){
             case SAVINGS -> {
@@ -46,6 +55,12 @@ public class FilePaths {
         }
     }
 
+    /**
+     * Gets the file path of person by type
+     *
+     * @param isCustomer If the person is a customer
+     * @return Path of file that stores customer/manager information
+     */
     public static String getPersonPath(boolean isCustomer) {
         return isCustomer ? CUST_PATH : MANAGER_PATH;
     }
