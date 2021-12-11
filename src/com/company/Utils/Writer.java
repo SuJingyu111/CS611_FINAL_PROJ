@@ -13,8 +13,17 @@ import com.opencsv.CSVWriter;
 import java.util.*;
 import java.io.*;
 
+/**
+ * Utils class that contains methods to write to data files.
+ */
 public class Writer {
 
+    /**
+     * Write to foreign currency file
+     *
+     * @param foreignExchange Map from currency to exchange rate
+     * @throws IOException If the currency data file does not exist
+     */
     public void writeForex(HashMap<String, Double> foreignExchange) throws IOException {
 
         String fileName = System.getProperty("user.dir") + "/src/com/company/Files/" + "Forex.csv";
@@ -33,33 +42,39 @@ public class Writer {
         writer.close();
     }
 
+    /**
+     * Writes a person to the file.
+     *
+     * @param p Object of person
+     * @param isCustomer If the person is a customer
+     * @throws IOException If person data file does not exist
+     */
     public void writeNewPerson(Person p, boolean isCustomer) throws IOException {
         String personFilePath = isCustomer ? FilePaths.CUST_PATH : FilePaths.MANAGER_PATH;
         CSVReader personReader = new CSVReader(new FileReader(personFilePath), ',');
         List<String[]> personCsvBody = personReader.readAll();
-        personCsvBody.clear();
-        System.out.println("person info: " + p.toString());
-        System.out.println(personCsvBody.size());
+        checkCSVBody(personCsvBody);
         personCsvBody.add(p.toString().split(","));
         personReader.close();
 
         writeBackToFile(personFilePath, personCsvBody);
-        /*
-        FileWriter personWriter = new FileWriter(personFilePath, false);
-        CSVWriter writer = new CSVWriter(personWriter, ',');
-        writer.writeAll(personCsvBody);
-        writer.flush();
-        writer.close();
-
-         */
     }
 
-    //Used when a person gets a new Account, if person does not exist, create a new record
+    /**
+     * Used when a person gets a new Account, if person does not exist, create a new record.
+     *
+     * @param p Person Object
+     * @param account Instance of the new account
+     * @param isCustomer If the person is a customer
+     * @throws IOException If any data file does not exist
+     * @throws AccountAlreadyExistException Taking an existing account as a new one
+     */
     public void grantNewAccount(Person p, Account account, boolean isCustomer) throws IOException, AccountAlreadyExistException {
         String accountFilePath = FilePaths.getPathByAccountType(account.getTYPE());
         String personFilePath = isCustomer ? FilePaths.CUST_PATH : FilePaths.MANAGER_PATH;
         CSVReader personReader = new CSVReader(new FileReader(personFilePath), ',');
         List<String[]> personCsvBody = personReader.readAll();
+        checkCSVBody(personCsvBody);
         boolean exist = false;
         for (int row = 0; row < personCsvBody.size(); row++) {
             String[] personInfo = personCsvBody.get(row);
@@ -75,45 +90,33 @@ public class Writer {
         personReader.close();
 
         writeBackToFile(personFilePath, personCsvBody);
-        /*
-        FileWriter personWriter = new FileWriter(personFilePath, false);
-        CSVWriter writer = new CSVWriter(personWriter, ',');
-        writer.writeAll(personCsvBody);
-        writer.flush();
-        writer.close();
-
-         */
     }
 
+    /**
+     * Marks in person record that he has a specific type of account.
+     *
+     * @param row Row in which to insert the new record
+     * @param personCsvBody List of array of strings containing person info
+     * @param account The account to add to the person
+     * @param accountFilePath File path that stores info of that type of account
+     * @throws IOException When some data files does not exist
+     * @throws AccountAlreadyExistException Trying to give an existing account to a person
+     */
     private void writeAccount(int row, List<String[]> personCsvBody, Account account, String accountFilePath) throws IOException, AccountAlreadyExistException {
-        //csvBody.get(row)[account.getTYPE().ordinal() + 3] = account.getAccountId();
-        //String filePath = isCustomer ? CUST_ACC_PATH : MANAGER_ACC_PATH;
         writeAccountToPath(account, accountFilePath);
         personCsvBody.get(row)[account.getTYPE().ordinal() + 3] = "T";
     }
 
+    /**
+     * Writes a
+     * @param transaction
+     * @throws IOException
+     */
     public void writeTxn(Transaction transaction) throws IOException {
-        /*
-        CSVReader txnReader = new CSVReader(new FileReader(FilePaths.TXN_FILE_PATH), ',');
-        List<String[]> csvBodyAcc = txnReader.readAll();
-        //csvBodyAcc.add(account.toString().split(","));
-        csvBodyAcc.add(transaction.toString().split(","));
-        txnReader.close();
-
-        FileWriter accWriter = new FileWriter(FilePaths.TXN_FILE_PATH, false);
-        CSVWriter writer = new CSVWriter(accWriter, ',');
-        writer.writeAll(csvBodyAcc);
-        writer.flush();
-        writer.close();
-        */
-
-        //System.out.println("!!!!!!!!!");
         CSVWriter csvWriter = new CSVWriter(new FileWriter(FilePaths.TXN_FILE_PATH, true));
         csvWriter.writeNext(transaction.toString().split(","));
         csvWriter.flush();
         csvWriter.close();
-        //FileWriter writer = new FileWriter(FilePaths.TXN_FILE_PATH, true);
-        //writer.write(transaction.toString();
     }
 
     public void updateAccountToDisk(Account account) throws IOException {
@@ -125,6 +128,7 @@ public class Writer {
         CSVReader accountReader = new CSVReader(new FileReader(filePath), ',');
         List<String[]> csvBodyAcc = accountReader.readAll();
         //csvBodyAcc.add(account.toString().split(","));
+        checkCSVBody(csvBodyAcc);
         boolean exist = false;
         for (int i = 0; i < csvBodyAcc.size(); i++) {
             String[] accountInfo = csvBodyAcc.get(i);
@@ -146,6 +150,7 @@ public class Writer {
         String filePath = FilePaths.getPathByAccountType(type);
         CSVReader accountReader = new CSVReader(new FileReader(filePath), ',');
         List<String[]> csvBodyAcc = accountReader.readAll();
+        checkCSVBody(csvBodyAcc);
         int deleteIdx = -1;
         for (int i = 0; i < csvBodyAcc.size(); i++) {
             String[] accountInfo = csvBodyAcc.get(i);
@@ -161,6 +166,7 @@ public class Writer {
     }
 
     private void writeBackToFile(String filePath, List<String[]> csvBodyAcc) throws IOException {
+        checkCSVBody(csvBodyAcc);
         FileWriter accWriter = new FileWriter(filePath, false);
         CSVWriter writer = new CSVWriter(accWriter, ',');
         writer.writeAll(csvBodyAcc);
@@ -173,6 +179,7 @@ public class Writer {
         String filePath = FilePaths.STOCK_PATH;
         CSVReader stockReader = new CSVReader(new FileReader(filePath), ',');
         List<String[]> csvBodyStock = stockReader.readAll();
+        checkCSVBody(csvBodyStock);
         int deleteIdx = -1;
         for (int i = 0; i < csvBodyStock.size(); i++) {
             String[] stockInfo = csvBodyStock.get(i);
@@ -191,5 +198,11 @@ public class Writer {
             csvBodyStock.add(stock.toString().split(","));
         }
         writeBackToFile(FilePaths.STOCK_PATH, csvBodyStock);
+    }
+
+    private void checkCSVBody(List<String[]> csvBody) {
+        if (csvBody.size() == 1 && (csvBody.get(0).length == 0 || csvBody.get(0)[0].length() == 0)) {
+            csvBody.clear();
+        }
     }
 }
