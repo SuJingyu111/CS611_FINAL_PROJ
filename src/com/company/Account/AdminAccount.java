@@ -5,6 +5,9 @@ import com.company.Bank.CurrencyType;
 import java.security.PublicKey;
 import java.util.Map;
 
+/**
+ * Admin account possessed only by managers. Inherits Account.
+ */
 public class AdminAccount extends Account{
 
     public AdminAccount(String accountId, String ownerName, String pwd, AccountType type) {
