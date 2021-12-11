@@ -11,8 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-import static com.company.Account.AccountType.CHECKINGS;
-import static com.company.Account.AccountType.SAVINGS;
+import static com.company.Account.AccountType.*;
 
 public class CustomerCloseAccount {
 
@@ -44,12 +43,15 @@ public class CustomerCloseAccount {
         System.out.println("Enter type of account to be closed : ");
         System.out.println("<1> Savings");
         System.out.println("<2> Checkings");
+        System.out.println("<3> Stocks");
         String choice = input.next();
 
-        while(!choice.equals("1") && !choice.equals("2")){
+        while(!choice.equals("1") && !choice.equals("2") && !choice.equals("3")){
             System.out.println("You've entered an incorrect input !");
             System.out.println("<1> Savings");
             System.out.println("<2> Checkings");
+            System.out.println("<3> Stocks");
+
             choice = input.next();
         }
 
@@ -74,6 +76,7 @@ public class CustomerCloseAccount {
             System.out.println("Enter the account ID :  ");
             String ID = input.next();
 
+            customer.deleteAccount(SAVINGS, ID);
             writer.deleteAccount(SAVINGS, ID);
 
         }
@@ -99,7 +102,18 @@ public class CustomerCloseAccount {
             System.out.println("Enter the account ID :  ");
             String ID = input.next();
 
+            customer.deleteAccount(CHECKINGS, ID);
             writer.deleteAccount(CHECKINGS, ID);
+        }
+
+        else if(choice.equals("3")){
+            List<Account> AllStockAccounts = customer.getAccountsByType(STOCK);
+            Account stockAccount = AllStockAccounts.get(0);
+            String ID = stockAccount.getAccountId();
+
+            customer.deleteAccount(STOCK, ID);
+            writer.deleteAccount(STOCK, ID);
+
         }
 
         CustomerBalance.run(customer, currency, stockMarket);
