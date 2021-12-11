@@ -60,7 +60,7 @@ public class ManagerOptions {
 
         String choice = input.next();
 
-        while (!choice.equals("1") && !choice.equals("2") && !choice.equals("3")&& !choice.equals("4") && !choice.equals("q")) {
+        while (!choice.equals("1") && !choice.equals("2") && !choice.equals("3")&& !choice.equals("4") && !choice.equals("5") && !choice.equals("6") && !choice.equals("q")) {
 
             System.out.println();
             System.out.println("You've entered an incorrect option !");
