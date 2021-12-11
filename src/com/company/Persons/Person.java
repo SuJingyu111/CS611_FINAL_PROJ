@@ -179,6 +179,7 @@ public class Person {
     }
 
     /**
+     * Append account existence info (T/F) to person info string
      *
      * @param type
      * @param stringBuilder
@@ -188,9 +189,10 @@ public class Person {
     }
 
     /**
+     * Delete the account from accounts
      *
-     * @param type
-     * @param accId
+     * @param type Account type
+     * @param accId Account TD
      */
     public void deleteAccount(AccountType type, String accId) {
         if (!accounts.containsKey(type)) {
