@@ -167,23 +167,46 @@ public class Writer {
      * @param id ID of the account
      * @throws IOException Data file not exist
      */
-    public void deleteAccount(AccountType type, String id) throws IOException {
+    public void deleteAccount(AccountType type, String id, boolean ifMarkAsF) throws IOException {
         String filePath = FilePaths.getPathByAccountType(type);
         CSVReader accountReader = new CSVReader(new FileReader(filePath), ',');
         List<String[]> csvBodyAcc = accountReader.readAll();
         checkCSVBody(csvBodyAcc);
         int deleteIdx = -1;
+        String ownerName = null, pwd = null;
         for (int i = 0; i < csvBodyAcc.size(); i++) {
             String[] accountInfo = csvBodyAcc.get(i);
             if (accountInfo[0].equals(id)) {
                 deleteIdx = i;
+                ownerName = accountInfo[1];
+                pwd = accountInfo[2];
                 break;
             }
         }
         if (deleteIdx >= 0) {
             csvBodyAcc.remove(deleteIdx);
         }
+        if (ifMarkAsF) {
+            markAccountAsF(ownerName, pwd, type);
+        }
         writeBackToFile(filePath, csvBodyAcc);
+    }
+
+    private void markAccountAsF(String ownerName, String pwd, AccountType type) throws IOException {
+        String personFilePath = FilePaths.getPersonPath(!(type == AccountType.ADMIN));
+        CSVReader personReader = new CSVReader(new FileReader(personFilePath), ',');
+        List<String[]> personCsvBody = personReader.readAll();
+        checkCSVBody(personCsvBody);
+        boolean exist = false;
+        for (int row = 0; row < personCsvBody.size(); row++) {
+            String[] personInfo = personCsvBody.get(row);
+            if (personInfo[1].equals(ownerName) && personInfo[2].equals(pwd)) {
+                personInfo[type.ordinal()] = "F";
+                break;
+            }
+        }
+        personReader.close();
+        writeBackToFile(personFilePath, personCsvBody);
     }
 
     /**
