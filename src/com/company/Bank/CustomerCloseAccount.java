@@ -80,14 +80,7 @@ public class CustomerCloseAccount {
             String ID = input.next();
 
             customer.deleteAccount(SAVINGS, ID);
-            try{
-                AllSavingsAccounts = customer.getAccountsByType(SAVINGS);
-            }
-            catch(AccountNotExistException e){
-                writer.deleteAccount(SAVINGS, ID, true);
-            }
-
-            if(!AllSavingsAccounts.isEmpty()){writer.deleteAccount(SAVINGS, ID, false);}
+            writer.deleteAccount(SAVINGS, ID, customer);
         }
 
         else if(choice.equals("2")){
@@ -112,14 +105,7 @@ public class CustomerCloseAccount {
             String ID = input.next();
 
             customer.deleteAccount(CHECKINGS, ID);
-            try{
-                AllCheckingsAccounts = customer.getAccountsByType(CHECKINGS);
-            }
-            catch(AccountNotExistException e){
-                writer.deleteAccount(CHECKINGS, ID, true);
-            }
-
-            if(!AllCheckingsAccounts.isEmpty()){writer.deleteAccount(CHECKINGS, ID, false);}
+            writer.deleteAccount(CHECKINGS, ID, customer);
         }
 
         else if(choice.equals("3")){
@@ -128,7 +114,7 @@ public class CustomerCloseAccount {
             String ID = stockAccount.getAccountId();
 
             customer.deleteAccount(STOCK, ID);
-            writer.deleteAccount(STOCK, ID, true);
+            writer.deleteAccount(STOCK, ID, customer);
 
         }
 

@@ -2,6 +2,7 @@ package com.company.Utils;
 
 import com.company.Account.Account;
 import com.company.Account.AccountType;
+import com.company.Persons.Customer;
 import com.company.Stock.Stock;
 import com.company.Utils.FilePaths;
 import com.company.Exceptions.AccountAlreadyExistException;
@@ -167,7 +168,7 @@ public class Writer {
      * @param id ID of the account
      * @throws IOException Data file not exist
      */
-    public void deleteAccount(AccountType type, String id, boolean ifMarkAsF) throws IOException {
+    public void deleteAccount(AccountType type, String id, Person p) throws IOException {
         String filePath = FilePaths.getPathByAccountType(type);
         CSVReader accountReader = new CSVReader(new FileReader(filePath), ',');
         List<String[]> csvBodyAcc = accountReader.readAll();
@@ -186,9 +187,7 @@ public class Writer {
         if (deleteIdx >= 0) {
             csvBodyAcc.remove(deleteIdx);
         }
-        if (ifMarkAsF) {
-            markAccountAsF(ownerName, pwd, type);
-        }
+        updatePerson(p);
         writeBackToFile(filePath, csvBodyAcc);
     }
 
@@ -200,18 +199,21 @@ public class Writer {
      * @param type Account type
      * @throws IOException File not exist
      */
-    private void markAccountAsF(String ownerName, String pwd, AccountType type) throws IOException {
-        String personFilePath = FilePaths.getPersonPath(!(type == AccountType.ADMIN));
+    private void updatePerson(Person p) throws IOException {
+        String personFilePath = FilePaths.getPersonPath(p instanceof Customer);
         CSVReader personReader = new CSVReader(new FileReader(personFilePath), ',');
         List<String[]> personCsvBody = personReader.readAll();
         checkCSVBody(personCsvBody);
-        boolean exist = false;
+        int updateIdx = -1;
         for (int row = 0; row < personCsvBody.size(); row++) {
             String[] personInfo = personCsvBody.get(row);
-            if (personInfo[1].equals(ownerName) && personInfo[2].equals(pwd)) {
-                personInfo[type.ordinal() + 2] = "F";
+            if (personInfo[0].equals(p.getId())) {
+                updateIdx = row;
                 break;
             }
+        }
+        if (updateIdx >= 0) {
+            personCsvBody.set(updateIdx, p.toString().split(","));
         }
         personReader.close();
         writeBackToFile(personFilePath, personCsvBody);
