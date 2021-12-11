@@ -37,6 +37,9 @@ public class Writer {
         String personFilePath = isCustomer ? FilePaths.CUST_PATH : FilePaths.MANAGER_PATH;
         CSVReader personReader = new CSVReader(new FileReader(personFilePath), ',');
         List<String[]> personCsvBody = personReader.readAll();
+        personCsvBody.clear();
+        System.out.println("person info: " + p.toString());
+        System.out.println(personCsvBody.size());
         personCsvBody.add(p.toString().split(","));
         personReader.close();
 

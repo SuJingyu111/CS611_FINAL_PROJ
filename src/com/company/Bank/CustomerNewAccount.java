@@ -80,7 +80,7 @@ public class CustomerNewAccount {
 
             System.out.println("Enter the amount to be deposited : ");
             double value = input.nextDouble();
-            value =- 5.0;
+            value -= 5.0;
             String accountNo = getRandomNumberString();
 
             if(choice1.equals("1")){
