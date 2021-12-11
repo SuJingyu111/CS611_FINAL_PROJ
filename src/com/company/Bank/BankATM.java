@@ -1,10 +1,14 @@
 package com.company.Bank;
 
 
+import com.company.Account.LoanAccount;
+import com.company.Factories.AccountFactory;
 import com.company.Stock.StockMarket;
 import com.company.Utils.Printer;
+import com.company.Utils.Writer;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.*;
 
 public class BankATM {
@@ -13,6 +17,25 @@ public class BankATM {
 
         Currency currency = new Currency();
         StockMarket stockMarket = StockMarket.getInstance();
+        Writer writer = new Writer();
+
+        AccountFactory accountFactory = new AccountFactory();
+        LocalDate localDate = LocalDate.now();
+        List<LoanAccount> overDueAccounts = accountFactory.produceOverdueAccounts(localDate);
+        for(LoanAccount account : overDueAccounts){
+            Map<LocalDate, Double> map = account.getAmountsDue();
+            Set<LocalDate> dates = map.keySet();
+            for(LocalDate date : dates){
+                if (date.isBefore(localDate.minusMonths(1))){
+                    Double value = map.get(date);
+                    value += (value * (0.15));
+                    map.remove(date);
+                    map.put(localDate, value);
+                }
+            }
+            account.setAmountsDue(map);
+            writer.updateAccountToDisk(account);
+        }
 
         Scanner in = new Scanner(System.in);
 
