@@ -29,7 +29,8 @@ public class Writer {
         }
 
         writer.write(String.valueOf(stringBuilder));
-
+        writer.flush();
+        writer.close();
     }
 
     public void writeNewPerson(Person p, boolean isCustomer) throws IOException {
