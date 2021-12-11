@@ -105,4 +105,22 @@ public class Person {
     private void appendAccExistence(AccountType type, StringBuilder stringBuilder) {
         stringBuilder.append(accounts.containsKey(type) ? "T" : "F").append(",");
     }
+
+    public void deleteAccount(AccountType type, String accId) {
+        if (!accounts.containsKey(type)) {
+            return;
+        }
+        List<Account> accountList = accounts.get(type);
+        int deleteIdx = -1;
+        for (int i = 0; i < accountList.size(); i++) {
+            if (accountList.get(i).getAccountId().equals(accId)) {
+                deleteIdx = i;
+                break;
+            }
+        }
+        if (deleteIdx >= 0) {
+            accountList.remove(deleteIdx);
+            accounts.put(type, accountList);
+        }
+    }
 }
