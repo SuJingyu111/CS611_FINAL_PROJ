@@ -77,6 +77,9 @@ public class AccountFactory {
     }
 
     private void setUpBalance(Account account, String[] balance) {
+        if (balance.length < 2) {
+            return;
+        }
         for (int i = 0; i < balance.length; i+=2) {
             System.out.println(balance[i]);
             account.addToBalance(CurrencyType.valueOf(balance[i]), Double.parseDouble(balance[i + 1]));
@@ -84,6 +87,9 @@ public class AccountFactory {
     }
 
     private void setUpAmountsDue(LoanAccount account, String[] amountsDueInfo) {
+        if (amountsDueInfo.length < 2) {
+            return;
+        }
         for (int i = 0; i < amountsDueInfo.length; i+=2) {
             String[] dateInfo = amountsDueInfo[i].split("-");
             int year = Integer.parseInt(dateInfo[0]), month = Integer.parseInt(dateInfo[1]), day = Integer.parseInt(dateInfo[2]);

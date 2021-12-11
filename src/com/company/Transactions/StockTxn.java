@@ -25,6 +25,7 @@ public class StockTxn extends Transaction{
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder(super.toString());
+        stringBuilder.append(",");
         for (Map.Entry<String, Integer> record : stockAmountMap.entrySet()) {
             stringBuilder.append(record.getKey()).append(",").append(record.getValue()).append(",");
         }

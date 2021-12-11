@@ -64,7 +64,7 @@ public class CustomerStock {
             choice1 = input.next();
         }
         
-        Map<String, Integer> purchaseInfo = null;
+        Map<String, Integer> purchaseInfo = new HashMap<>();
         Double price = null;
 
         if(choice1.equals("1")){
@@ -114,7 +114,7 @@ public class CustomerStock {
 
             ((StockAccount) stockAccount).sellShare(name, noOfShares);
             price = allStocks.get(name);
-            purchaseInfo.put(name, noOfShares);
+            purchaseInfo.put(name, -noOfShares);
             writer.updateAccountToDisk(stockAccount);
 
         }
