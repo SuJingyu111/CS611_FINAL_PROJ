@@ -3,6 +3,7 @@ package com.company.Bank;
 import com.company.Account.Account;
 import com.company.Account.AccountType;
 import com.company.Account.LoanAccount;
+import com.company.Exceptions.AccountNotExistException;
 import com.company.Factories.AccountFactory;
 import com.company.Persons.Customer;
 import com.company.Stock.StockMarket;
@@ -38,9 +39,12 @@ public class CustomerLoan {
         System.out.println("Enter the amount in USD : ");
         double value = input.nextDouble();
 
-        List<Account> allLoanAccounts = customer.getAccountsByType(AccountType.LOAN);
 
-        if(allLoanAccounts.isEmpty()){
+        try{
+            List<Account> allLoanAccounts = customer.getAccountsByType(AccountType.LOAN);
+        }
+        catch (AccountNotExistException e){
+
             String accountNo = getRandomNumberString();
             String[] args = {accountNo, customer.getName(), customer.getPwd(), "LOAN", " ", " "};
             AccountFactory accountFactory = new AccountFactory();
@@ -49,7 +53,7 @@ public class CustomerLoan {
             writer.grantNewAccount(customer, newAccount, true);
         }
 
-        allLoanAccounts = customer.getAccountsByType(AccountType.LOAN);
+        List<Account> allLoanAccounts = customer.getAccountsByType(AccountType.LOAN);
 
         List<Account> allCheckingsAccounts = customer.getAccountsByType(AccountType.CHECKINGS);
         List<Account> allSavingsAccounts = customer.getAccountsByType(AccountType.SAVINGS);
