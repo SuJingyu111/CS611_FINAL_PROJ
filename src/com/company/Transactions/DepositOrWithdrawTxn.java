@@ -3,6 +3,9 @@ package com.company.Transactions;
 import java.time.LocalDate;
 import java.util.Date;
 
+/**
+ * Class for Deposit/Withdraw transactions
+ */
 public class DepositOrWithdrawTxn extends Transaction{
 
     //Amount is positive if deposit, negative if withdraw
