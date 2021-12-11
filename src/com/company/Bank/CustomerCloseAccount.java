@@ -2,6 +2,7 @@ package com.company.Bank;
 
 import com.company.Account.Account;
 import com.company.Account.AccountType;
+import com.company.Exceptions.AccountNotExistException;
 import com.company.Factories.AccountFactory;
 import com.company.Persons.Customer;
 import com.company.Stock.StockMarket;
@@ -132,8 +133,16 @@ public class CustomerCloseAccount {
         Account adminAccount = allAdminAccounts.get(0);
         adminAccount.addToBalance(USD, 5.00);
 
-        List<Account> allCheckingsAccounts = customer.getAccountsByType(CHECKINGS);
-        for(Account account : allCheckingsAccounts){
+        List<Account> allAccounts;
+
+        try{
+            allAccounts = customer.getAccountsByType(CHECKINGS);
+        }
+        catch(AccountNotExistException e){
+            allAccounts = customer.getAccountsByType(SAVINGS);
+        }
+
+        for(Account account : allAccounts){
             Map<CurrencyType, Double> map = account.getBalance();
             double value = map.get(USD);
             if(value > 5.0){
