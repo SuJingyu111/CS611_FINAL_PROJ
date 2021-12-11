@@ -76,6 +76,7 @@ public class CustomerCloseAccount {
             System.out.println("Enter the account ID :  ");
             String ID = input.next();
 
+            customer.deleteAccount(SAVINGS, ID);
             writer.deleteAccount(SAVINGS, ID);
 
         }
@@ -101,6 +102,7 @@ public class CustomerCloseAccount {
             System.out.println("Enter the account ID :  ");
             String ID = input.next();
 
+            customer.deleteAccount(CHECKINGS, ID);
             writer.deleteAccount(CHECKINGS, ID);
         }
 
@@ -109,6 +111,7 @@ public class CustomerCloseAccount {
             Account stockAccount = AllStockAccounts.get(0);
             String ID = stockAccount.getAccountId();
 
+            customer.deleteAccount(STOCK, ID);
             writer.deleteAccount(STOCK, ID);
 
         }
