@@ -1,6 +1,7 @@
 package com.company.Bank;
 
 import com.company.Persons.Manager;
+import com.company.Stock.StockMarket;
 import com.company.Transactions.Transaction;
 import com.company.Utils.Parser;
 import com.company.Utils.Writer;
@@ -11,7 +12,7 @@ import java.util.*;
 
 public class ManagerViewTransaction {
 
-    public static void run(Manager manager, Currency currency) throws IOException {
+    public static void run(Manager manager, Currency currency, StockMarket stockMarket) throws IOException {
 
         Scanner input = new Scanner(System.in);
         Parser parser = new Parser();
@@ -32,7 +33,7 @@ public class ManagerViewTransaction {
         }
         System.out.println("********************************************************************************************");
 
-        ManagerOptions.options(manager, currency);
+        ManagerOptions.options(manager, currency, stockMarket);
 
     }
 }

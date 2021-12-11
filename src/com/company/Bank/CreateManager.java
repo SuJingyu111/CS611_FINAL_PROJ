@@ -3,6 +3,7 @@ import com.company.Account.AccountType;
 import com.company.Factories.PersonFactory;
 import com.company.Persons.Customer;
 import com.company.Persons.Manager;
+import com.company.Stock.StockMarket;
 import com.company.Utils.Writer;
 
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.util.Scanner;
 
 public class CreateManager {
 
-    public static void run(Manager manager,Currency currency) throws IOException {
+    public static void run(Manager manager, Currency currency, StockMarket stockMarket) throws IOException {
 
         Scanner input = new Scanner(System.in);
 
@@ -28,7 +29,7 @@ public class CreateManager {
         Writer writer = new Writer();
         writer.writeNewPerson(newManager, false);
 
-        ManagerOptions.options(manager, currency);
+        ManagerOptions.options(manager, currency, stockMarket);
     }
 
     public static String getRandomNumberString() {

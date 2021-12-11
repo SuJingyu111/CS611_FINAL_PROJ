@@ -5,13 +5,14 @@ import com.company.Account.AccountType;
 import com.company.Factories.PersonFactory;
 import com.company.Persons.Customer;
 import com.company.Persons.Manager;
+import com.company.Stock.StockMarket;
 
 import java.io.IOException;
 import java.util.*;
 
 public class ManagerViewCustomer {
 
-    public static void run(Manager manager, Currency currency) throws IOException {
+    public static void run(Manager manager, Currency currency, StockMarket stockMarket) throws IOException {
 
         Scanner input = new Scanner(System.in);
         PersonFactory personFactory = new PersonFactory();
@@ -39,6 +40,6 @@ public class ManagerViewCustomer {
         }
         System.out.println("********************************************************************************************");
         System.out.println();
-        ManagerOptions.options(manager, currency);
+        ManagerOptions.options(manager, currency, stockMarket);
     }
 }

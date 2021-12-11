@@ -5,12 +5,14 @@ import com.company.Persons.Manager;
 
 import java.io.IOException;
 import java.util.Scanner;
+
+import com.company.Stock.StockMarket;
 import com.company.Utils.Parser;
 import com.company.Utils.Printer;
 
 public class ManagerOptions {
 
-    public static void run(Currency currency) throws IOException {
+    public static void run(Currency currency, StockMarket stockMarket) throws IOException {
 
         Scanner input = new Scanner(System.in);
         Parser parser = new Parser();
@@ -38,13 +40,13 @@ public class ManagerOptions {
             System.out.println("Hello there, " + manager.getName() + " !");
             System.out.println("****************************************************************************************");
             System.out.println();
-            options(manager, currency);
+            options(manager, currency, stockMarket);
 
         }
 
     }
 
-    public static void options(Manager manager, Currency currency) throws IOException {
+    public static void options(Manager manager, Currency currency, StockMarket stockMarket) throws IOException {
 
         Scanner input = new Scanner(System.in);
         System.out.println("What do you want to do ?");
@@ -52,7 +54,8 @@ public class ManagerOptions {
         System.out.println("<2> Get Customer Details by ID");
         System.out.println("<3> Create New Manager");
         System.out.println("<4> Set Forex");
-        System.out.println("<5> Return to Previous Menu");
+        System.out.println("<5> Set Stock Prices");
+        System.out.println("<6> Return to Previous Menu");
         System.out.println("<q> Quit");
 
         String choice = input.next();
@@ -67,28 +70,33 @@ public class ManagerOptions {
             System.out.println("<2> Get Customer Details by ID");
             System.out.println("<3> Create New Manager");
             System.out.println("<4> Set Forex");
-            System.out.println("<5> Return to Previous Menu");
+            System.out.println("<5> Set Stock Prices");
+            System.out.println("<6> Return to Previous Menu");
             System.out.println("<q> Quit");
             choice = input.next();
         }
 
         if(choice.equals("1")){
-            ManagerViewTransaction.run(manager, currency);
+            ManagerViewTransaction.run(manager, currency, stockMarket);
         }
 
         else if(choice.equals("2")){
-            ManagerViewCustomer.run(manager, currency);
+            ManagerViewCustomer.run(manager, currency, stockMarket);
         }
 
         else if(choice.equals("3")){
-            CreateManager.run(manager, currency);
+            CreateManager.run(manager, currency, stockMarket);
         }
 
         else if(choice.equals("4")){
-            ManagerSetForex.run(manager, currency);
+            ManagerSetForex.run(manager, currency, stockMarket);
         }
 
         else if(choice.equals("5")){
+            ManagerSetStockPrice.run(manager, currency, stockMarket);
+        }
+
+        else if(choice.equals("6")){
             BankATM.run();
         }
 

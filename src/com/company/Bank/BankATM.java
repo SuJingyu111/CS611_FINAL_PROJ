@@ -40,11 +40,11 @@ public class BankATM {
         }
 
         else if(choice.equals("2")){
-            ManagerOptions.run(currency);
+            ManagerOptions.run(currency, stockMarket);
         }
 
         else if(choice.equals("3")){
-            CreateCustomer.run(currency);
+            CreateCustomer.run(currency, stockMarket);
         }
 
         else{
