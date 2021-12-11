@@ -93,6 +93,9 @@ public class AccountFactory {
     }
 
     private void setUpSharesHolding(StockAccount account, String[] sharesHoldingInfo) {
+        if (sharesHoldingInfo.length < 2) {
+            return;
+        }
         for (int i = 0; i < sharesHoldingInfo.length; i+=2) {
             account.addShare(sharesHoldingInfo[i], Integer.parseInt(sharesHoldingInfo[i + 1]));
         }
