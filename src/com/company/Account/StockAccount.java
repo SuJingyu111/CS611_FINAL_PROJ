@@ -76,11 +76,12 @@ public class StockAccount extends Account{
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder(super.toString());
-        stringBuilder.append(",");
+        stringBuilder.append(" ,");
         for (Map.Entry<String, Integer> ent : sharesHolding.entrySet()) {
             stringBuilder.append(ent.getKey()).append(" ").append(ent.getValue()).append(" ");
         }
-        stringBuilder.delete(stringBuilder.length() - (sharesHolding.isEmpty() ? 0 : 1), stringBuilder.length());
+        stringBuilder.append(" ,");
+        //stringBuilder.delete(stringBuilder.length() - (sharesHolding.isEmpty() ? 0 : 1), stringBuilder.length());
         return stringBuilder.toString();
     }
 

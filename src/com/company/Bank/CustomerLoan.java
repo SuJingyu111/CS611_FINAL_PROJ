@@ -158,6 +158,7 @@ public class CustomerLoan {
                 for(Account loanAccount : allLoanAccounts){
                     ((LoanAccount)loanAccount).payLoan(date, value);
                     writer.updateAccountToDisk(loanAccount);
+                    writer.writeTxn(recordTransaction(-value, customer.getId()));
                 }
             }
 
@@ -197,7 +198,7 @@ public class CustomerLoan {
 
         }
 
-        writer.writeTxn(recordTransaction(value, customer.getId()));
+        //writer.writeTxn(recordTransaction(value, customer.getId()));
         CustomerBalance.run(customer, currency, stockMarket);
 
     }

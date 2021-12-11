@@ -60,6 +60,7 @@ public class AccountFactory {
                 LoanAccount account = new LoanAccount(id, name, pwd, type);
                 setUpBalance(account, balance);
                 String[] amountsDueInfo = args[5].split(" ");
+                System.out.println(args[5]);
                 setUpAmountsDue(account, amountsDueInfo);
                 return account;
             }

@@ -94,7 +94,7 @@ public class Account {
         for (Map.Entry<CurrencyType, Double> ent : balance.entrySet()) {
             sb.append(ent.getKey().name()).append(" ").append(ent.getValue()).append(" ");
         }
-        sb.delete(sb.length() - (balance.isEmpty() ? 1 : 2), sb.length());
+        //sb.delete(sb.length() - (balance.isEmpty() ? 0 : 1), sb.length());
         return sb.toString();
     }
 }

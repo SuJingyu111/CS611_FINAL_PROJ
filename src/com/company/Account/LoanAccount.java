@@ -50,11 +50,12 @@ public class LoanAccount extends Account{
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder(super.toString());
-        stringBuilder.append(",");
+        stringBuilder.append(" ,");
         for (Map.Entry<LocalDate, Double> ent : amountsDue.entrySet()) {
             stringBuilder.append(ent.getKey().toString()).append(" ").append(ent.getValue()).append(" ");
         }
-        stringBuilder.delete(stringBuilder.length() - (amountsDue.isEmpty() ? 0 : 1), stringBuilder.length());
+        stringBuilder.append(" ,");
+        //stringBuilder.delete(stringBuilder.length() - (amountsDue.isEmpty() ? 0 : 1), stringBuilder.length());
         return stringBuilder.toString();
     }
 }
