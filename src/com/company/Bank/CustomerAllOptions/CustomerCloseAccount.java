@@ -1,7 +1,9 @@
-package com.company.Bank;
+package com.company.Bank.CustomerAllOptions;
 
 import com.company.Account.Account;
 import com.company.Account.AccountType;
+import com.company.Currency.Currency;
+import com.company.Currency.CurrencyType;
 import com.company.Exceptions.AccountNotExistException;
 import com.company.Factories.AccountFactory;
 import com.company.Persons.Customer;
@@ -14,7 +16,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import static com.company.Account.AccountType.*;
-import static com.company.Bank.CurrencyType.USD;
+import static com.company.Currency.CurrencyType.USD;
 
 public class CustomerCloseAccount {
 

@@ -1,16 +1,18 @@
-package com.company.Bank;
-
+package com.company.Bank.ManagerAllOptions;
+import com.company.Account.AccountType;
+import com.company.Currency.Currency;
 import com.company.Factories.PersonFactory;
-import com.company.Persons.Customer;
+import com.company.Persons.Manager;
 import com.company.Stock.StockMarket;
 import com.company.Utils.Writer;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Random;
+import java.util.Scanner;
 
-public class CreateCustomer {
+public class CreateManager {
 
-    public static void run(Currency currency, StockMarket stockMarket) throws IOException {
+    public static void run(Manager manager, Currency currency, StockMarket stockMarket) throws IOException {
 
         Scanner input = new Scanner(System.in);
 
@@ -20,14 +22,14 @@ public class CreateCustomer {
         System.out.println("Enter password : ");
         String password = input.next();
 
-        String customerId = getRandomNumberString();
+        String managerId = getRandomNumberString();
 
         PersonFactory personFactory = new PersonFactory();
-        Customer customer = personFactory.produceNewCustomer(customerId, name, password);
+        Manager newManager = personFactory.produceNewManager(managerId, name, password, manager.getAccountsByType(AccountType.ADMIN));
         Writer writer = new Writer();
-        writer.writeNewPerson(customer, true);
+        writer.writeNewPerson(newManager, false);
 
-        CustomerOptions.options(customer, currency, stockMarket);
+        ManagerOptions.options(manager, currency, stockMarket);
     }
 
     public static String getRandomNumberString() {

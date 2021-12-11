@@ -1,8 +1,7 @@
 package com.company.Account;
 
-import com.company.Bank.CurrencyType;
+import com.company.Currency.CurrencyType;
 
-import java.security.PublicKey;
 import java.util.Map;
 
 /**

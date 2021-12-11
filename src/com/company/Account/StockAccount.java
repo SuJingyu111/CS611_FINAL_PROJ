@@ -1,7 +1,7 @@
 package com.company.Account;
 
-import com.company.Bank.Currency;
-import com.company.Bank.CurrencyType;
+import com.company.Currency.Currency;
+import com.company.Currency.CurrencyType;
 import com.company.Exceptions.InadequateBalanceException;
 import com.company.Exceptions.NotEnoughShareException;
 import com.company.Exceptions.StockNotExistException;

@@ -1,12 +1,13 @@
-package com.company.Bank;
+package com.company.Bank.CustomerAllOptions;
 
 import com.company.Account.Account;
+import com.company.Currency.Currency;
+import com.company.Currency.CurrencyType;
 import com.company.Factories.AccountFactory;
 import com.company.Persons.Customer;
 import com.company.Stock.StockMarket;
 import com.company.Transactions.DepositOrWithdrawTxn;
 import com.company.Transactions.Transaction;
-import com.company.Utils.Parser;
 import com.company.Utils.Writer;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.company.Bank;
+package com.company.Currency;
 
 import com.company.Utils.Parser;
 import com.company.Utils.Writer;

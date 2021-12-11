@@ -1,7 +1,7 @@
 package com.company.Factories;
 
 import com.company.Account.*;
-import com.company.Bank.CurrencyType;
+import com.company.Currency.CurrencyType;
 import com.company.Exceptions.AccountNotExistException;
 import com.company.Utils.Parser;
 

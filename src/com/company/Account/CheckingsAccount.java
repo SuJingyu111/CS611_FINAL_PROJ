@@ -1,6 +1,6 @@
 package com.company.Account;
 
-import com.company.Bank.CurrencyType;
+import com.company.Currency.CurrencyType;
 
 import java.util.Map;
 

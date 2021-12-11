@@ -2,6 +2,9 @@ package com.company.Bank;
 
 
 import com.company.Account.LoanAccount;
+import com.company.Bank.CustomerAllOptions.*;
+import com.company.Bank.ManagerAllOptions.ManagerOptions;
+import com.company.Currency.Currency;
 import com.company.Factories.AccountFactory;
 import com.company.Stock.StockMarket;
 import com.company.Utils.Printer;
@@ -15,7 +18,7 @@ public class BankATM {
 
     public static void run() throws IOException {
 
-        Currency currency = new Currency();
+        com.company.Currency.Currency currency = new Currency();
         StockMarket stockMarket = StockMarket.getInstance();
         Writer writer = new Writer();
 

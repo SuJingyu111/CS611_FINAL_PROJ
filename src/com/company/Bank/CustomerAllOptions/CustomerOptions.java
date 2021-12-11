@@ -1,5 +1,7 @@
-package com.company.Bank;
+package com.company.Bank.CustomerAllOptions;
 
+import com.company.Bank.BankATM;
+import com.company.Currency.Currency;
 import com.company.Factories.PersonFactory;
 import com.company.Persons.Customer;
 import com.company.Stock.StockMarket;

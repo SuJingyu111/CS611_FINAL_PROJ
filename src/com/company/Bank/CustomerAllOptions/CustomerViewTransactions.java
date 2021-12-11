@@ -1,5 +1,6 @@
-package com.company.Bank;
+package com.company.Bank.CustomerAllOptions;
 
+import com.company.Currency.Currency;
 import com.company.Persons.Customer;
 import com.company.Stock.StockMarket;
 import com.company.Transactions.Transaction;

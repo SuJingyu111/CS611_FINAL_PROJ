@@ -1,4 +1,4 @@
-package com.company.Bank;
+package com.company.Currency;
 
 public enum CurrencyType {
 

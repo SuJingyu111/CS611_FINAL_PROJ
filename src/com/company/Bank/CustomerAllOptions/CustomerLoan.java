@@ -1,8 +1,10 @@
-package com.company.Bank;
+package com.company.Bank.CustomerAllOptions;
 
 import com.company.Account.Account;
 import com.company.Account.AccountType;
 import com.company.Account.LoanAccount;
+import com.company.Currency.Currency;
+import com.company.Currency.CurrencyType;
 import com.company.Exceptions.AccountNotExistException;
 import com.company.Factories.AccountFactory;
 import com.company.Persons.Customer;
@@ -15,7 +17,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 
-import static com.company.Account.AccountType.CHECKINGS;
 import static com.company.Account.AccountType.LOAN;
 
 public class CustomerLoan {

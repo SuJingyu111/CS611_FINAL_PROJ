@@ -1,27 +1,35 @@
-package com.company.Bank;
+package com.company.Bank.ManagerAllOptions;
 
 import com.company.Account.Account;
 import com.company.Account.AccountType;
+import com.company.Currency.Currency;
+import com.company.Currency.CurrencyType;
+import com.company.Factories.PersonFactory;
 import com.company.Persons.Customer;
+import com.company.Persons.Manager;
 import com.company.Stock.StockMarket;
 
 import java.io.IOException;
 import java.util.*;
 
-public class CustomerBalance {
+public class ManagerViewCustomer {
 
-    public static void run(Customer customer, Currency currency, StockMarket stockMarket) throws IOException {
+    public static void run(Manager manager, Currency currency, StockMarket stockMarket) throws IOException {
 
+        Scanner input = new Scanner(System.in);
+        PersonFactory personFactory = new PersonFactory();
+
+        System.out.println();
+        System.out.println("Enter Customer ID :");
+        String ID = input.next();
+
+        Customer customer = personFactory.produceCustomerById(ID);
         System.out.println();
         System.out.println("********************************************************************************************");
         System.out.println("           Account Id       Account Type   Currency    Balance ");
         int count = 1;
         Map<AccountType, List<Account>> accounts = customer.getAllAccounts();
-        for (AccountType accountType : accounts.keySet()) {
-            System.out.println(accountType);
-        }
         for(AccountType accountType : accounts.keySet()){
-            System.out.println(accountType);
             List<Account> accountsByType = customer.getAccountsByType(accountType);
             for(Account account : accountsByType){
                 System.out.println("<" + count + "> " + "           " +  account.getAccountId() + "             " + accountType);
@@ -34,8 +42,6 @@ public class CustomerBalance {
         }
         System.out.println("********************************************************************************************");
         System.out.println();
-        CustomerOptions.options(customer, currency, stockMarket);
-
-
+        ManagerOptions.options(manager, currency, stockMarket);
     }
 }
