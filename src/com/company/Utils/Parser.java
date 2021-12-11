@@ -1,5 +1,6 @@
 package com.company.Utils;
 
+import com.company.Account.LoanAccount;
 import com.company.Factories.TxnFactory;
 import com.company.Transactions.Transaction;
 import com.company.Utils.FilePaths;
@@ -50,23 +51,6 @@ public class Parser {
 
     //-1 if not exist, if exists, return person Id
     public int checkPresence(String name, String pwd, boolean isCustomer) {
-        /*
-        String delimiter = ",";
-        String record = null;
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(isCustomer ? CUST_PATH : MANAGER_PATH));
-            while ((record = br.readLine()) != null) {
-                String[] accountInfo = record.split(delimiter);
-                if (accountInfo[1].equals(name) && accountInfo[2].equals(pwd)) {
-                    return Integer.parseInt(accountInfo[0]);
-                }
-            }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        return -1;
-         */
         try {
             String personFilePath = isCustomer ? CUST_PATH : MANAGER_PATH;
             CSVReader personReader = new CSVReader(new FileReader(personFilePath), ',');
@@ -85,34 +69,6 @@ public class Parser {
 
     //Customer/Manager layout:id, name, pwd, if_have_save, if_have_check, if_have_stock, if_have_loan, if_have_admin ("T/F")
     public Map<AccountType, Boolean> parsePersonAccountExistence(String name, String pwd, boolean isCustomer) {
-        /*
-        String delimiter = ",";
-        String record = null;
-        Map<AccountType, Boolean> accountExistMap = new HashMap<>();
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(isCustomer ? CUST_PATH : MANAGER_PATH));
-            while ((record = br.readLine()) != null) {
-                String[] accountInfo = record.split(delimiter);
-                if (accountInfo[1].equals(name) && accountInfo[2].equals(pwd)) {
-                    for (int i = 3; i < accountInfo.length; i++) {
-                        AccountType type = AccountType.values()[i - 3];
-                        if (accountInfo[i].equals("T")) {
-                            accountExistMap.put(type, true);
-                        }
-                        else {
-                            accountExistMap.put(type, false);
-                        }
-                    }
-                    break;
-                }
-            }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return accountExistMap;
-         */
         Map<AccountType, Boolean> accountExistMap = new HashMap<>();
         try {
             String personFilePath = isCustomer ? CUST_PATH : MANAGER_PATH;
@@ -142,25 +98,6 @@ public class Parser {
 
     //Account record layout (general): acc_id, name, pwd, accountType, "currency_1, balance, currency2, ....."
     public List<String[]> parseAccounts(AccountType type, String name, String pwd) {
-        /*
-        String delimiter = ",";
-        String record = null;
-        List<String[]> accountsInfo = new ArrayList<>();
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(FilePaths.getPathByAccountType(type)));
-            while ((record = br.readLine()) != null) {
-                String[] accountInfo = record.split(delimiter);
-                if (accountInfo[1].equals(name) && accountInfo[2].equals(pwd)) {
-                    accountsInfo.add(accountInfo);
-                }
-            }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return accountsInfo;
-         */
         List<String[]> accountsInfo = new ArrayList<>();
         try {
             String filePath = FilePaths.getPathByAccountType(type);
@@ -181,34 +118,7 @@ public class Parser {
         return accountsInfo;
     }
 
-    /*
-    public List<String[]> parseAllAcountInfo(List<String> accountIdList, boolean isCustomer) {
-        List<String[]> accountInfo = new ArrayList<>();
-        for (String id : accountIdList) {
-            accountInfo.add(parseAccount(id, isCustomer));
-        }
-        return accountInfo;
-    }
-    */
-
     public Map<String, Double> parseAllStockInfo() {
-        /*
-        Map<String, Double> stockInfo = new HashMap<>();
-        String delimiter = ",";
-        String record = null;
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(STOCK_PATH));
-            while ((record = br.readLine()) != null) {
-                String[] info = record.split(delimiter);
-                stockInfo.put(info[0], Double.parseDouble(info[1]));
-            }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            return new HashMap<>();
-        }
-        return stockInfo;
-         */
         Map<String, Double> stockInfo = new HashMap<>();
         try {
             String filePath = STOCK_PATH;
@@ -225,27 +135,6 @@ public class Parser {
     }
 
     public List<Transaction> parseTxnByPersonId(String personId) {
-        /*
-        String filePath = TXN_FILE_PATH;
-        String delimiter = ",";
-        List<Transaction> txnList = new ArrayList<>();
-        String record = null;
-        TxnFactory txnFactory = new TxnFactory();
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(filePath));
-            while ((record = br.readLine()) != null) {
-                String[] info = record.split(delimiter);
-                if (info[3].equals(personId)) {
-                    txnList.add(txnFactory.produceTxn(info));
-                }
-            }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            return new ArrayList<>();
-        }
-        return txnList;
-         */
         List<Transaction> txnList = new ArrayList<>();
         try {
             String filePath = TXN_FILE_PATH;
@@ -265,28 +154,6 @@ public class Parser {
     }
 
     public List<Transaction> parseTxnByDate(LocalDate date) {
-        /*
-        String filePath = TXN_FILE_PATH;
-        String delimiter = ",";
-        List<Transaction> txnList = new ArrayList<>();
-        String record = null;
-        TxnFactory txnFactory = new TxnFactory();
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(filePath));
-            while ((record = br.readLine()) != null) {
-                String[] info = record.split(delimiter);
-                if (info[1].equals(date.toString())) {
-                    txnList.add(txnFactory.produceTxn(info));
-                }
-            }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            return new ArrayList<>();
-        }
-        return txnList;
-
-         */
         List<Transaction> txnList = new ArrayList<>();
         try {
             String filePath = TXN_FILE_PATH;
@@ -306,25 +173,6 @@ public class Parser {
     }
 
     public List<Transaction> parseAllTxns() {
-        /*
-        String filePath = TXN_FILE_PATH;
-        String delimiter = ",";
-        List<Transaction> txnList = new ArrayList<>();
-        String record = null;
-        TxnFactory txnFactory = new TxnFactory();
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(filePath));
-            while ((record = br.readLine()) != null) {
-                String[] info = record.split(delimiter);
-                txnList.add(txnFactory.produceTxn(info));
-            }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            return new ArrayList<>();
-        }
-        return txnList;
-         */
         List<Transaction> txnList = new ArrayList<>();
         try {
             String filePath = TXN_FILE_PATH;
@@ -339,6 +187,44 @@ public class Parser {
             e.printStackTrace();
         }
         return txnList;
+    }
+
+    public List<String[]> parseOverdueLoanAccounts(LocalDate date){
+        String filePath = FilePaths.getPathByAccountType(AccountType.LOAN);
+        List<String[]> overdueAccList = new ArrayList<>();
+        try {
+            CSVReader loanAccReader = new CSVReader(new FileReader(filePath), ',');
+            List<String[]> loanAccBody = loanAccReader.readAll();
+            for (String[] accInfo : loanAccBody) {
+                String[] loans = accInfo[5].split(" ");
+                if (loans.length >= 2) {
+                    for (int i = 0; i < loans.length; i+=2) {
+                        String dateStr = loans[i];
+                        LocalDate localDate = LocalDate.parse(dateStr);
+                        if (localDate.isBefore(date.minusMonths(1))) {
+                            overdueAccList.add(accInfo);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return overdueAccList;
+    }
+
+    public List<String[]> parseAccountsByType(AccountType type){
+        String filePath = FilePaths.getPathByAccountType(type);
+        try {
+            CSVReader accReader = new CSVReader(new FileReader(filePath), ',');
+            return accReader.readAll();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
     }
 
 }
