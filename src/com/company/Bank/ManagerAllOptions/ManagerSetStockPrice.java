@@ -36,14 +36,16 @@ public class ManagerSetStockPrice {
         System.out.println("What do you want to do : ");
         System.out.println("<1> Update price");
         System.out.println("<2> Delete stock");
+        System.out.println("<3> Add Stock");
         String choice = input.next();
 
-        while(!choice.equals("1") && !choice.equals("2")){
+        while(!choice.equals("1") && !choice.equals("2") && !choice.equals("3")){
             System.out.println();
             System.out.println("You've entered an incorrect input");
             System.out.println("What do you want to do : ");
             System.out.println("<1> Update price");
             System.out.println("<2> Delete stock");
+            System.out.println("<3> Add Stock");
             choice = input.next();
         }
 
@@ -51,7 +53,7 @@ public class ManagerSetStockPrice {
 
             System.out.println("Enter Name of Stock :");
             String name = input.next();
-            System.out.println("Enter new price : ");
+            System.out.println("Enter New Price : ");
             Double price = input.nextDouble();
 
             Stock stock = stockFactory.produceSingleStock(name, price);
@@ -65,6 +67,17 @@ public class ManagerSetStockPrice {
 
             Stock stock = stockFactory.produceSingleStock(name, 0.0);
             writer.updateStock(stock, true);
+        }
+
+        else if(choice.equals("3")){
+
+            System.out.println("Enter Name of Stock :");
+            String name = input.next();
+            System.out.println("Enter Price : ");
+            Double price = input.nextDouble();
+
+            Stock stock = stockFactory.produceSingleStock(name, price);
+            writer.updateStock(stock, false);
         }
 
         stockMarket.refresh();
