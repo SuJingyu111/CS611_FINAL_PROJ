@@ -5,6 +5,10 @@ import com.company.Account.AccountType;
 import com.company.Account.LoanAccount;
 import com.company.Persons.Customer;
 import com.company.Stock.StockMarket;
+import com.company.Transactions.LoanTxn;
+import com.company.Transactions.StockTxn;
+import com.company.Transactions.Transaction;
+import com.company.Utils.Writer;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -15,6 +19,7 @@ public class CustomerLoan {
     public static void run(Customer customer, Currency currency, StockMarket stockMarket) throws IOException {
 
         Scanner input = new Scanner(System.in);
+        Writer writer = new Writer();
 
         System.out.println();
         System.out.println("What do you want to do ?");
@@ -37,15 +42,17 @@ public class CustomerLoan {
         List<Account> allCheckingsAccounts = customer.getAccountsByType(AccountType.CHECKINGS);
         List<Account> allSavingsAccounts = customer.getAccountsByType(AccountType.SAVINGS);
 
-        Map<LocalDate, Double> amountsDue = null;
-
-        for(Account loanAccount : allLoanAccounts){
-            ((LoanAccount) loanAccount).getLoan(LocalDate.now(), value);
-            amountsDue = ((LoanAccount) loanAccount).getAmountsDue();
-        }
+        Map<LocalDate, Double> amountsDue = new HashMap<>();
 
 
         if(choice1.equals("1")){
+
+            for(Account loanAccount : allLoanAccounts){
+                ((LoanAccount) loanAccount).getLoan(LocalDate.now(), value);
+                writer.updateAccountToDisk(loanAccount);
+                writer.writeTxn(recordTransaction(value, customer.getId()));
+                amountsDue = ((LoanAccount) loanAccount).getAmountsDue();
+            }
 
             System.out.println();
             System.out.println("Current Loans : ");
@@ -80,6 +87,7 @@ public class CustomerLoan {
             for(Account account : allCheckingsAccounts){
                 if(account.getAccountId().equals(ID)){
                     account.addToBalance(CurrencyType.USD, value);
+                    writer.updateAccountToDisk(account);
                 }
             }
         }
@@ -139,11 +147,13 @@ public class CustomerLoan {
                 for(Account account : allCheckingsAccounts){
                     if(account.getAccountId().equals(ID)){
                         account.addToBalance(CurrencyType.USD, -value);
+                        writer.updateAccountToDisk(account);
                     }
                 }
 
                 for(Account loanAccount : allLoanAccounts){
                     ((LoanAccount)loanAccount).payLoan(date, value);
+                    writer.updateAccountToDisk(loanAccount);
                 }
             }
 
@@ -170,18 +180,43 @@ public class CustomerLoan {
                 for(Account account : allSavingsAccounts){
                     if(account.getAccountId().equals(ID)){
                         account.addToBalance(CurrencyType.USD, -value);
+                        writer.updateAccountToDisk(account);
                     }
                 }
 
                 for(Account loanAccount : allLoanAccounts){
                     ((LoanAccount)loanAccount).payLoan(date, value);
+                    writer.updateAccountToDisk(loanAccount);
+                    writer.writeTxn(recordTransaction(-value, customer.getId()));
                 }
             }
 
         }
 
+        writer.writeTxn(recordTransaction(value, customer.getId()));
         CustomerBalance.run(customer, currency, stockMarket);
 
+    }
+
+    public static Transaction recordTransaction(Double amount, String cusID){
+
+        String ID = getRandomNumberString();
+        String customerID = cusID;
+        Double value = amount;
+        LocalDate date = LocalDate.now();
+        LoanTxn transaction = new LoanTxn(ID,date, amount, customerID);
+        return transaction;
+    }
+
+    public static String getRandomNumberString() {
+
+        // It will generate 6 digit random Number.
+        // from 0 to 999999
+        Random rnd = new Random();
+        int number = rnd.nextInt(999999);
+
+        // this will convert any number sequence into 6 character.
+        return String.format("%06d", number);
     }
 
 }
