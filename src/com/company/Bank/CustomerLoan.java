@@ -3,6 +3,7 @@ package com.company.Bank;
 import com.company.Account.Account;
 import com.company.Account.AccountType;
 import com.company.Account.LoanAccount;
+import com.company.Factories.AccountFactory;
 import com.company.Persons.Customer;
 import com.company.Stock.StockMarket;
 import com.company.Transactions.LoanTxn;
@@ -38,6 +39,18 @@ public class CustomerLoan {
         double value = input.nextDouble();
 
         List<Account> allLoanAccounts = customer.getAccountsByType(AccountType.LOAN);
+
+        if(allLoanAccounts.isEmpty()){
+            String accountNo = getRandomNumberString();
+            String[] args = {accountNo, customer.getName(), customer.getPwd(), "LOAN", " ", " "};
+            AccountFactory accountFactory = new AccountFactory();
+            Account newAccount = accountFactory.produceAccount(args);
+            customer.addAccount(newAccount);
+            writer.grantNewAccount(customer, newAccount, true);
+        }
+
+        allLoanAccounts = customer.getAccountsByType(AccountType.LOAN);
+
         List<Account> allCheckingsAccounts = customer.getAccountsByType(AccountType.CHECKINGS);
         List<Account> allSavingsAccounts = customer.getAccountsByType(AccountType.SAVINGS);
 
