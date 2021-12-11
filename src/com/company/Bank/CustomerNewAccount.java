@@ -49,8 +49,7 @@ public class CustomerNewAccount {
             else{
 
                 String accountNo = getRandomNumberString();
-                String values = "USD" + " " + 0.0 + " " + "EUR" + " " + 0.0 + " " + "CAD" + " " + 0.0 + " " + "JPY" + " " + 0.0;
-                String[] args = {accountNo, customer.getName(), customer.getPwd(), "STOCK", values};
+                String[] args = {accountNo, customer.getName(), customer.getPwd(), "STOCK", " ", " "};
                 Account newAccount = accountFactory.produceAccount(args);
                 customer.addAccount(newAccount);
                 writer.grantNewAccount(customer, newAccount, true);
