@@ -3,6 +3,7 @@ package com.company.Factories;
 import com.company.Account.*;
 import com.company.Bank.CurrencyType;
 import com.company.Exceptions.AccountNotExistException;
+import com.company.Utils.Parser;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,6 +12,12 @@ import java.util.List;
 import java.util.Map;
 
 public class AccountFactory {
+
+    private Parser parser;
+
+    public AccountFactory() {
+        parser = new Parser();
+    }
 
     public Map<AccountType, List<Account>> produceAccountMap(Map<AccountType, List<String[]>> accountInfoMap) {
         Map<AccountType, List<Account>> map = new HashMap<>();
@@ -23,6 +30,24 @@ public class AccountFactory {
             map.put(type, accountList);
         }
         return map;
+    }
+
+    public List<LoanAccount> produceOverdueAccounts(LocalDate date) {
+        List<LoanAccount> loanAccountList = new ArrayList<>();
+        List<String[]> accInfo = parser.parseOverdueLoanAccounts(date);
+        for (String[] info : accInfo) {
+            loanAccountList.add((LoanAccount) produceAccount(info));
+        }
+        return loanAccountList;
+    }
+
+    public List<Account> produceAccountsByType(AccountType type) {
+        List<String[]> accInfo = parser.parseAccountsByType(type);
+        List<Account> accountList = new ArrayList<>();
+        for (String[] info : accInfo) {
+            accountList.add(produceAccount(info));
+        }
+        return accountList;
     }
 
     public Account produceAccount(String[] args) {
