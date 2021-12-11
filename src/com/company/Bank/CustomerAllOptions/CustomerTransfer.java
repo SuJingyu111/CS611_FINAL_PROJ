@@ -43,7 +43,7 @@ public class CustomerTransfer {
         }
 
         System.out.println();
-        System.out.println("Please enter the currency you want to withdraw : ");
+        System.out.println("Please enter the currency you want to transfer : ");
         System.out.println("<1> USD");
         System.out.println("<2> EUR");
         System.out.println("<3> CAD");

@@ -32,6 +32,7 @@ public class CustomerStock {
         int count = 1;
         for (Map.Entry<String, Double> entry : allStocks.entrySet()){
             System.out.println("<" + count + "> " + entry.getKey() + "         " + entry.getValue());
+            count += 1;
         }
         System.out.println("********************************************************************************************");
         System.out.println();
