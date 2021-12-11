@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Factory that produces transactions
+ */
 public class TxnFactory {
 
     private Parser parser;

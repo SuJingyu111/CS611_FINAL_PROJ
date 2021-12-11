@@ -11,14 +11,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Factory that produces accounts
+ */
 public class AccountFactory {
 
+    /**
+     * Parsing utils {@link com.company.Utils.Parser}.
+     */
     private Parser parser;
 
     public AccountFactory() {
         parser = new Parser();
     }
 
+    /**
+     * Produces all accounts of different types.
+     *
+     * @param accountInfoMap Info for all accounts
+     * @return All accounts of different types
+     */
     public Map<AccountType, List<Account>> produceAccountMap(Map<AccountType, List<String[]>> accountInfoMap) {
         Map<AccountType, List<Account>> map = new HashMap<>();
         for (AccountType type : accountInfoMap.keySet()) {
@@ -32,6 +44,12 @@ public class AccountFactory {
         return map;
     }
 
+    /**
+     * Produce all Loan accounts that are overdue.
+     *
+     * @param date Date when accounts should overdue
+     * @return List of overdue loan accounts
+     */
     public List<LoanAccount> produceOverdueAccounts(LocalDate date) {
         List<LoanAccount> loanAccountList = new ArrayList<>();
         List<String[]> accInfo = parser.parseOverdueLoanAccounts(date);
@@ -41,6 +59,12 @@ public class AccountFactory {
         return loanAccountList;
     }
 
+    /**
+     * Produce all accounts of a give type from file.
+     *
+     * @param type Account type
+     * @return List of accounts of that type.
+     */
     public List<Account> produceAccountsByType(AccountType type) {
         List<String[]> accInfo = parser.parseAccountsByType(type);
         List<Account> accountList = new ArrayList<>();
@@ -50,6 +74,12 @@ public class AccountFactory {
         return accountList;
     }
 
+    /**
+     * Produce an account given proper arguments.
+     *
+     * @param args Array of arguments in form of string
+     * @return Account instance
+     */
     public Account produceAccount(String[] args) {
         String id = args[0], name = args[1], pwd = args[2];
         AccountType type = AccountType.valueOf(args[3]);
@@ -57,14 +87,6 @@ public class AccountFactory {
         for (String arg : balance) {
             System.out.println(arg);
         }
-        //int balance = Integer.parseInt(args[4]);
-        /*
-        Account account = new Account(id, name, pwd, type);
-        for (int i = 4; i < args.length; i+=2) {
-            account.addToBalance(CurrencyType.valueOf(args[i]), Double.parseDouble(args[i + 1]));
-        }
-        return account;
-         */
         switch (type) {
             case SAVINGS -> {
                 SavingsAccount account = new SavingsAccount(id, name, pwd, type);
@@ -102,6 +124,12 @@ public class AccountFactory {
         }
     }
 
+    /**
+     * Set up balance from parsed arguments.
+     *
+     * @param account Account instance
+     * @param balance Balance information (currency, amount)
+     */
     private void setUpBalance(Account account, String[] balance) {
         if (balance.length < 2) {
             return;
@@ -112,6 +140,12 @@ public class AccountFactory {
         }
     }
 
+    /**
+     * Set up amounts due field in loan account.
+     *
+     * @param account Loan account instance
+     * @param amountsDueInfo Information on the amounts due
+     */
     private void setUpAmountsDue(LoanAccount account, String[] amountsDueInfo) {
         if (amountsDueInfo.length < 2) {
             return;
@@ -124,6 +158,12 @@ public class AccountFactory {
         }
     }
 
+    /**
+     * Set up shares holding field in stock account.
+     *
+     * @param account Stock account instance
+     * @param sharesHoldingInfo Parsed sharesHoldingInfo
+     */
     private void setUpSharesHolding(StockAccount account, String[] sharesHoldingInfo) {
         if (sharesHoldingInfo.length < 2) {
             return;
