@@ -236,7 +236,7 @@ public class Writer {
     //update existing stock, if the stock does not already exist, add to the list
 
     /**
-     * Updates a stock in data file.
+     * Updates a stock in data file, if the stock does not already exist, add to the list.
      *
      * @param stock Instance of a stock
      * @param ifDelete If this is a deletion operation
