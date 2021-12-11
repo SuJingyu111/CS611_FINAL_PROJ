@@ -2,6 +2,7 @@ package com.company.Bank;
 
 import com.company.Account.Account;
 import com.company.Account.AccountType;
+import com.company.Exceptions.AccountNotExistException;
 import com.company.Factories.AccountFactory;
 import com.company.Persons.Customer;
 import com.company.Stock.StockMarket;
@@ -40,13 +41,12 @@ public class CustomerNewAccount {
             choice1 = input.next();
         }
 
-        if(choice1.equals("1")){
+        if(choice1.equals("3")){
 
-            List<Account> allStockAccounts = customer.getAccountsByType(AccountType.STOCK);
-            if(!allStockAccounts.isEmpty()){
-                System.out.println("You already have a stock account !");
+            try{
+                List<Account> allStockAccounts = customer.getAccountsByType(AccountType.STOCK);
             }
-            else{
+            catch (AccountNotExistException e){
 
                 String accountNo = getRandomNumberString();
                 String[] args = {accountNo, customer.getName(), customer.getPwd(), "STOCK", " ", " "};
@@ -111,6 +111,7 @@ public class CustomerNewAccount {
                 writer.grantNewAccount(customer, newAccount, true);
             }
         }
+
         CustomerBalance.run(customer, currency, stockMarket);
     }
 
