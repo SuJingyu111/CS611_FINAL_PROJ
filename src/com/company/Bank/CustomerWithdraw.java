@@ -84,15 +84,18 @@ public class CustomerWithdraw {
         CustomerBalance.run(customer,currency, stockMarket);
     }
 
-    public static void feeToBank(CurrencyType currencyType){
+    public static void feeToBank(CurrencyType currencyType) throws IOException {
 
         AccountFactory accountFactory = new AccountFactory();
-        List<Account> allAdminAccounts = accountFactory.produceAccountsbyType(ADMIN);
+        List<Account> allAdminAccounts = accountFactory.produceAccountsByType(ADMIN);
         Account adminAccount = allAdminAccounts.get(0);
         if(currencyType.equals(CurrencyType.USD)){adminAccount.addToBalance(CurrencyType.USD, 5.00);}
         else if(currencyType.equals(CurrencyType.EUR)){adminAccount.addToBalance(CurrencyType.EUR, 5.00);}
         else if(currencyType.equals(CurrencyType.CAD)){adminAccount.addToBalance(CurrencyType.CAD, 5.00);}
         else if(currencyType.equals(CurrencyType.JPY)){adminAccount.addToBalance(CurrencyType.JPY, 5.00);}
+
+        Writer writer = new Writer();
+        writer.updateAccountToDisk(adminAccount);
     }
 
     public static Transaction recordTransaction(Double amount, String cusID){

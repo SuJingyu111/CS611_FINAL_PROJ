@@ -150,10 +150,10 @@ public class CustomerTransfer {
 
             for (Account account : AllSavingsAccounts) {
                 if (account.getAccountId().equals(ID1)) {
-                    if(choice2.equals("1")){ account.addToBalance(CurrencyType.USD, -value);}
-                    else if(choice2.equals("2")){account.addToBalance(CurrencyType.EUR, -value);}
-                    else if(choice2.equals("3")){account.addToBalance(CurrencyType.CAD, -value);}
-                    else if(choice2.equals("4")){account.addToBalance(CurrencyType.JPY, -value);}
+                    if(choice2.equals("1")){ account.addToBalance(CurrencyType.USD, -(value + 5.0)); feeToBank(CurrencyType.USD);}
+                    else if(choice2.equals("2")){account.addToBalance(CurrencyType.EUR, -(value + 5.0)); feeToBank(CurrencyType.EUR);}
+                    else if(choice2.equals("3")){account.addToBalance(CurrencyType.CAD, -(value + 5.0)); feeToBank(CurrencyType.CAD);}
+                    else if(choice2.equals("4")){account.addToBalance(CurrencyType.JPY, -(value + 5.0)); feeToBank(CurrencyType.JPY);}
                     writer.updateAccountToDisk(account);
                 }
             }
@@ -223,15 +223,18 @@ public class CustomerTransfer {
         CustomerBalance.run(customer, currency, stockMarket);
     }
 
-    public static void feeToBank(CurrencyType currencyType){
+    public static void feeToBank(CurrencyType currencyType) throws IOException {
 
         AccountFactory accountFactory = new AccountFactory();
-        List<Account> allAdminAccounts = accountFactory.produceAccountsbyType(ADMIN);
+        List<Account> allAdminAccounts = accountFactory.produceAccountsByType(ADMIN);
         Account adminAccount = allAdminAccounts.get(0);
         if(currencyType.equals(CurrencyType.USD)){adminAccount.addToBalance(CurrencyType.USD, 5.00);}
         else if(currencyType.equals(CurrencyType.EUR)){adminAccount.addToBalance(CurrencyType.EUR, 5.00);}
         else if(currencyType.equals(CurrencyType.CAD)){adminAccount.addToBalance(CurrencyType.CAD, 5.00);}
         else if(currencyType.equals(CurrencyType.JPY)){adminAccount.addToBalance(CurrencyType.JPY, 5.00);}
+
+        Writer writer = new Writer();
+        writer.updateAccountToDisk(adminAccount);
     }
 
     public static Transaction recordTransaction(Double amount, String cusID, String from, String to){

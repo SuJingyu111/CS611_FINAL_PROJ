@@ -2,6 +2,7 @@ package com.company.Bank;
 
 import com.company.Account.Account;
 import com.company.Account.AccountType;
+import com.company.Factories.AccountFactory;
 import com.company.Persons.Customer;
 import com.company.Stock.StockMarket;
 import com.company.Utils.Writer;
@@ -12,6 +13,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import static com.company.Account.AccountType.*;
+import static com.company.Bank.CurrencyType.USD;
 
 public class CustomerCloseAccount {
 
@@ -78,7 +80,6 @@ public class CustomerCloseAccount {
 
             customer.deleteAccount(SAVINGS, ID);
             writer.deleteAccount(SAVINGS, ID);
-
         }
 
         else if(choice.equals("2")){
@@ -116,6 +117,32 @@ public class CustomerCloseAccount {
 
         }
 
+        feeToBank(customer);
         CustomerBalance.run(customer, currency, stockMarket);
+    }
+
+
+
+    public static void feeToBank(Customer customer) throws IOException {
+
+        Writer writer = new Writer();
+
+        AccountFactory accountFactory = new AccountFactory();
+        List<Account> allAdminAccounts = accountFactory.produceAccountsByType(ADMIN);
+        Account adminAccount = allAdminAccounts.get(0);
+        adminAccount.addToBalance(USD, 5.00);
+
+        List<Account> allCheckingsAccounts = customer.getAccountsByType(CHECKINGS);
+        for(Account account : allCheckingsAccounts){
+            Map<CurrencyType, Double> map = account.getBalance();
+            double value = map.get(USD);
+            if(value > 5.0){
+                map.put(USD, value - 5.0);
+                account.setAllBalance(map);
+                writer.updateAccountToDisk(account);
+                break;
+            }
+        }
+        writer.updateAccountToDisk(adminAccount);
     }
 }

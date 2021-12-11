@@ -10,6 +10,8 @@ import com.company.Utils.Writer;
 import java.io.IOException;
 import java.util.*;
 
+import static com.company.Account.AccountType.ADMIN;
+
 public class CustomerNewAccount {
 
 
@@ -79,15 +81,16 @@ public class CustomerNewAccount {
 
             System.out.println("Enter the amount to be deposited : ");
             double value = input.nextDouble();
+            value =- 5.0;
             String accountNo = getRandomNumberString();
 
             if(choice1.equals("1")){
 
                 String values = null;
-                if(choice2.equals("1")){values = "USD" + " " + value + " " + "EUR" + " " + 0.0 + " " + "CAD" + " " + 0.0 + " " + "JPY" + " " + 0.0;}
-                else if(choice2.equals("2")){values = "USD" + " " + 0.0 + " " + "EUR" + " " + value + " " + "CAD" + " " + 0.0 + " " + "JPY" + " " + 0.0;}
-                else if(choice2.equals("3")){values = "USD" + " " + 0.0 + " " + "EUR" + " " + 0.0 + " " + "CAD" + " " + value + " " + "JPY" + " " + 0.0;}
-                else if(choice2.equals("4")){values = "USD" + " " + 0.0 + " " + "EUR" + " " + 0.0 + " " + "CAD" + " " + 0.0 + " " + "JPY" + " " + value;}
+                if(choice2.equals("1")){values = "USD" + " " + value + " " + "EUR" + " " + 0.0 + " " + "CAD" + " " + 0.0 + " " + "JPY" + " " + 0.0; feeToBank(CurrencyType.USD); }
+                else if(choice2.equals("2")){values = "USD" + " " + 0.0 + " " + "EUR" + " " + value + " " + "CAD" + " " + 0.0 + " " + "JPY" + " " + 0.0; feeToBank(CurrencyType.EUR);}
+                else if(choice2.equals("3")){values = "USD" + " " + 0.0 + " " + "EUR" + " " + 0.0 + " " + "CAD" + " " + value + " " + "JPY" + " " + 0.0; feeToBank(CurrencyType.CAD);}
+                else if(choice2.equals("4")){values = "USD" + " " + 0.0 + " " + "EUR" + " " + 0.0 + " " + "CAD" + " " + 0.0 + " " + "JPY" + " " + value; feeToBank(CurrencyType.JPY);}
                 String[] args = {accountNo, customer.getName(), customer.getPwd(), "SAVINGS", values};
                 Account newAccount = accountFactory.produceAccount(args);
                 customer.addAccount(newAccount);
@@ -98,10 +101,10 @@ public class CustomerNewAccount {
             else if(choice1.equals("2")){
 
                 String values = null;
-                if(choice2.equals("1")){values = "USD" + " " + value + " " + "EUR" + " " + 0.0 + " " + "CAD" + " " + 0.0 + " " + "JPY" + " " + 0.0;}
-                else if(choice2.equals("2")){values = "USD" + " " + 0.0 + " " + "EUR" + " " + value + " " + "CAD" + " " + 0.0 + " " + "JPY" + " " + 0.0;}
-                else if(choice2.equals("3")){values = "USD" + " " + 0.0 + " " + "EUR" + " " + 0.0 + " " + "CAD" + " " + value + " " + "JPY" + " " + 0.0;}
-                else if(choice2.equals("4")){values = "USD" + " " + 0.0 + " " + "EUR" + " " + 0.0 + " " + "CAD" + " " + 0.0 + " " + "JPY" + " " + value;}
+                if(choice2.equals("1")){values = "USD" + " " + value + " " + "EUR" + " " + 0.0 + " " + "CAD" + " " + 0.0 + " " + "JPY" + " " + 0.0; feeToBank(CurrencyType.USD);}
+                else if(choice2.equals("2")){values = "USD" + " " + 0.0 + " " + "EUR" + " " + value + " " + "CAD" + " " + 0.0 + " " + "JPY" + " " + 0.0; feeToBank(CurrencyType.EUR);}
+                else if(choice2.equals("3")){values = "USD" + " " + 0.0 + " " + "EUR" + " " + 0.0 + " " + "CAD" + " " + value + " " + "JPY" + " " + 0.0; feeToBank(CurrencyType.CAD);}
+                else if(choice2.equals("4")){values = "USD" + " " + 0.0 + " " + "EUR" + " " + 0.0 + " " + "CAD" + " " + 0.0 + " " + "JPY" + " " + value; feeToBank(CurrencyType.JPY);}
                 String[] args = {accountNo, customer.getName(), customer.getPwd(), "CHECKINGS", values};
                 System.out.println(values);
                 Account newAccount = accountFactory.produceAccount(args);
@@ -110,6 +113,20 @@ public class CustomerNewAccount {
             }
         }
         CustomerBalance.run(customer, currency, stockMarket);
+    }
+
+    public static void feeToBank(CurrencyType currencyType) throws IOException {
+
+        AccountFactory accountFactory = new AccountFactory();
+        List<Account> allAdminAccounts = accountFactory.produceAccountsByType(ADMIN);
+        Account adminAccount = allAdminAccounts.get(0);
+        if(currencyType.equals(CurrencyType.USD)){adminAccount.addToBalance(CurrencyType.USD, 5.00);}
+        else if(currencyType.equals(CurrencyType.EUR)){adminAccount.addToBalance(CurrencyType.EUR, 5.00);}
+        else if(currencyType.equals(CurrencyType.CAD)){adminAccount.addToBalance(CurrencyType.CAD, 5.00);}
+        else if(currencyType.equals(CurrencyType.JPY)){adminAccount.addToBalance(CurrencyType.JPY, 5.00);}
+
+        Writer writer = new Writer();
+        writer.updateAccountToDisk(adminAccount);
     }
 
     public static String getRandomNumberString() {
