@@ -4,6 +4,9 @@ import com.company.Bank.CurrencyType;
 
 import java.util.Map;
 
+/**
+ * Checkings Account. Inherits Account.
+ */
 public class CheckingsAccount extends Account{
 
     public CheckingsAccount(String accountId, String ownerName, String pwd, AccountType type) {

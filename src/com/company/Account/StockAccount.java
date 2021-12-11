@@ -12,12 +12,21 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Stocks Account. Inherits Account.
+ */
 public class StockAccount extends Account{
 
-    //private Map<String, Stock> stockLookUpMap;
-
+    /**
+     * The amount of each stock that is held by the customer.
+     *
+     * String -> Stock name, Integer -> amount
+     */
     private Map<String, Integer> sharesHolding;
 
+    /**
+     * Instance of the stock market.
+     */
     private StockMarket stockMarket;
 
     public StockAccount(String accountId, String ownerName, String pwd, AccountType type, Map<CurrencyType, Double> balance) {
@@ -33,6 +42,16 @@ public class StockAccount extends Account{
         stockMarket = StockMarket.getInstance();
     }
 
+    /**
+     * Buys a share.
+     *
+     * @param corpName Name of the stock
+     * @param amount Amount of shares bought
+     * @param currencyType Currency paid with
+     * @throws StockNotExistException If the stock does not exist
+     * @throws InadequateBalanceException If inadequate balance in this account
+     * @throws IOException Data file not exist
+     */
     public void buyShare(String corpName, int amount, CurrencyType currencyType) throws StockNotExistException, InadequateBalanceException, IOException {
         Currency currency = new Currency();
         Stock stock = stockMarket.getStockByName(corpName);
@@ -46,6 +65,14 @@ public class StockAccount extends Account{
         addToBalance(currencyType, -(cost / currency.getForex(currencyType.name())));
     }
 
+    /**
+     * Sells a stock.
+     *
+     * @param corpName Stock name
+     * @param amount Amount of shares sold
+     * @throws StockNotExistException Does not have any shares of that stock
+     * @throws NotEnoughShareException Attempting to sell more shares than possessed
+     */
     public void sellShare(String corpName, int amount)  throws StockNotExistException, NotEnoughShareException {
         if (!sharesHolding.containsKey(corpName)) {
             throw new StockNotExistException();
@@ -67,6 +94,14 @@ public class StockAccount extends Account{
     }
 
     //Should only use in account factory
+
+    /**
+     * Adds a share directly to shares holding.
+     * SHOULD ONLY BE CALLED IN AccountFactory.
+     *
+     * @param corpName Name of the stock
+     * @param amount Amount of shares
+     */
     public void addShare(String corpName, int amount) {
         //Stock stock = stockMarket.getStockByName(corpName);
         sharesHolding.put(corpName, amount);
@@ -85,6 +120,11 @@ public class StockAccount extends Account{
         return stringBuilder.toString();
     }
 
+    /**
+     * Get the info of all shares holding.
+     *
+     * @return Map of String to Integer, from stock name to amount holding.
+     */
     public Map<String, Integer> getSharesHolding() {
         return sharesHolding;
     }
