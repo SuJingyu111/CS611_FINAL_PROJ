@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 
-public class ManagerSetStockPrice {
+public class ManagerModifyStock {
 
     public static void run(Manager manager, Currency currency, StockMarket stockMarket) throws IOException {
 
@@ -29,6 +29,7 @@ public class ManagerSetStockPrice {
         int count = 1;
         for (Map.Entry<String, Double> entry : allStocks.entrySet()){
             System.out.println("<" + count + "> " + entry.getKey() + "         " + entry.getValue());
+            count += 1;
         }
         System.out.println("********************************************************************************************");
         System.out.println();
@@ -37,15 +38,17 @@ public class ManagerSetStockPrice {
         System.out.println("<1> Update price");
         System.out.println("<2> Delete stock");
         System.out.println("<3> Add Stock");
+        System.out.println("<4> See Stocks");
         String choice = input.next();
 
-        while(!choice.equals("1") && !choice.equals("2") && !choice.equals("3")){
+        while(!choice.equals("1") && !choice.equals("2") && !choice.equals("3") && !choice.equals("4")){
             System.out.println();
             System.out.println("You've entered an incorrect input");
             System.out.println("What do you want to do : ");
             System.out.println("<1> Update price");
             System.out.println("<2> Delete stock");
             System.out.println("<3> Add Stock");
+            System.out.println("<4> Set Stocks");
             choice = input.next();
         }
 
@@ -78,6 +81,22 @@ public class ManagerSetStockPrice {
 
             Stock stock = stockFactory.produceSingleStock(name, price);
             writer.updateStock(stock, false);
+        }
+
+        else if(choice.equals("4")){
+
+            System.out.println();
+            System.out.println("STOCK MARKET : ");
+            System.out.println("********************************************************************************************");
+            System.out.println("    Stock        Price ");
+            count = 1;
+            for (Map.Entry<String, Double> entry : allStocks.entrySet()){
+                System.out.println("<" + count + "> " + entry.getKey() + "         " + entry.getValue());
+                count += 1;
+            }
+            System.out.println("********************************************************************************************");
+            System.out.println();
+
         }
 
         stockMarket.refresh();

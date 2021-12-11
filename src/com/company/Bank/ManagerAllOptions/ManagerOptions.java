@@ -56,7 +56,7 @@ public class ManagerOptions {
         System.out.println("<2> Get Customer Details by ID");
         System.out.println("<3> Create New Manager");
         System.out.println("<4> Set Forex");
-        System.out.println("<5> Set Stock Prices");
+        System.out.println("<5> Go To Stock Market");
         System.out.println("<6> Return to Previous Menu");
         System.out.println("<q> Quit");
 
@@ -72,7 +72,7 @@ public class ManagerOptions {
             System.out.println("<2> Get Customer Details by ID");
             System.out.println("<3> Create New Manager");
             System.out.println("<4> Set Forex");
-            System.out.println("<5> Set Stock Prices");
+            System.out.println("<5> Go To Stock Market");
             System.out.println("<6> Return to Previous Menu");
             System.out.println("<q> Quit");
             choice = input.next();
@@ -95,7 +95,7 @@ public class ManagerOptions {
         }
 
         else if(choice.equals("5")){
-            ManagerSetStockPrice.run(manager, currency, stockMarket);
+            ManagerModifyStock.run(manager, currency, stockMarket);
         }
 
         else if(choice.equals("6")){
