@@ -6,7 +6,6 @@ import com.company.Account.LoanAccount;
 import com.company.Persons.Customer;
 import com.company.Stock.StockMarket;
 import com.company.Transactions.LoanTxn;
-import com.company.Transactions.StockTxn;
 import com.company.Transactions.Transaction;
 import com.company.Utils.Writer;
 
@@ -43,6 +42,11 @@ public class CustomerLoan {
         List<Account> allSavingsAccounts = customer.getAccountsByType(AccountType.SAVINGS);
 
         Map<LocalDate, Double> amountsDue = new HashMap<>();
+
+        for(Account loanAccount : allLoanAccounts){
+            amountsDue = ((LoanAccount) loanAccount).getAmountsDue();
+        }
+
 
 
         if(choice1.equals("1")){
