@@ -201,7 +201,7 @@ public class Writer {
         for (int row = 0; row < personCsvBody.size(); row++) {
             String[] personInfo = personCsvBody.get(row);
             if (personInfo[1].equals(ownerName) && personInfo[2].equals(pwd)) {
-                personInfo[type.ordinal()] = "F";
+                personInfo[type.ordinal() + 2] = "F";
                 break;
             }
         }
