@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 
+import static com.company.Account.AccountType.CHECKINGS;
+import static com.company.Account.AccountType.LOAN;
+
 public class CustomerLoan {
 
     public static void run(Customer customer, Currency currency, StockMarket stockMarket) throws IOException {
@@ -54,9 +57,13 @@ public class CustomerLoan {
         }
 
         List<Account> allLoanAccounts = customer.getAccountsByType(AccountType.LOAN);
+        List<Account> allCheckingsAccounts = new LinkedList<>();
+        List<Account> allSavingsAccounts = new LinkedList<>() ;
 
-        List<Account> allCheckingsAccounts = customer.getAccountsByType(AccountType.CHECKINGS);
-        List<Account> allSavingsAccounts = customer.getAccountsByType(AccountType.SAVINGS);
+        try{allCheckingsAccounts = customer.getAccountsByType(AccountType.CHECKINGS);}
+        catch(AccountNotExistException e){}
+        try{allSavingsAccounts = customer.getAccountsByType(AccountType.SAVINGS);}
+        catch (AccountNotExistException e){}
 
         Map<LocalDate, Double> amountsDue = new HashMap<>();
 
@@ -176,6 +183,12 @@ public class CustomerLoan {
                     ((LoanAccount)loanAccount).payLoan(date, value);
                     writer.updateAccountToDisk(loanAccount);
                     writer.writeTxn(recordTransaction(-value, customer.getId()));
+                }
+
+                Account loanAccount = allLoanAccounts.get(0);
+                if(((LoanAccount)loanAccount).getAmountsDue().isEmpty()){
+                    customer.deleteAccount(LOAN, loanAccount.getAccountId());
+                    writer.deleteAccount(LOAN, loanAccount.getAccountId(), customer);
                 }
             }
 
