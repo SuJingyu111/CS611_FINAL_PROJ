@@ -5,6 +5,8 @@ import com.company.Account.AccountType;
 import com.company.Account.StockAccount;
 import com.company.Currency.Currency;
 import com.company.Currency.CurrencyType;
+import com.company.Exceptions.AccountNotExistException;
+import com.company.Factories.AccountFactory;
 import com.company.Persons.Customer;
 import com.company.Stock.StockMarket;
 import com.company.Transactions.StockTxn;
@@ -13,6 +15,7 @@ import com.company.Utils.Parser;
 import com.company.Utils.Writer;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -37,7 +40,20 @@ public class CustomerStock {
         System.out.println("********************************************************************************************");
         System.out.println();
 
-        List<Account> stockAccounts = customer.getAccountsByType(AccountType.STOCK);
+        List<Account> stockAccounts = new LinkedList<>();
+        try{
+            stockAccounts = customer.getAccountsByType(AccountType.STOCK);
+        }
+        catch (AccountNotExistException e){
+
+            AccountFactory accountFactory = new AccountFactory();
+            String accountNo = getRandomNumberString();
+            String[] args = {accountNo, customer.getName(), customer.getPwd(), "STOCK", " ", " "};
+            Account newAccount = accountFactory.produceAccount(args);
+            customer.addAccount(newAccount);
+            writer.grantNewAccount(customer, newAccount, true);
+        }
+
         Account stockAccount = stockAccounts.get(0);
         Map<String, Integer> sharesHolding = ((StockAccount) stockAccount).getSharesHolding();
 
