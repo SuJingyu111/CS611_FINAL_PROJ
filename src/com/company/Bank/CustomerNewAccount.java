@@ -86,10 +86,10 @@ public class CustomerNewAccount {
             if(choice1.equals("1")){
 
                 String values = null;
-                if(choice2.equals("1")){values = "USD" + " " + value + " " + "EUR" + " " + 0.0 + " " + "CAD" + " " + 0.0 + " " + "JPY" + " " + 0.0; feeToBank(CurrencyType.USD); }
-                else if(choice2.equals("2")){values = "USD" + " " + 0.0 + " " + "EUR" + " " + value + " " + "CAD" + " " + 0.0 + " " + "JPY" + " " + 0.0; feeToBank(CurrencyType.EUR);}
-                else if(choice2.equals("3")){values = "USD" + " " + 0.0 + " " + "EUR" + " " + 0.0 + " " + "CAD" + " " + value + " " + "JPY" + " " + 0.0; feeToBank(CurrencyType.CAD);}
-                else if(choice2.equals("4")){values = "USD" + " " + 0.0 + " " + "EUR" + " " + 0.0 + " " + "CAD" + " " + 0.0 + " " + "JPY" + " " + value; feeToBank(CurrencyType.JPY);}
+                if(choice2.equals("1")){values = "USD" + " " + value; feeToBank(CurrencyType.USD); }
+                else if(choice2.equals("2")){values = "EUR" + " " + value; feeToBank(CurrencyType.EUR);}
+                else if(choice2.equals("3")){values = "CAD" + " " + value; feeToBank(CurrencyType.CAD);}
+                else if(choice2.equals("4")){values = "JPY" + " " + value; feeToBank(CurrencyType.JPY);}
                 String[] args = {accountNo, customer.getName(), customer.getPwd(), "SAVINGS", values};
                 Account newAccount = accountFactory.produceAccount(args);
                 customer.addAccount(newAccount);
@@ -100,10 +100,10 @@ public class CustomerNewAccount {
             else if(choice1.equals("2")){
 
                 String values = null;
-                if(choice2.equals("1")){values = "USD" + " " + value + " " + "EUR" + " " + 0.0 + " " + "CAD" + " " + 0.0 + " " + "JPY" + " " + 0.0; feeToBank(CurrencyType.USD);}
-                else if(choice2.equals("2")){values = "USD" + " " + 0.0 + " " + "EUR" + " " + value + " " + "CAD" + " " + 0.0 + " " + "JPY" + " " + 0.0; feeToBank(CurrencyType.EUR);}
-                else if(choice2.equals("3")){values = "USD" + " " + 0.0 + " " + "EUR" + " " + 0.0 + " " + "CAD" + " " + value + " " + "JPY" + " " + 0.0; feeToBank(CurrencyType.CAD);}
-                else if(choice2.equals("4")){values = "USD" + " " + 0.0 + " " + "EUR" + " " + 0.0 + " " + "CAD" + " " + 0.0 + " " + "JPY" + " " + value; feeToBank(CurrencyType.JPY);}
+                if(choice2.equals("1")){values = "USD" + " " + value; feeToBank(CurrencyType.USD); }
+                else if(choice2.equals("2")){values = "EUR" + " " + value; feeToBank(CurrencyType.EUR);}
+                else if(choice2.equals("3")){values = "CAD" + " " + value; feeToBank(CurrencyType.CAD);}
+                else if(choice2.equals("4")){values = "JPY" + " " + value; feeToBank(CurrencyType.JPY);}
                 String[] args = {accountNo, customer.getName(), customer.getPwd(), "CHECKINGS", values};
                 System.out.println(values);
                 Account newAccount = accountFactory.produceAccount(args);
