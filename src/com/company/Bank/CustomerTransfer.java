@@ -1,6 +1,7 @@
 package com.company.Bank;
 
 import com.company.Account.Account;
+import com.company.Factories.AccountFactory;
 import com.company.Persons.Customer;
 import com.company.Stock.StockMarket;
 import com.company.Transactions.Transaction;
@@ -220,6 +221,17 @@ public class CustomerTransfer {
         }
 
         CustomerBalance.run(customer, currency, stockMarket);
+    }
+
+    public static void feeToBank(CurrencyType currencyType){
+
+        AccountFactory accountFactory = new AccountFactory();
+        List<Account> allAdminAccounts = accountFactory.produceAccountsbyType(ADMIN);
+        Account adminAccount = allAdminAccounts.get(0);
+        if(currencyType.equals(CurrencyType.USD)){adminAccount.addToBalance(CurrencyType.USD, 5.00);}
+        else if(currencyType.equals(CurrencyType.EUR)){adminAccount.addToBalance(CurrencyType.EUR, 5.00);}
+        else if(currencyType.equals(CurrencyType.CAD)){adminAccount.addToBalance(CurrencyType.CAD, 5.00);}
+        else if(currencyType.equals(CurrencyType.JPY)){adminAccount.addToBalance(CurrencyType.JPY, 5.00);}
     }
 
     public static Transaction recordTransaction(Double amount, String cusID, String from, String to){

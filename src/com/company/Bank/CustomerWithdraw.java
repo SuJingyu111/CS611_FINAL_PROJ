@@ -1,10 +1,12 @@
 package com.company.Bank;
 
 import com.company.Account.Account;
+import com.company.Factories.AccountFactory;
 import com.company.Persons.Customer;
 import com.company.Stock.StockMarket;
 import com.company.Transactions.DepositOrWithdrawTxn;
 import com.company.Transactions.Transaction;
+import com.company.Utils.Parser;
 import com.company.Utils.Writer;
 
 import java.io.IOException;
@@ -15,6 +17,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import static com.company.Account.AccountType.CHECKINGS;
+import static com.company.Account.AccountType.ADMIN;
 
 public class CustomerWithdraw {
 
@@ -46,6 +49,7 @@ public class CustomerWithdraw {
         System.out.println();
         System.out.println("Enter the amount you want to withdraw : ");
         double value = input.nextInt();
+        value += 5.0;
 
         List<Account> AllCheckingsAccounts = customer.getAccountsByType(CHECKINGS);
         System.out.println();
@@ -68,16 +72,27 @@ public class CustomerWithdraw {
 
         for(Account account : AllCheckingsAccounts){
             if(account.getAccountId().equals(ID)){
-                if(choice1.equals("1")){ account.addToBalance(CurrencyType.USD, -value);}
-                else if(choice1.equals("2")){account.addToBalance(CurrencyType.EUR, -value);}
-                else if(choice1.equals("3")){account.addToBalance(CurrencyType.CAD, -value);}
-                else if(choice1.equals("4")){account.addToBalance(CurrencyType.JPY, -value);}
+                if(choice1.equals("1")){ account.addToBalance(CurrencyType.USD, -value); feeToBank(CurrencyType.USD);}
+                else if(choice1.equals("2")){account.addToBalance(CurrencyType.EUR, -value); feeToBank(CurrencyType.EUR);}
+                else if(choice1.equals("3")){account.addToBalance(CurrencyType.CAD, -value); feeToBank(CurrencyType.CAD);}
+                else if(choice1.equals("4")){account.addToBalance(CurrencyType.JPY, -value); feeToBank(CurrencyType.JPY);}
                 writer.updateAccountToDisk(account);
             }
         }
 
         writer.writeTxn(recordTransaction(value, customer.getId()));
         CustomerBalance.run(customer,currency, stockMarket);
+    }
+
+    public static void feeToBank(CurrencyType currencyType){
+
+        AccountFactory accountFactory = new AccountFactory();
+        List<Account> allAdminAccounts = accountFactory.produceAccountsbyType(ADMIN);
+        Account adminAccount = allAdminAccounts.get(0);
+        if(currencyType.equals(CurrencyType.USD)){adminAccount.addToBalance(CurrencyType.USD, 5.00);}
+        else if(currencyType.equals(CurrencyType.EUR)){adminAccount.addToBalance(CurrencyType.EUR, 5.00);}
+        else if(currencyType.equals(CurrencyType.CAD)){adminAccount.addToBalance(CurrencyType.CAD, 5.00);}
+        else if(currencyType.equals(CurrencyType.JPY)){adminAccount.addToBalance(CurrencyType.JPY, 5.00);}
     }
 
     public static Transaction recordTransaction(Double amount, String cusID){
