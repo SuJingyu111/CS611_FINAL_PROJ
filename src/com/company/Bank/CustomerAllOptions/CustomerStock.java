@@ -54,8 +54,11 @@ public class CustomerStock {
             writer.grantNewAccount(customer, newAccount, true);
         }
 
-        Account stockAccount = stockAccounts.get(0);
-        Map<String, Integer> sharesHolding = ((StockAccount) stockAccount).getSharesHolding();
+        Map<String, Integer> sharesHolding = new HashMap<>();
+        for(Account stockAccount : stockAccounts){
+
+            sharesHolding = ((StockAccount) stockAccount).getSharesHolding();
+        }
 
 
         System.out.println("Current Shares : ");
@@ -111,14 +114,17 @@ public class CustomerStock {
                 choice2 = input.next();
             }
 
-            if(choice2.equals("1")){((StockAccount) stockAccount).buyShare(name, noOfShares, CurrencyType.USD);}
-            else if(choice2.equals("2")){((StockAccount) stockAccount).buyShare(name, noOfShares, CurrencyType.EUR);}
-            else if(choice2.equals("3")){((StockAccount) stockAccount).buyShare(name, noOfShares, CurrencyType.CAD);}
-            else if(choice2.equals("4")){((StockAccount) stockAccount).buyShare(name, noOfShares, CurrencyType.JPY);}
+            for(Account stockAccount : stockAccounts){
+                if(choice2.equals("1")){((StockAccount) stockAccount).buyShare(name, noOfShares, CurrencyType.USD);}
+                else if(choice2.equals("2")){((StockAccount) stockAccount).buyShare(name, noOfShares, CurrencyType.EUR);}
+                else if(choice2.equals("3")){((StockAccount) stockAccount).buyShare(name, noOfShares, CurrencyType.CAD);}
+                else if(choice2.equals("4")){((StockAccount) stockAccount).buyShare(name, noOfShares, CurrencyType.JPY);}
 
-            price = allStocks.get(name);
-            purchaseInfo.put(name, noOfShares);
-            writer.updateAccountToDisk(stockAccount);
+                price = allStocks.get(name);
+                purchaseInfo.put(name, noOfShares);
+                writer.updateAccountToDisk(stockAccount);
+            }
+
 
         }
 
@@ -130,10 +136,13 @@ public class CustomerStock {
             System.out.println("Enter No of Shares : ");
             int noOfShares = input.nextInt();
 
-            ((StockAccount) stockAccount).sellShare(name, noOfShares);
-            price = allStocks.get(name);
-            purchaseInfo.put(name, -noOfShares);
-            writer.updateAccountToDisk(stockAccount);
+            for(Account stockAccount : stockAccounts){
+
+                ((StockAccount) stockAccount).sellShare(name, noOfShares);
+                price = allStocks.get(name);
+                purchaseInfo.put(name, -noOfShares);
+                writer.updateAccountToDisk(stockAccount);
+            }
 
         }
 
