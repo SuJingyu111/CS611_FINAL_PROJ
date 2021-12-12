@@ -30,14 +30,16 @@ public class CustomerTransfer {
         System.out.println("Enter the account you want to transfer from : ");
         System.out.println("<1> Checkings");
         System.out.println("<2> Savings");
+        System.out.println("<3> Stock");
         String choice1 = input.next();
 
-        while(!choice1.equals("1") && !choice1.equals("2")){
+        while(!choice1.equals("1") && !choice1.equals("2") && !choice1.equals("3")){
             System.out.println();
             System.out.println("You've entered the wrong input !");
             System.out.println("Enter the account you want to transfer from : ");
             System.out.println("<1> Checkings");
             System.out.println("<2> Savings");
+            System.out.println("<3> Stock");
             choice1 = input.next();
 
         }
@@ -220,6 +222,49 @@ public class CustomerTransfer {
                 writer.updateAccountToDisk(stockAccount);
                 writer.writeTxn(recordTransaction(value, customer.getId(), ID1, ID2));
             }
+        }
+
+        else if(choice1.equals("3")){
+
+            List<Account> allStockAccounts = customer.getAccountsByType(STOCK);
+            Account stockAccount = allStockAccounts.get(0);
+            String ID1 = stockAccount.getAccountId();
+            if(choice2.equals("1")){ stockAccount.addToBalance(CurrencyType.USD, -value);}
+            else if(choice2.equals("2")){stockAccount.addToBalance(CurrencyType.EUR, -value);}
+            else if(choice2.equals("3")){stockAccount.addToBalance(CurrencyType.CAD, -value);}
+            else if(choice2.equals("4")){stockAccount.addToBalance(CurrencyType.JPY, -value);}
+            writer.updateAccountToDisk(stockAccount);
+
+            List<Account> AllSavingsAccounts = customer.getAccountsByType(SAVINGS);
+            System.out.println();
+            System.out.println("********************************************************************************************");
+            System.out.println("           Account Id      Currency      Balance");
+            int count = 1;
+            for(Account account : AllSavingsAccounts){
+                System.out.println("<" + count + "> " + "           " +  account.getAccountId());
+                Map<CurrencyType, Double> map = account.getBalance();
+                for (Map.Entry<CurrencyType, Double> entry : map.entrySet()){
+                    System.out.println("                    " + entry.getKey() + "        " + entry.getValue());
+                }
+                count += 1;
+            }
+            System.out.println("********************************************************************************************");
+
+            System.out.println();
+            System.out.println("Enter the account ID to be transferred to :  ");
+            String ID2 = input.next();
+
+            for (Account account : AllSavingsAccounts) {
+                if (account.getAccountId().equals(ID1)) {
+                    if(choice2.equals("1")){ account.addToBalance(CurrencyType.USD, value);}
+                    else if(choice2.equals("2")){account.addToBalance(CurrencyType.EUR, value);}
+                    else if(choice2.equals("3")){account.addToBalance(CurrencyType.CAD, value);}
+                    else if(choice2.equals("4")){account.addToBalance(CurrencyType.JPY, value);}
+                    writer.updateAccountToDisk(account);
+                }
+            }
+
+            writer.writeTxn(recordTransaction(value, customer.getId(), ID1, ID2));
         }
 
         CustomerBalance.run(customer, currency, stockMarket);
