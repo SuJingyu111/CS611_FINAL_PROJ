@@ -14,8 +14,16 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * Bank class which displays and welcome message and identifies type of person. Also, computes forex and loan interests each time.
+ */
+
 public class BankATM {
 
+    /**
+     * Identifies type of person and directs to appropriate page
+     * @throws IOException to ensure proper file parsing
+     */
     public static void run() throws IOException {
 
         com.company.Currency.Currency currency = new Currency();

@@ -10,8 +10,17 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * Class responsible for allowing managers to get transactions by date
+ */
 public class ManagerViewTransaction {
 
+    /**
+     * Method responsible for allowing managers to get transactions by date
+     * @param currency Holds Forex info for the day
+     * @param stockMarket Holds stock info for the day
+     * @throws IOException Ensures proper file parsing
+     */
     public static void run(Manager manager, Currency currency, StockMarket stockMarket) throws IOException {
 
         Scanner input = new Scanner(System.in);

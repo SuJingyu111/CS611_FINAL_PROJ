@@ -10,8 +10,18 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Class responsible for creating new managers
+ */
 public class CreateManager {
 
+    /**
+     * Method responsible for creating new managers
+     * @param manager Holds info about current manager
+     * @param currency Holds Forex info for the day
+     * @param stockMarket Holds stock info for the day
+     * @throws IOException Ensures proper file parsing
+     */
     public static void run(Manager manager, Currency currency, StockMarket stockMarket) throws IOException {
 
         Scanner input = new Scanner(System.in);
@@ -32,6 +42,10 @@ public class CreateManager {
         ManagerOptions.options(manager, currency, stockMarket);
     }
 
+    /**
+     * Method responsible for generating random six-digit ID
+     * @return Six digit ID
+     */
     public static String getRandomNumberString() {
         // It will generate 6 digit random Number.
         // from 0 to 999999

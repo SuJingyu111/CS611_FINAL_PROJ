@@ -19,8 +19,18 @@ import java.util.*;
 
 import static com.company.Account.AccountType.LOAN;
 
+/**
+ * Class responsible for allowing customers to take and pay back loans
+ */
 public class CustomerLoan {
 
+    /**
+     * Method responsible for allowing customers to take and pay back loans
+     * @param customer Holds info about current customer
+     * @param currency Holds Forex info for the day
+     * @param stockMarket Holds stock info for the day
+     * @throws IOException Ensures proper file parsing
+     */
     public static void run(Customer customer, Currency currency, StockMarket stockMarket) throws IOException {
 
         Scanner input = new Scanner(System.in);
@@ -234,6 +244,12 @@ public class CustomerLoan {
 
     }
 
+    /**
+     * Method responsible for recording transactions
+     * @param amount Amount transacted
+     * @param cusID Customer involved in transaction
+     * @return Transaction info
+     */
     public static Transaction recordTransaction(Double amount, String cusID){
 
         String ID = getRandomNumberString();
@@ -244,6 +260,10 @@ public class CustomerLoan {
         return transaction;
     }
 
+    /**
+     * Method responsible for generating random six-digit ID
+     * @return Six digit ID
+     */
     public static String getRandomNumberString() {
 
         // It will generate 6 digit random Number.

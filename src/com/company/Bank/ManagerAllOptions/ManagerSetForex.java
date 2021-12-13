@@ -7,8 +7,17 @@ import com.company.Stock.StockMarket;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Class responsible for allowing managers to modify Forex
+ */
 public class ManagerSetForex {
 
+    /**
+     * Method responsible for allowing managers to modify Forex
+     * @param currency Holds Forex info for the day
+     * @param stockMarket Holds stock info for the day
+     * @throws IOException Ensures proper file parsing
+     */
     public static void run(Manager manager, Currency currency, StockMarket stockMarket) throws IOException {
 
         Scanner input = new Scanner(System.in);

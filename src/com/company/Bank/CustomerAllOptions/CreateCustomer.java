@@ -9,7 +9,18 @@ import com.company.Utils.Writer;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * Class responsible for creating a profile for new customers
+ */
+
 public class CreateCustomer {
+
+    /**
+     * Method which gets profile info from new customers
+     * @param currency Holds Forex info for the day
+     * @param stockMarket Holds stock info for the day
+     * @throws IOException Ensures proper file parsing
+     */
 
     public static void run(Currency currency, StockMarket stockMarket) throws IOException {
 
@@ -31,6 +42,10 @@ public class CreateCustomer {
         CustomerOptions.options(customer, currency, stockMarket);
     }
 
+    /**
+     * Method responsible for generating random six-digit ID
+     * @return Six digit ID
+     */
     public static String getRandomNumberString() {
         // It will generate 6 digit random Number.
         // from 0 to 999999

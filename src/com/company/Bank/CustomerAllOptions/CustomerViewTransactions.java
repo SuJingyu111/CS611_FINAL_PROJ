@@ -9,8 +9,18 @@ import com.company.Utils.Parser;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Class responsible for allowing customers to view all their transactions
+ */
 public class CustomerViewTransactions {
 
+    /**
+     * Method responsible for allowing customers to view all their transactions
+     * @param customer Holds info about current customer
+     * @param currency Holds Forex info for the day
+     * @param stockMarket Holds stock info for the day
+     * @throws IOException Ensures proper file parsing
+     */
     public static void run(Customer customer, Currency currency, StockMarket stockMarket) throws IOException {
 
         Parser parser = new Parser();

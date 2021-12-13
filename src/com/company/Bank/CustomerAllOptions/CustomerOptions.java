@@ -11,8 +11,18 @@ import com.company.Utils.Printer;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Class responsible for authenticating customers and directing them to the pages for their chosen tasks.
+ */
+
 public class CustomerOptions {
 
+    /**
+     * Method responsible for authenticating customers.
+     * @param currency Holds Forex information for the day
+     * @param stockMarket Holds stock information for the day
+     * @throws IOException To ensure proper file parsing
+     */
     public static void run(Currency currency, StockMarket stockMarket) throws IOException {
 
         Scanner input = new Scanner(System.in);
@@ -47,6 +57,13 @@ public class CustomerOptions {
 
     }
 
+    /**
+     * Method responsible for providing customers with task options
+     * @param customer Holds info about current customer
+     * @param currency Holds Forex information for the day
+     * @param stockMarket Holds stock information for the day
+     * @throws IOException To ensure proper file parsing
+     */
     public static void options(Customer customer, Currency currency, StockMarket stockMarket) throws IOException {
 
         Scanner input = new Scanner(System.in);

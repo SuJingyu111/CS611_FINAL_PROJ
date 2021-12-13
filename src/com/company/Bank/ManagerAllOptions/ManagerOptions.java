@@ -12,8 +12,17 @@ import com.company.Stock.StockMarket;
 import com.company.Utils.Parser;
 import com.company.Utils.Printer;
 
+/**
+ * Class responsible for authenticating managers and providing them with task options
+ */
 public class ManagerOptions {
 
+    /**
+     * Method responsible for authenticating managers
+     * @param currency Holds Forex info for the day
+     * @param stockMarket Holds stock info for the day
+     * @throws IOException Ensures proper file parsing
+     */
     public static void run(Currency currency, StockMarket stockMarket) throws IOException {
 
         Scanner input = new Scanner(System.in);
@@ -48,6 +57,12 @@ public class ManagerOptions {
 
     }
 
+    /**
+     * Method responsible for providing managers with task options
+     * @param currency Holds Forex info for the day
+     * @param stockMarket Holds stock info for the day
+     * @throws IOException Ensures proper file parsing
+     */
     public static void options(Manager manager, Currency currency, StockMarket stockMarket) throws IOException {
 
         Scanner input = new Scanner(System.in);

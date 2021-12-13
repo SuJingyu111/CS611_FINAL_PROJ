@@ -18,8 +18,19 @@ import java.util.Scanner;
 import static com.company.Account.AccountType.*;
 import static com.company.Currency.CurrencyType.USD;
 
+/**
+ * Class responsible for closing accounts held by customers
+ */
+
 public class CustomerCloseAccount {
 
+    /**
+     * Method responsible for closing accounts held by customers
+     * @param customer Holds info about current customer
+     * @param currency Holds Forex info for the day
+     * @param stockMarket  Holds Stock info for the day
+     * @throws IOException to ensure proper file parsing
+     * */
     public static void run(Customer customer, Currency currency, StockMarket stockMarket) throws IOException {
 
         Scanner input = new Scanner(System.in);
@@ -125,7 +136,11 @@ public class CustomerCloseAccount {
     }
 
 
-
+    /**
+     * Method responsible for extracting small fee from customer
+     * @param customer Holds info about current customer
+     * @throws IOException To ensure proper file parsing
+     */
     public static void feeToBank(Customer customer) throws IOException {
 
         Writer writer = new Writer();

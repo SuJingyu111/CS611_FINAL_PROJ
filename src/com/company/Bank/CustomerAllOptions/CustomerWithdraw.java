@@ -20,8 +20,18 @@ import java.util.Scanner;
 import static com.company.Account.AccountType.CHECKINGS;
 import static com.company.Account.AccountType.ADMIN;
 
+/**
+ * Class responsible for allowing customers to withdraw from their accounts
+ */
 public class CustomerWithdraw {
 
+    /**
+     * Method responsible for allowing customers to withdraw from their accounts
+     * @param customer Holds info about current customer
+     * @param currency Holds Forex info for the day
+     * @param stockMarket Holds stock info for the day
+     * @throws IOException Ensures proper file parsing
+     */
     public static void run(Customer customer, Currency currency, StockMarket stockMarket) throws IOException {
 
         Scanner input = new Scanner(System.in);
@@ -85,6 +95,11 @@ public class CustomerWithdraw {
         CustomerBalance.run(customer,currency, stockMarket);
     }
 
+    /**
+     * Method responsible for extracting small fee from customer
+     * @param currencyType Type of currency being deposited in new account
+     * @throws IOException To ensure proper file parsing
+     */
     public static void feeToBank(CurrencyType currencyType) throws IOException {
 
         AccountFactory accountFactory = new AccountFactory();
@@ -99,6 +114,12 @@ public class CustomerWithdraw {
         writer.updateAccountToDisk(adminAccount);
     }
 
+    /**
+     * Method responsible for recording transactions
+     * @param amount Amount transacted
+     * @param cusID Customer involved in transaction
+     * @return Transaction info
+     */
     public static Transaction recordTransaction(Double amount, String cusID){
 
         String ID = getRandomNumberString();
@@ -110,6 +131,10 @@ public class CustomerWithdraw {
         return transaction;
     }
 
+    /**
+     * Method responsible for generating random six-digit ID
+     * @return Six digit ID
+     */
     public static String getRandomNumberString() {
 
         // It will generate 6 digit random Number.

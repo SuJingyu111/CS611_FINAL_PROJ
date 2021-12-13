@@ -19,8 +19,18 @@ import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * Class responsible for allowing customers to buy and sell shares
+ */
 public class CustomerStock {
 
+    /**
+     * Method responsible for allowing customers to buy and sell shares
+     * @param customer Holds info about current customer
+     * @param currency Holds Forex info for the day
+     * @param stockMarket Holds stock info for the day
+     * @throws IOException Ensures proper file parsing
+     */
     public static void run(Customer customer, Currency currency, StockMarket stockMarket) throws IOException {
 
         Parser parser = new Parser();
@@ -161,6 +171,12 @@ public class CustomerStock {
 
     }
 
+    /**
+     * Method responsible for recording transactions
+     * @param amount Amount transacted
+     * @param cusID Customer involved in transaction
+     * @return Transaction info
+     */
     public static Transaction recordTransaction(Double amount, String cusID, Map<String, Integer> purchaseInfo){
 
         String ID = getRandomNumberString();
@@ -171,6 +187,10 @@ public class CustomerStock {
         return transaction;
     }
 
+    /**
+     * Method responsible for generating random six-digit ID
+     * @return Six digit ID
+     */
     public static String getRandomNumberString() {
 
         // It will generate 6 digit random Number.

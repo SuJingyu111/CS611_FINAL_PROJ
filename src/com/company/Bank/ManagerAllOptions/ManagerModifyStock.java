@@ -12,8 +12,18 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * Class responsible for allowing managers ot modify stocks
+ */
 public class ManagerModifyStock {
 
+    /**
+     * Method responsible for allowing managers ot modify stocks
+     * @param manager Holds info about current manager
+     * @param currency Holds Forex info for the day
+     * @param stockMarket Holds stock info for the day
+     * @throws IOException Ensures proper file parsing
+     */
     public static void run(Manager manager, Currency currency, StockMarket stockMarket) throws IOException {
 
         Parser parser = new Parser();
