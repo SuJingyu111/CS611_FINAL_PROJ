@@ -303,4 +303,29 @@ public class Parser {
         return new ArrayList<>();
     }
 
+    /**
+     * Get transactions after last time he got a report.
+     *
+     * @return List of transactions during the time period
+     * @throws FileNotFoundException File not exist
+     */
+    public List<Transaction> parseCumulativeTxn() throws FileNotFoundException {
+        String filePath = LAST_REPORT_DATE_PATH;
+        input = new Scanner(new File(filePath));
+        List<Transaction> transactionList = new ArrayList<>();
+        if (input.hasNext()) {
+            String dateStr = input.next();
+            LocalDate date = LocalDate.parse(dateStr);
+            LocalDate today = LocalDate.now();
+            while (date.isBefore(today)) {
+                transactionList.addAll(parseTxnByDate(date));
+                date = date.plusDays(1);
+            }
+            transactionList.addAll(parseTxnByDate(today));
+            return transactionList;
+        }
+        else {
+            return parseAllTxns();
+        }
+    }
 }
