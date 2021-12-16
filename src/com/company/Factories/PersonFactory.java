@@ -2,11 +2,13 @@ package com.company.Factories;
 
 import com.company.Account.Account;
 import com.company.Account.AccountType;
+import com.company.Account.LoanAccount;
 import com.company.Persons.Customer;
 import com.company.Persons.Manager;
 import com.company.Exceptions.PersonNotFoundException;
 import com.company.Utils.Parser;
 
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -115,5 +117,22 @@ public class PersonFactory{
         }
         System.out.println(accountInfo.containsKey(AccountType.STOCK));
         return accountInfo;
+    }
+
+    /**
+     * Get customers who have loans.
+     *
+     * @return List of customers with overdue accounts.
+     */
+    public List<Customer> getCustomersWithLoan() {
+        List<Customer> customerList = new ArrayList<>();
+        AccountFactory accountFactory = new AccountFactory();
+        List<Account> accounts = accountFactory.produceAccountsByType(AccountType.LOAN);
+        for (Account account : accounts) {
+            if (((LoanAccount)account).haveLoan()) {
+                customerList.add(produceCustomer(account.getOwnerName(), account.getPwd()));
+            }
+        }
+        return customerList;
     }
 }

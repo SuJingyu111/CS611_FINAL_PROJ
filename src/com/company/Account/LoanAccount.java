@@ -92,4 +92,8 @@ public class LoanAccount extends Account{
         //stringBuilder.delete(stringBuilder.length() - (amountsDue.isEmpty() ? 0 : 1), stringBuilder.length());
         return stringBuilder.toString();
     }
+
+    public boolean haveLoan() {
+        return !amountsDue.isEmpty();
+    }
 }
