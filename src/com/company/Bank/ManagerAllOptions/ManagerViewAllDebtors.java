@@ -24,7 +24,18 @@ public class ManagerViewAllDebtors {
     public static void run(Manager manager, Currency currency, StockMarket stockMarket) throws IOException{
 
         PersonFactory personFactory = new PersonFactory();
-        List<Customer> debtors = personFactory.
+        List<Customer> debtors = personFactory.getCustomersWithLoan();
+
+        System.out.println();
+        int count = 0;
+        System.out.println("********************************************************************************************");
+        System.out.println("    Customer ID      Name");
+        for(Customer debtor : debtors){
+            System.out.println("<" + count + ">" + " " + debtor.getId() + "          " + debtor.getName());
+            count += 1;
+        }
+        System.out.println("********************************************************************************************");
+        System.out.println();
 
         ManagerOptions.options(manager, currency, stockMarket);
 
