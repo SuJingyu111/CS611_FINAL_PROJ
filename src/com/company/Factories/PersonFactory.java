@@ -2,11 +2,13 @@ package com.company.Factories;
 
 import com.company.Account.Account;
 import com.company.Account.AccountType;
+import com.company.Account.LoanAccount;
 import com.company.Persons.Customer;
 import com.company.Persons.Manager;
 import com.company.Exceptions.PersonNotFoundException;
 import com.company.Utils.Parser;
 
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -115,5 +117,21 @@ public class PersonFactory{
         }
         System.out.println(accountInfo.containsKey(AccountType.STOCK));
         return accountInfo;
+    }
+
+    /**
+     * Get customers who have overdue loans by a given date.
+     *
+     * @param date Date on which loans overdue.
+     * @return List of customers with overdue accounts.
+     */
+    public List<Customer> getLoanOverdueCustomers(LocalDate date) {
+        List<Customer> customerList = new ArrayList<>();
+        AccountFactory accountFactory = new AccountFactory();
+        List<LoanAccount> accounts = accountFactory.produceOverdueAccounts(date);
+        for (LoanAccount account : accounts) {
+            customerList.add(produceCustomer(account.getOwnerName(), account.getPwd()));
+        }
+        return customerList;
     }
 }
