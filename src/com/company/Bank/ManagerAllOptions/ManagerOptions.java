@@ -73,12 +73,13 @@ public class ManagerOptions {
         System.out.println("<4> Set Forex");
         System.out.println("<5> Go To Stock Market");
         System.out.println("<6> Display all Debtors");
-        System.out.println("<7> Return to Previous Menu");
+        System.out.println("<7> View Updates Since Last Report");
+        System.out.println("<8> Return to Previous Menu");
         System.out.println("<q> Quit");
 
         String choice = input.next();
 
-        while (!choice.equals("1") && !choice.equals("2") && !choice.equals("3")&& !choice.equals("4") && !choice.equals("5") && !choice.equals("6") && !choice.equals("7") && !choice.equals("q")) {
+        while (!choice.equals("1") && !choice.equals("2") && !choice.equals("3")&& !choice.equals("4") && !choice.equals("5") && !choice.equals("6") && !choice.equals("7") && !choice.equals("8") && !choice.equals("q")) {
 
             System.out.println();
             System.out.println("You've entered an incorrect option !");
@@ -90,7 +91,8 @@ public class ManagerOptions {
             System.out.println("<4> Set Forex");
             System.out.println("<5> Go To Stock Market");
             System.out.println("<6> Display all Debtors");
-            System.out.println("<7> Return to Previous Menu");
+            System.out.println("<7> View Updates Since Last Report");
+            System.out.println("<8> Return to Previous Menu");
             System.out.println("<q> Quit");
             choice = input.next();
         }
@@ -120,6 +122,10 @@ public class ManagerOptions {
         }
 
         else if(choice.equals("7")){
+            ManagerViewUpdates.run(manager, currency, stockMarket);
+        }
+
+        else if(choice.equals("8")){
             BankATM.run();
         }
 
