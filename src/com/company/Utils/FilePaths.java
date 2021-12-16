@@ -26,7 +26,7 @@ public class FilePaths {
 
     public static final String TXN_FILE_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "Transactions.csv";
 
-    public static final String LAST_REPORT_DATE_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "LastReportDate.csv";
+    public static final String LAST_REPORT_DATE_PATH = System.getProperty("user.dir") + "/src/com/company/Files/" + "LastReportDate.txt";
 
     /**
      * Gets file path by account type

@@ -5,6 +5,7 @@ import com.company.Persons.Manager;
 import com.company.Stock.StockMarket;
 import com.company.Transactions.Transaction;
 import com.company.Utils.Parser;
+import com.company.Utils.Writer;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -25,6 +26,7 @@ public class ManagerViewTransaction {
 
         Scanner input = new Scanner(System.in);
         Parser parser = new Parser();
+        Writer writer = new Writer();
 
         System.out.println();
         System.out.println("Enter date : ( YYYY/MM/DD ) ");
@@ -42,6 +44,7 @@ public class ManagerViewTransaction {
         }
         System.out.println("********************************************************************************************");
 
+        writer.writeCurTimeToReportDate();
         ManagerOptions.options(manager, currency, stockMarket);
 
     }
