@@ -11,6 +11,7 @@ import com.company.Transactions.Transaction;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.io.*;
 
@@ -277,5 +278,13 @@ public class Writer {
         if (csvBody.size() == 1 && (csvBody.get(0).length == 0 || csvBody.get(0)[0].length() == 0)) {
             csvBody.clear();
         }
+    }
+
+    public void writeCurTimeToReportDate() throws IOException {
+        String fileName = FilePaths.LAST_REPORT_DATE_PATH;
+        FileWriter writer = new FileWriter(fileName, false);
+        writer.write(LocalDate.now().toString());
+        writer.flush();
+        writer.close();
     }
 }
