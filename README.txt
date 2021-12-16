@@ -20,7 +20,7 @@ Chang Liu U09203763
 9. Transactions: All transaction related classes.
 10. Utils: FilePaths, Parser, Printer & Writer.
 
-For details regarding each class, check out ATM/docs/javadoc
+For details regarding each class, check out ATM/docs/javadoc/index.html
 
 --Design Choices & Benefits:
-See ATM/docs/doc.txt
+See ATM/docs/Design.txt
