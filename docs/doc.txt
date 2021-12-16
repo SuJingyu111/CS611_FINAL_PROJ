@@ -9,7 +9,7 @@ under different context.
 
 Benefits:
 
-1. Packages makes code clear, organized and easy to reuse.
+1. Packages make code clear, organized and easy to reuse.
 2. Factory pattern separates object creation logic with other logic, so object generation code can be reused.
-3. Singleton pattern forces cosistency on stock market, no longer need to worry about synchronizing multiple stock markets.
+3. Singleton pattern forces consistency on stock market, no longer need to worry about synchronizing multiple stock markets.
 4. Can apply different exception handlers, making code more agile. 
