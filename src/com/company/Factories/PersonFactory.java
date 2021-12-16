@@ -120,17 +120,18 @@ public class PersonFactory{
     }
 
     /**
-     * Get customers who have overdue loans by a given date.
+     * Get customers who have loans.
      *
-     * @param date Date on which loans overdue.
      * @return List of customers with overdue accounts.
      */
-    public List<Customer> getLoanOverdueCustomers(LocalDate date) {
+    public List<Customer> getCustomersWithLoan() {
         List<Customer> customerList = new ArrayList<>();
         AccountFactory accountFactory = new AccountFactory();
-        List<LoanAccount> accounts = accountFactory.produceOverdueAccounts(date);
-        for (LoanAccount account : accounts) {
-            customerList.add(produceCustomer(account.getOwnerName(), account.getPwd()));
+        List<Account> accounts = accountFactory.produceAccountsByType(AccountType.LOAN);
+        for (Account account : accounts) {
+            if (((LoanAccount)account).haveLoan()) {
+                customerList.add(produceCustomer(account.getOwnerName(), account.getPwd()));
+            }
         }
         return customerList;
     }
