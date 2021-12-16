@@ -280,6 +280,12 @@ public class Writer {
         }
     }
 
+    /**
+     * Write current time to last report date.
+     * Called when reports are generated.
+     *
+     * @throws IOException
+     */
     public void writeCurTimeToReportDate() throws IOException {
         String fileName = FilePaths.LAST_REPORT_DATE_PATH;
         FileWriter writer = new FileWriter(fileName, false);
